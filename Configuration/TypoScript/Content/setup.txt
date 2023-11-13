@@ -1,0 +1,37 @@
+tt_content.image =< lib.contentElement
+tt_content.image.templateName = Image
+tt_content.gallery =< lib.contentElement
+tt_content.gallery.templateName = Gallery
+tt_content.fadegallery =< lib.contentElement
+tt_content.fadegallery.templateName = Fadegallery
+tt_content.text =< lib.contentElement
+tt_content.text.templateName = Text
+
+
+tt_content.gallery.dataProcessing{
+    10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    10 {
+            references.fieldName = assets
+    }
+}
+
+tt_content.fadegallery.dataProcessing{
+    10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    10 {
+            references.fieldName = assets
+    }
+}
+
+
+
+
+
+lib.contentElement{
+        templateRootPaths {
+            5 = EXT:ted3/Resources/Private/Templates/ContentElements/
+	}
+        layoutRootPaths {
+            5 = EXT:ted3/Resources/Private/Templates/ContentElements/Layouts/
+
+        }
+}

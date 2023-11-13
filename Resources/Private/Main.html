@@ -1,0 +1,107 @@
+{namespace ted=DS\Ted3\ViewHelpers}
+<ted:main>
+
+    <div id="ted3-bottombar-outer" data-belang='{fedata.belang}'>
+        <div id="ted3-bottombar" class="clearfix" >
+            <div class="ted3-logo">TED<span style="opacity:0.5">³</span></div>
+            <div id="ted3-bottombar-rightbtns">
+            </div>
+        </div>
+    </div>
+    <div id="ted3-panel">
+        <div id="Ted3Data" data-deflang=""></div>
+        <div id="ted3-editbar" ></div>
+        <f:if condition='1'>
+            <f:else>
+                <div id="ted3-donate" title="Support" target="_blank" href="#">
+                    <div id="ted3-donate-inner"><a href="http://ted3.zimmermann-streiter.com/en/premiumversion/" target="_blank">Get TED³ Premiumversion</a></div>
+                    <div id='ted3-donate-close' title="Close">X</div>
+                </div>
+              </f:else>
+        </f:if>
+        <div id="ted3-mainbarouter" >
+            <div id="ted3-mainbar">
+                <div class="ted3-logo">TED<span style="opacity:0.5">³</span></div>
+                <div class="ted3-btn ted3-btn-preview-toggle" title="Editing/Preview" ></div>
+                <div class="ted3-btn ted3-btn-showhidden" title="Show hidden elements"></div>
+                <div class="ted3-btn-popoutset" >
+                    <div class="ted3-btn ted3-btn-page" title="Edit page" data-pagerecord="{data._PAGES_OVERLAY_UID}" >
+                        <f:if condition="{fedata.currentlangId} > 0">
+                            <f:if condition="{fedata.currentHasPageTranslation} == 1">
+                                <f:then>
+                                    <div class='currentlang'>
+                                        <f:format.raw>{fedata.currentlangFlag}</f:format.raw>
+                                    </div>
+                                </f:then>
+                                <f:else>
+                                    <div class='currentlang notTranslatedPage'>
+                                        <f:format.raw>{fedata.currentlangFlag}</f:format.raw>
+                                    </div>
+                                </f:else>
+                            </f:if>
+                        </f:if>
+                    </div>
+                    <f:if condition="{fedata.onlyOneSyslang}">
+                        <f:else>
+                            <div class="ted3-btn-popout">
+                                <div class="ted3-btn-popout-inner">
+
+                                    <f:for each="{fedata.syslangs}" as="lang">
+                                        <div class="ted3-btn ted3-btn">
+                                            <f:if condition="{lang.hasPageTranslation}">
+                                                <f:then>
+                                                    <f:link.page class="syslang"  additionalParams="{L:lang.uid}" title="Switch to {lang.title}">
+                                                        <f:format.raw>{lang.iconmarkup}</f:format.raw>
+                                                    </f:link.page>
+                                                </f:then>
+                                                <f:else>
+                                                    <a class="syslang notTranslatedPage" data-redirect='<f:uri.page additionalParams="{L:lang.uid}" />' data-syslang="{lang.uid}" data-uid="{lang.pageTransUid}" title="Translate this page to {lang.title}">
+                                                        <f:format.raw>{lang.iconmarkup}</f:format.raw>
+                                                    </a>
+                                                </f:else>
+                                            </f:if>
+
+                                        </div>
+                                    </f:for>
+
+                                </div>
+                            </div>
+                        </f:else>
+                    </f:if>
+
+                </div>
+                
+                <a class="ted3-btn ted3-btn-t3" title="Backend" target="_blank" href="{ted:routeuri(route:'main')}"></a>
+                <a class="ted3-btn ted3-btn-logout" title="Logout" href="{ted:routeuri(route:'logout')}"></a>
+                <a class="ted3-btn ted3-btn-empty"></a>
+                <!-- a class="ted3-btn ted3-btn-donate" title="Support TED³" target="_blank" href="#"></a -->
+                
+                <a class="ted3-btn ted3-btn-doku" title="Documentation" target="_blank" href="http://ted3.zimmermann-streiter.com/en/documentation/"></a>
+                
+                
+
+            </div>
+
+        </div>
+
+        <div id="ted3-fileselector"><input type='file' id="ted3-fileselector-input"  /></div>
+        <div id="ted3-tmpbar"></div>
+        <div id="ted3-jqueryui" class="ted3-jqueryui-outer"></div>
+        <div id="ted3-quickinfo">
+            <div id="ted3-quickinfo-close">x</div>
+            <div id="ted3-quickinfo-inner">
+
+                <f:if condition="{fedata.shortcutPage}">
+                    <f:link.page id="ted3-shortcut-info" class="ted3-quickinfo-msg" pageUid="{fedata.shortcutPage}"> <div class="ted3-btn ted3-btn-link"></div>This page is a shortcut.</f:link.page>
+                </f:if>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        <![CDATA[ Ted3.fedata = {}; ]]>
+        Ted3.fedata = <f:format.htmlentitiesDecode >{fedataJSON}</f:format.htmlentitiesDecode>; 
+        
+    </script>
+</ted:main>

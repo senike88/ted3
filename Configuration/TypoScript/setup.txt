@@ -1,0 +1,192 @@
+lib.ted3parseFunc_RTE < lib.parseFunc_RTE
+lib.ted3parseFunc_RTE.nonTypoTagStdWrap.encapsLines >
+lib.ted3parseFunc_RTE.tags.link < lib.parseFunc.tags.link
+#config.disTed3Donate = 1
+
+[backend.user.isLoggedIn] 
+
+config.contentObjectExceptionHandler = 0
+plugin.tx_ted3 {
+	features {
+            skipDefaultArguments = 1
+            requireCHashArgumentForActionArguments = 0
+	}
+        
+}
+ted3ajaxRequest = PAGE
+ted3ajaxRequest {
+    typeNum = 4455
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.additionalHeaders = Content-type:application/json
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    config.no_cache = 1
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Fe
+        extensionName = Ted3
+        controller = Crud
+        vendorName = DS
+        switchableControllerActions{
+                Crud{
+                    1 = tce
+                    2 = movecontent
+                    3 = delete
+                    4 = copy
+                    5 = createcontent
+                    6 = translate
+                    7 = hide
+                    8 = addfile
+                    9 = sort
+                    10 = addflexelement
+                    11 = copycontent
+                    12 = initdata
+                    13 = settings
+                    14 = test
+                }
+                File{
+                    1 = index
+		    2 = upload
+                }
+        }
+        #action = renderbe
+    }
+}
+
+
+ted3backend = PAGE
+ted3backend {
+    typeNum = 4456
+    config.no_cache = 1
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Fe
+        extensionName = Ted3
+        controller = Backend
+        vendorName = DS
+        switchableControllerActions{
+            Backend{
+                1 = route
+                2 = module
+                3 = link
+            }
+        }
+        #action = renderbe
+    }
+}
+
+
+
+ted3media >
+ted3media = PAGE
+ted3media {
+    typeNum = 4500
+    config.no_cache = 1
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Fe
+        extensionName = Ted3
+        controller = Filepool
+        vendorName = DS
+        switchableControllerActions{
+            Filepool{
+                1 = index
+                2 = list
+                3 = addfiles
+                4 = deletefile
+                5 = upload
+            }
+        }
+        #action = renderbe
+    }
+}
+
+
+ 
+plugin.tx_ted3.settings{
+    # Disable directories in the filepool 
+    blackListFileadmin{
+        1 = css
+        2 = form_definitions
+        3 = ted3
+        4 = js
+        5 = templates
+        6 = vendor
+        7 = fonts
+        8 = _temp_
+    }
+      
+    extensionBlackList{
+        1 = exe
+        2 = php
+        3 = php3
+        4 = php4
+        5 = php5
+        6 = php6
+        7 = php7
+        8 = php8
+        9 = phpsh
+        10 = inc
+        11 = phtml
+        12 = js
+    }
+}
+
+
+
+ted3closeWindow = PAGE
+ted3closeWindow {
+    typeNum = 4457
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    config.no_cache = 1
+
+    headerData.10 = TEXT
+    headerData.10.value(
+        <script>window.close();</script>
+    )
+}
+
+[global]
+
+
+ted3test = PAGE
+ted3test {
+    typeNum = 777
+    config.no_cache = 1
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    10 = TEXT
+    10 {
+        value = My Test ...
+    }
+}

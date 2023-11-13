@@ -1,0 +1,15 @@
+{namespace ted3=DS\Ted3\ViewHelpers}
+<ted3:element.content object="{data}" settings="{edit:1,save:0}" class="c-element c-menu-recentlypages" name="Recently updated pages" >
+   
+        <f:if condition="{menu}">
+        <ul>
+            <f:for each="{menu}" as="page">
+                <li>
+                    <a href="{page.link}"{f:if(condition: page.target, then: ' target="{page.target}"')} title="{page.title}">
+                        <span>{page.title}</span>
+                    </a>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>
+</ted3:element.content>

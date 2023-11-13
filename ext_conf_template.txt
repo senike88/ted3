@@ -1,0 +1,2 @@
+# cat=basic//; type=boolean; label=Load TED³ Content-Element-Wizard
+loadted3ContentElementWizardTsConfig = 1

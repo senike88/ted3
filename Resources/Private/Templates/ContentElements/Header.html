@@ -1,0 +1,12 @@
+{namespace ted3=DS\Ted3\ViewHelpers}
+<ted3:element.content object="{data}" class="c-element c-header" name="TED³ Header" >
+    <f:if condition="{data.header_layout}">
+        <f:then>
+            <h{data.header_layout}><ted3:editing.text rte="0" field="header" /></h{data.header_layout}>
+        </f:then>
+        <f:else>
+            <h1><ted3:editing.text rte="0" field="header" /></h1>
+        </f:else>
+    </f:if>
+    
+</ted3:element.content>

@@ -1,0 +1,528 @@
+@import url(https://fonts.googleapis.com/css?family=Share+Tech);
+
+@white: #fff;
+@medblack: rgba(0,0,0,0.5);
+@lightblack: rgba(0,0,0,0.3);
+@black: #111;
+
+@keyframes fadein {
+    from{
+        right: -400px;
+    }
+    to{
+        right: 0px;
+    }
+}
+
+
+.ted3-logo{
+    position: relative;
+    display: inline-block;
+    text-align: center !important;
+    font-size: 18px; line-height: 200%;
+    color: #000;
+    font-family: 'Share Tech' !important;
+    background: #fff;
+    padding: 0px;
+    span.t3{
+        opacity: 0.5;
+        font-size: 60%;
+    }
+}
+#ted3-bottombar-outer{
+    display: none !important;
+    /*    top: 0px;
+        right: 0; left: 0px;
+        height: 40px;
+        position: relative !important;
+        background: #fff;
+        box-shadow: 0px 0px 4px grey; 
+        text-align: left;
+        #ted3-bottombar{
+            padding: 0 10px; 
+            text-align: left; 
+            #ted3-bottombar-rightbtns{
+                float: right;
+            }
+        }
+        .ted3-btn{
+            font-size: 20px;
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 0px;
+            display: block;
+            width: 36px; line-height: 39px;
+            margin-bottom: 0px;
+            &.ted3-btn-logout:before{
+                content: '\f08b';
+            }
+        }*/
+}
+#ted3-panel{
+
+    #ted3-donate{
+        position: fixed;
+        bottom: 50px;
+        z-index: 8888;
+        animation: fadein 2s;  
+        right:0px;
+        box-shadow:0px 0px 4px grey;
+        background: #fff;
+        transition: 0.3s background;
+        padding: 0 15px;
+        padding-right: 40px;
+        font-size: 15px;
+        line-height:50px;
+        h3{
+            font-size: 30px;
+        }
+        #ted3-donate-inner{
+            cursor: pointer;
+        }
+        #ted3-donate-close{
+            position: absolute;
+            z-index: 20; right: 10px; top: 0px;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+        .ted3-paypalimg{}
+        #ted3-donate-window{
+            display: none;
+            background: #fff;
+            box-shadow:0px 0px 40px #000;
+            position: fixed; top: 50px;
+            left: 50%; margin-left: -300px;
+            width: 600px;
+            box-sizing: border-box;
+            padding: 60px;
+            h2{
+            }
+            #ted3-donate-window-inner{
+                text-align: center;
+                font-size: 18px;
+                line-height: 160%;
+            }
+            #ted3-donate-windowclose{
+                position: absolute;
+                z-index: 20; right: 10px; top: 0px;
+                padding: 0 5px;
+                cursor: pointer;
+            }
+        }
+
+        &:hover{
+            background: #fff;
+        }
+
+
+    }
+
+
+    font-family: 'Share Tech';
+    letter-spacing: normal;
+    color: @black;
+    a{
+        color: @black;
+        text-decoration: none;
+    }
+    z-index: 6500;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    .ted3-logo{
+        cursor: move;
+    }
+    #ted3-mainbarouter{
+        position: fixed !important;
+        top: 40%;
+        right: 20px;
+        background: #fff;
+        max-height: 80%;
+        box-shadow: 0px 0px 4px grey; 
+        padding: 7px;
+        box-sizing: border-box;
+        transition: 0.4s opacity;
+        opacity: 1;
+        z-index: 99999;
+    }
+
+    #ted3-mainbar{
+        background: #fff;
+        .ted3-btn{
+            font-size: 20px;
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 0px;
+            display: block;
+            width: 36px; line-height: 40px;
+            height: 40px;
+            margin-bottom: 0px;
+        }
+        .ted3-btn-addzones:before{
+            content: '\f0c9';
+            opacity: 0.5;
+        }
+        .ted3-btn-logout:before{
+            content: '\f08b';
+        }
+        .ted3-btn-t3{
+            background: url(images/typo3.png) no-repeat center center;
+            background-size: 25px;
+        }
+        .ted3-btn-doku:before{
+            content: '\f128';
+            color: #777;
+            font-size: 18px;
+        }
+        .ted3-btn-donate:before{
+            content: '\f091';
+            color: #777;
+            font-size: 18px;
+        }
+
+        .ted3-btn-empty{
+            height: 0px ;
+            line-height: 0px ;
+            cursor: auto ;
+            box-shadow: none ;
+            border-bottom: none;
+        }
+        .ted3-btn-popoutset{
+            position: relative;
+            .notTranslatedPage{
+                opacity: 0.5;
+            }
+            a.syslang{
+                display:block;
+
+                img{
+                    text-align: center;
+                    margin: 0 auto;
+                    width: 18px; height: 16px;
+                    padding: 10px 0;
+                }
+            }
+            .ted3-btn-popout{
+                display: none;
+                z-index: -1;
+                position: absolute;
+                right: 35px; top: 0px;
+                padding-right: 7px;
+
+                .ted3-btn-popout-inner{
+                    background: #fff;
+                    display: inline-flex;
+                    padding: 2px 5px;
+                    box-shadow: -3px 0px 3px grey;
+
+                    .ted3-btn{
+                        height: 36px;
+                        display: inline-block;
+                        border: none;
+                    }
+                }
+
+            }
+            &:hover{
+                .ted3-btn-popout{
+                    display: block;
+                }
+            }
+        }
+        .currentlang{
+            position: absolute;
+            width: 13px;
+            z-index: 20;
+            top:7px; right:4px;
+        }
+    }
+    #ted3-tmpbar{
+        text-align: left;
+        position: relative;
+        z-index: 9999;
+    }
+
+    #ted3-editbar{
+        background: #555; 
+        background: linear-gradient(to right, #000000 0%, #f6f6f6 90%, #ffffff 100%);
+        position: fixed;  top: 0; left: 0px; right: 0px;
+        z-index: 9998;
+        text-align: center;
+        .mce-menubar , .mce-container, .mce-btn{
+
+            background-color: #fff !important;   
+        }
+        .mce-tinymce{
+            border: none !important;
+            background: transparent !important;
+            padding-top: 10px !important; 
+            padding-bottom: 10px !important; 
+            margin: 0 auto;                
+        }
+        .mce-toolbar{
+
+        }
+        .ted3-btn-world:before{
+            font-size: 19px;
+        }
+
+    }
+    .ted3-btn-syslang{
+        text-align:center;
+        img{
+            margin: 0 auto;
+            width: 21px;
+            padding: 10px 0;
+        }
+    }
+    #ted3-quickinfo{
+        position: absolute;
+        display: none;
+        z-index: 5000;
+        top: 20px;
+        left: 20px;
+        /*border-radius: 5px 0 0 5px;*/
+        font-size: 13px;
+        box-shadow: 0px 0px 4px grey; 
+        font-family: 'Share Tech';
+        #ted3-quickinfo-close{
+            text-align: right;
+            margin-bottom: 2px;
+            font-size: 12px;
+            cursor: pointer;
+            line-height: 13px;
+            position: absolute; top: 0px; left: -16px;
+            background: rgba(255,255,255,0.6);
+            padding: 2px 5px;
+        }
+        #ted3-quickinfo-inner{
+            background: rgba(255,255,255,0.6);
+            padding: 5px;
+        }
+
+        .ted3-quickinfo-msg{
+            background: rgba(255,255,255,1);
+            padding: 7px;
+            padding-right: 17px;
+            display: block; 
+        }
+        .ted3-btn{
+            font-size: 13px;
+            margin-right: 0px;
+        }
+        &.ted3-quickinfo-visble{
+            display: block;
+        }
+    }
+
+}
+.ted3-mode-edit #ted3-donate{
+    display: none;
+}
+
+.ted3-root{
+    &.ted3-mode-preview{
+        #ted3-panel{
+            #ted3-mainbarouter{
+                .ted3-btn-preview-toggle:before{
+                    content: '\f204';
+                } 
+                opacity: 0.5;
+                &:hover{
+                    opacity: 1; 
+                }
+            } 
+        }
+    }
+    &.ted3-mode-showhidden{
+        #ted3-panel{
+            #ted3-mainbarouter{
+                opacity: 1;
+            }
+        }
+    }
+}
+.extbase-debugger.extbase-debugger-floating{
+    /*    position:fixed;
+        width: 90%;*/
+    z-index: 6000;
+}
+
+
+/* MESSAGES */
+.ted3-message{
+    position: fixed;
+    top: 10px; right: 10px;
+    padding: 7px;
+    background: #000; color: #fff;
+    z-index: 99999;
+
+    .ted3-message-success{
+        background: #79a548;
+    }
+}
+.ted3-jqueryui-outer .ted3-dialog{
+    z-index: 99998 !important;
+    font-family: 'Share Tech';  
+    .ui-dialog-titlebar{
+
+    }
+    .ui-dialog-content {
+        font-size: 16px;
+    }
+
+    &.ted3-dialog-error{
+        min-width: 650px;
+        .ui-dialog-titlebar{
+            color: #fff;
+            background: rgb(200, 60, 60);
+        }
+
+    }
+}
+
+
+body.ted3-mode-loading{
+}
+div#ted3-loader{
+    position: fixed;
+    z-index: 6500;
+    top: 0;
+    left: 0;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,0);
+}
+
+/** Buttons **/
+#ted3-editswitcher:before{
+    content : '\f204';
+}
+
+
+
+
+.ted3-btn-page:before{
+    content: '\f044';
+}
+.ted3-btn-world:before{
+    content: '\f0ac';
+    /*color: darkviolet;*/
+}
+.ted3-btn-copy:before{
+    content: '\f24d';
+    font-size: 14px;
+}
+.ted3-btn-cut:before{
+    content: '\f0c4';
+}
+.ted3-btn-paste:before{
+    content: '\f0ea';
+}
+.ted3-btn-add:before{
+    content: '\f055';
+}
+.ted3-btn-save:before{
+    content: '\f0c7';
+}
+.ted3-btn-select:before{
+    content: '\f040';
+}
+.ted3-btn-edit:before{
+    content: '\f044';
+}
+.ted3-image-editbutton:before{
+    content: '\f125';
+}
+
+.ted3-btn-unselect:before{
+    content: '\f08b';
+}
+.ted3-btn-cancel:before{
+    content: '\f00d';
+}
+.ted3-btn-delete:before{
+    content: '\f014';
+}
+.ted3-btn-elementwizard:before{
+    content: '\f055';
+}
+.ted3-btn-falwizard:before{
+    content: '\f1c5';
+}
+.ted3-btn-uploadwindow:before{
+    content: '\f093';
+}
+.ted3-btn-up:before{
+    content: '\f148';
+}
+
+.ted3-btn-link:before{
+    content: '\f0c1';
+}
+.ted3-btn-preview-toggle:before{
+    content: '\f205 ';
+}
+.ted3-btn-showhidden:before{
+    content: '\f06e';
+}
+.ted3-mode-showhidden{
+    .ted3-btn-showhidden:before{
+        color: red;
+    }
+}
+.ted3-mode-edit .ted3-btn-showhidden{
+    display: none !important;
+}
+
+
+.ted3-btn-show:before{
+    content: '\f204';
+}
+.ted3-btn-hide:before{
+    content: '\f205';
+}
+.ted3-btn-hidemobile:before{
+    content: '\f10b';
+}
+.ted3-btn-hidemobile-hidden:before{
+    color: red;
+}
+.ted3-btn-prev:before{
+    content: '\f0de ';
+}
+.ted3-btn-next:before{
+    content: '\f0dd';
+}
+.ted3-btn-clone:before{
+    content: '\f055';
+}
+.ted3-btn-reset:before{
+    content: '\f00d';
+}
+.ted3-btn-use:before{
+    content: '\f00c';
+}
+.ted3-btn-cog:before{
+    content: '\f013';
+}
+.ted3-btn-edithelper:before{
+    content: '\f1e9';
+}
+
+.ted3-btn-file:before{
+    content: '\f016';
+    font-size: 11px;
+}
+.ted3-btn-upload:before{
+    content: '\f093';
+}
+
+#ted3-fileselector{
+    display: none;
+}
+
+.ted3-mode-addzones #ted3-panel #ted3-mainbar .ted3-btn-addzones:before{
+    opacity: 1;
+}
+.ted3-tinymcebar-forceTopPadding{
+    padding-top: 57px;
+}

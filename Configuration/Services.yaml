@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+    
+  DS\Ted3\Controller\NewContentElementController:
+    shared: false
+    public: true 
+    
+  DS\Ted3\Hooks\PageRepositoryGetPageOverlay:
+    shared: false
+    public: true 
