@@ -1,7 +1,7 @@
 {
     "name": "ted3team/ted3",
     "type": "typo3-cms-extension",
-    "description": "Frontend editing",
+    "description": "Frontend editing for TYPO3",
     "version": "11.2.0",
     "homepage": "http://ted3.zimmermann-streiter.com/",
     "support": {
