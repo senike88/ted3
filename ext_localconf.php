@@ -30,21 +30,19 @@ if (TYPO3_MODE === 'BE') {
         'DS.' . $_EXTKEY, 'Fe', array(
     \DS\Ted3\Controller\CrudController::class => 'tce,movecontent,delete,copy,createcontent,hide,translate,sort,addflexelement,copycontent,settings,test',
     \DS\Ted3\Controller\BackendController::class => 'module,route,link',
-    \DS\Ted3\Controller\FileController::class => 'index,upload',
-    \DS\Ted3\Controller\FilepoolController::class => 'index,list,deletefile,upload'
 //    \DS\Ted3\Controller\NewContentElementController::class => 'wizard'
         ),
         // non-cacheable actions
         array(
     \DS\Ted3\Controller\CrudController::class => 'tce,movecontent,delete,copy,createcontent,hide,translate,sort,addflexelement,copycontent,settings,test',
     \DS\Ted3\Controller\BackendController::class => 'module,route,link',
-    \DS\Ted3\Controller\FileController::class => 'index,upload',
-    \DS\Ted3\Controller\FilepoolController::class => 'index,list,deletefile,upload'
 //    \DS\Ted3\Controller\NewContentElementController::class => 'wizard'
         )
 );
 $GLOBALS['TYPO3_CONF_VARS']['FE']['pageOverlayFields'] .= ',ted3text1,ted3text2,ted3text3';
 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'] =  $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'].",webp";
+
+$GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFoundOnCHashError'] = 0;
 
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['configArrayPostProc'][] = \DS\Ted3\Hooks\FrontendRenderer::class . '->tsfe';

@@ -23,9 +23,6 @@ tt_content.fadegallery.dataProcessing{
 }
 
 
-
-
-
 lib.contentElement{
         templateRootPaths {
             5 = EXT:ted3/Resources/Private/Templates/ContentElements/

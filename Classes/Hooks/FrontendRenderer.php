@@ -58,7 +58,7 @@ class FrontendRenderer {
 
 
                 $GLOBALS['TSFE']->no_cache = TRUE;
-//            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( $GLOBALS['TSFE']); exit;  
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( get_class_methods(  ); exit;  
                 $tmpJS = $GLOBALS['TSFE']->pSetup['includeJS.'];
                 if (!is_array($tmpJS)) {
                     $tmpJS = array();
@@ -95,6 +95,10 @@ class FrontendRenderer {
                 // BAR
             }
         }
+        if ($GLOBALS['TSFE']->pSetup['ted3'] == 1) {
+             $GLOBALS['TSFE']->pageRenderer->addCssFile("EXT:ted3/Resources/Public/css/ted3-frontend.css");
+        }
+       
     }
 
     private function refreshOnce() {

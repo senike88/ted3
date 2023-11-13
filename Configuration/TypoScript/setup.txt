@@ -90,70 +90,6 @@ ted3backend {
 
 
 
-ted3media >
-ted3media = PAGE
-ted3media {
-    typeNum = 4500
-    config.no_cache = 1
-    config.disableAllHeaderCode = 1
-    config.disableCharsetHeader = 1
-    config.disablePrefixComment = 1
-    config.admPanel = 0
-    config.xhtml_cleaning = 0
-    config.debug = 0
-    
-
-    10 = USER
-    10 {
-        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-        pluginName = Fe
-        extensionName = Ted3
-        controller = Filepool
-        vendorName = DS
-        switchableControllerActions{
-            Filepool{
-                1 = index
-                2 = list
-                3 = addfiles
-                4 = deletefile
-                5 = upload
-            }
-        }
-        #action = renderbe
-    }
-}
-
-
- 
-plugin.tx_ted3.settings{
-    # Disable directories in the filepool 
-    blackListFileadmin{
-        1 = css
-        2 = form_definitions
-        3 = ted3
-        4 = js
-        5 = templates
-        6 = vendor
-        7 = fonts
-        8 = _temp_
-    }
-      
-    extensionBlackList{
-        1 = exe
-        2 = php
-        3 = php3
-        4 = php4
-        5 = php5
-        6 = php6
-        7 = php7
-        8 = php8
-        9 = phpsh
-        10 = inc
-        11 = phtml
-        12 = js
-    }
-}
-
 
 
 ted3closeWindow = PAGE
@@ -172,8 +108,6 @@ ted3closeWindow {
     )
 }
 
-[global]
-
 
 ted3test = PAGE
 ted3test {
@@ -190,3 +124,6 @@ ted3test {
         value = My Test ...
     }
 }
+
+[global]
+

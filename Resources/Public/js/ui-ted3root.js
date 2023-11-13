@@ -2,7 +2,6 @@
     $.widget("ted3.ted3root", {
         _create: function () {
             var that = this;
-
             // Initialize Containers
             Ted3.root = this.element;
             this.element.addClass('ted3-root');
@@ -46,6 +45,15 @@
                     $(this).container();
                 }
             });
+            
+            // If no conatiners in use
+            $('[data-element]').each(function(){
+               var element = $(this); 
+               if(element.closest('[data-container]').length < 1){
+                   console.log("no container");
+                   element.element();
+               }
+            });
 
 
 
@@ -86,13 +94,6 @@
             });
 
 
-            //Donate
-            /*
-             if(Ted3.memory.get('ted3-donate-banner-hidex')){
-             $('#ted3-donate #ted3-donate-inner').hide();
-             $('#ted3-donate #ted3-donate-close').hide();
-             }
-             */
             $('#ted3-donate').on('click', function () {
                 $('#ted3-donate-window').show();
             });
@@ -297,6 +298,7 @@
             var that = this;
             var elementGot = false;
 //            console.log("getVisibleElement");
+
             $('[data-element]').each(function () {
                 //check if visible
                 var topOffset = $(this).offset().top;
