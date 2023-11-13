@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'TED³ (Base)',
-    'description' => 'Frontendediting für TYPO3',
+    'description' => 'Frontendediting for TYPO3',
     'category' => 'Frontend',
     'version' => '11.2.0',
     'state' => 'beta',
