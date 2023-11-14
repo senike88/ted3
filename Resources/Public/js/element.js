@@ -24,8 +24,8 @@
                     }
                 }
             });
-            
-         
+
+
 
             if (this.element.css('position') == "static") {
                 this.element.css('position', 'relative');
@@ -56,7 +56,7 @@
             this._createAddzone();
 
             if (this.options.move && !(this.options.buttonsort || this.getContainer().data('buttonsorting'))) {
-               //
+                //
             }
 
 
@@ -586,14 +586,20 @@
                     width = width - ((that.element.offset().left + that.element.outerWidth()) - $(window).width());
 
                 }
-               // alert(Ted3.root.css('marginLeft'));
-               var bodyMarginLeft = 0;
-               if(Ted3.root.css('marginLeft')){
-                   bodyMarginLeft = parseInt(Ted3.root.css('marginLeft'));
-                   console.log(bodyMarginLeft);
-               }
+                // alert(Ted3.root.css('marginLeft'));
+                var bodyMarginLeft = 0;
+                if (Ted3.root.css('marginLeft')) {
+                    bodyMarginLeft = parseInt(Ted3.root.css('marginLeft'));
+                    console.log(bodyMarginLeft);
+                }
+
+                var topOffset = that.element.offset().top - 26;
+                if (topOffset < 0) {
+                    topOffset = 0;
+                }
+
                 this.toolbar.css({
-                    top: that.element.offset().top - 26,
+                    top: topOffset,
                     left: that.element.offset().left - bodyMarginLeft,
                     width: width,
                     minWidth: 150
