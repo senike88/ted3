@@ -15,13 +15,17 @@ if (TYPO3_MODE === 'BE') {
     } else {
         $PATH_site = PATH_site;
     }
+      
+    if (!is_dir($PATH_site . "/fileadmin/ted3")) {
+        
+        @mkdir($PATH_site . "/fileadmin/ted3");
+        @mkdir($PATH_site . "/fileadmin/ted3/js");
 
-    if (!is_dir($PATH_site . "fileadmin/ted3")) {
-        @mkdir($PATH_site . "fileadmin/ted3");
-        @mkdir($PATH_site . "fileadmin/ted3/js");
     }
-    if (!file_exists($PATH_site . "fileadmin/ted3/js/ted3-user-override.js")) {
-        @copy($PATH_site . "typo3conf/ext/ted3/Resources/Public/Dummy/ted3-user-override.js", $PATH_site . "fileadmin/ted3/js/ted3-user-override.js");
+  
+    if (!file_exists($PATH_site . "/fileadmin/ted3/js/ted3-user-override.js")) {
+        //  echo "notex"; exit;
+        @copy($PATH_site . "/typo3conf/ext/ted3/Resources/Public/Dummy/ted3-user-override.js", $PATH_site . "/fileadmin/ted3/js/ted3-user-override.js");
     }
 }
 
