@@ -24,6 +24,8 @@
                     }
                 }
             });
+            
+         
 
             if (this.element.css('position') == "static") {
                 this.element.css('position', 'relative');
@@ -187,7 +189,7 @@
                 this._trigger('select');
                 //Should fix animationfails do better on document-resize
                 var checkresizeing = 120;
-                while (checkresizeing < 1300) {
+                while (checkresizeing < 800) {
 
                     setTimeout(function () {
                         that.initBarsPositions();
@@ -584,16 +586,22 @@
                     width = width - ((that.element.offset().left + that.element.outerWidth()) - $(window).width());
 
                 }
+               // alert(Ted3.root.css('marginLeft'));
+               var bodyMarginLeft = 0;
+               if(Ted3.root.css('marginLeft')){
+                   bodyMarginLeft = parseInt(Ted3.root.css('marginLeft'));
+                   console.log(bodyMarginLeft);
+               }
                 this.toolbar.css({
                     top: that.element.offset().top - 26,
-                    left: that.element.offset().left,
+                    left: that.element.offset().left - bodyMarginLeft,
                     width: width,
                     minWidth: 150
                 });
 
                 this.toolbarbottom.css({
                     top: that.element.offset().top + that.element.outerHeight(),
-                    left: that.element.offset().left,
+                    left: that.element.offset().left - bodyMarginLeft,
                     width: width
                 });
 
