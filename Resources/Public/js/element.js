@@ -587,11 +587,7 @@
 
                 }
                 // alert(Ted3.root.css('marginLeft'));
-                var bodyMarginLeft = 0;
-                if (Ted3.root.css('marginLeft')) {
-                    bodyMarginLeft = parseInt(Ted3.root.css('marginLeft'));
-                    console.log(bodyMarginLeft);
-                }
+               
 
                 var topOffset = that.element.offset().top - 26;
                 if (topOffset < 0) {
@@ -600,14 +596,14 @@
 
                 this.toolbar.css({
                     top: topOffset,
-                    left: that.element.offset().left - bodyMarginLeft,
+                    left: that.element.offset().left,
                     width: width,
                     minWidth: 150
                 });
 
                 this.toolbarbottom.css({
                     top: that.element.offset().top + that.element.outerHeight(),
-                    left: that.element.offset().left - bodyMarginLeft,
+                    left: that.element.offset().left,
                     width: width
                 });
 
