@@ -1,10 +1,10 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = array(
-    'title' => 'TED³ (Base)',
-    'description' => 'Frontendediting for TYPO3',
+    'title' => 'TED³',
+    'description' => 'Frontendediting for TYPO3 (Basic version)',
     'category' => 'Frontend',
-    'version' => '11.2.3',
+    'version' => '11.2.4',
     'state' => 'beta',
     'uploadfolder' => true,
     'createDirs' => '',
