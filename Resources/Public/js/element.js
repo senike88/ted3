@@ -56,7 +56,28 @@
             this._createAddzone();
 
             if (this.options.move && !(this.options.buttonsort || this.getContainer().data('buttonsorting'))) {
-                //
+                this.dragger = $('<div /> ', {
+                    class: 'ted3-dragger ted3-btn'
+                }).prependTo(this.element);
+                this.element.draggable({
+                    handle: that.dragger,
+                    refreshPositions: true,
+                    cursor: "move",
+                    delay: 90,
+                    helper: 'clone',
+                    cursorAt: {top: -30},
+                    start: function (e, ui) {
+                        var that = $(this);
+                        $('body').addClass('ted3-mode-dragging');
+                        setTimeout(function () {
+                            that.draggable('option', 'refreshPositions', false);
+                        }, 1000);
+                    },
+                    stop: function (e, ui) {
+                        $('body').removeClass('ted3-mode-dragging');
+                    },
+                    revert: 'invalid'
+                });
             }
 
 
@@ -587,7 +608,7 @@
 
                 }
                 // alert(Ted3.root.css('marginLeft'));
-               
+
 
                 var topOffset = that.element.offset().top - 26;
                 if (topOffset < 0) {
