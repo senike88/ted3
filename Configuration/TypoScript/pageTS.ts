@@ -19,7 +19,7 @@ mod.wizards.newContentElement.wizardItems.common.elements {
                 image{
 			iconIdentifier = content-image
 			title = Image
-			description = A cropable image
+			description = Simple Image
 			tt_content_defValues {
 				CType = image
 			}
@@ -38,14 +38,6 @@ mod.wizards.newContentElement.wizardItems.common.elements {
 			description = Simple Imagefader
 			tt_content_defValues {
 				CType = fadegallery
-			}
-		}
-                video{
-			iconIdentifier = mimetypes-x-content-multimedia
-			title = Video
-			description = Video with optional fallback-files
-			tt_content_defValues {
-				CType = video
 			}
 		}
                 textmedia {
@@ -85,4 +77,4 @@ mod.wizards.newContentElement.wizardItems.common.elements {
 
 }
 mod.wizards.newContentElement.wizardItems.common.show >
-mod.wizards.newContentElement.wizardItems.common.show := addToList(header,text,image,textmedia,bullets,gallery,fadegallery,video,table,uploads)
+mod.wizards.newContentElement.wizardItems.common.show := addToList(header,text,image,textmedia,bullets,gallery,fadegallery,table,uploads)

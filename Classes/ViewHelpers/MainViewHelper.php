@@ -94,7 +94,6 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
             "currentHasPageTranslation" => 0,
             "shortcutPage" => @$shortcutPage['uid'],
             "origDoktype" => @$GLOBALS['TSFE']->page['_originalDoktype'],
-            "disTed3Donate" => $GLOBALS['TSFE']->config['config']['disTed3Donate'],
             "imageFileExtensions" => explode(",", $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])
         );
         

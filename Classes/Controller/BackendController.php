@@ -103,9 +103,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             echo $uri;
             exit;
         }
-        //     echo $uri; exit;
-        //  $this->redirectToUri($uri, 0, 301);
-        //echo $uri; exit;
+
         return $this->responseFactory->createResponse(301)
                         ->withHeader('Location', (string) $uri);
         // echo "sxdf"; exit;

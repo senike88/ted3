@@ -52,7 +52,6 @@
             this._createDirectContainers();
 
             this._createAddzone();
-
             if (this.options.move && !(this.options.buttonsort || this.getContainer().data('buttonsorting'))) {
                 this.dragger = $('<div /> ', {
                     class: 'ted3-dragger ted3-btn'
@@ -77,7 +76,6 @@
                     revert: 'invalid'
                 });
             }
-
 
         },
         _createAddzone: function () {
@@ -237,16 +235,16 @@
         cancel: function () {
             var that = this;
             this.element.find('[data-widget="text"]').textedit('blur');
-          
+
 
             this.element.find('[data-widget="textedit"]').each(function (i, item) {
 
                 if ($(this).closest('[data-element]')[0] == that.element[0]) {
                     $(this).removeClass('ted3-changed');
-                    if(! $(this).closest('[data-element]').data('translateable')){
-                       $(this).textedit('disable'); 
+                    if (!$(this).closest('[data-element]').data('translateable')) {
+                        $(this).textedit('disable');
                     }
-                    
+
                 }
             });
             if (this.options.save && this.savebuttons) {
@@ -526,11 +524,11 @@
         _createDirectFieldWidgetsOnce: function () {
             if (!this._fieldWidgetsCreated) {
                 var that = this;
-             
+
 
                 this.element.find('[data-widget="textedit"]').each(function () {
                     var $thisItem = $(this);
-                    if ($(this).closest('[data-element]')[0] == that.element[0] && ! $(this).closest('[data-element]').data('translateable')) {
+                    if ($(this).closest('[data-element]')[0] == that.element[0] && !$(this).closest('[data-element]').data('translateable')) {
                         //  console.log("text_edit");
                         setTimeout(function () {
                             $thisItem.textedit();
@@ -628,7 +626,7 @@
 
                 this.toolbarbottom.css({
                     top: that.element.offset().top + that.element.outerHeight(),
-                    left: that.element.offset().left ,
+                    left: that.element.offset().left,
                     width: width
                 });
 
