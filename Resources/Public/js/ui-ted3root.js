@@ -115,15 +115,7 @@
             });
 
 
-            /*
-             // Tool-Donate-Button
-             $('.ted3-btn-donate').on('click', function (e) {
-             e.preventDefault();
-             
-             $('#ted3-donate-window').show();
-             });
-             
-             */
+     
 
             $('.ted3-btn-page').on('click', function () {
 
@@ -141,10 +133,7 @@
 
                 }
                 //link.url = "http://t3install10.zimmermann2019.web-crossing.com/typo3/index.php?route=%2Frecord%2Fedit&token=63652dc6facbd84723043b1f849102a717a32544&edit%5Bpages%5D%5B27%5D=edit&returnUrl=%2Findex.php%3Fid%3D1%26type%3D4457";
-                //alert(link.url);
-//                    Ted3.newWindow.open(link, function () {
-//                        Ted3.reload();
-//                    });
+
 
                 location.href = link.url;
 
