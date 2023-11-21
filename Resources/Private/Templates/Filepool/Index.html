@@ -1,0 +1,349 @@
+{namespace ted3=DS\Ted3\ViewHelpers}
+<link rel="stylesheet" href="typo3conf/ext/ted3/Resources/Public/fonticons/css/font-awesome.min.css">
+<link rel="stylesheet" href="typo3conf/ext/ted3/Resources/Public/css/jquery-ui.css">
+<link rel="stylesheet" href="typo3conf/ext/ted3/Resources/Public/css/general.css">
+<link rel="stylesheet" href="typo3conf/ext/ted3/Resources/Public/css/filepool.css">
+<script src="typo3conf/ext/ted3/Resources/Public/js/jquery-1.11.3.min.js"></script>
+<script src="typo3conf/ext/ted3/Resources/Public/js/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="typo3conf/ext/ted3/Resources/Public/js/filepoolapi.js"></script>
+
+<div id="ted3-jqueryui" class="ted3-jqueryui-outer"></div>
+
+<div id="Ted3Filepool" class="clearfix" ng-app="filepool" ng-controller="fileList" >
+    <div class="floatchildren">
+        <div id="FolderStructure">
+            <div id="FolderStructureFA">fileadmin</div>
+            <ul>
+
+                <f:for each="{storagefolders}" as="folder">
+                    <li data-level='1' class='ted3-fp-folders-item'  data-folder="{folder.identifier}" data-name="{folder.name}">
+                        <i class="fa fa-solid fa-folder"></i><div >{folder.name}</div>
+                        <ul>
+                            <f:for each="{folder.subFolders}" as="subFolder">
+                                <li data-level='2' class='ted3-fp-folders-item'  data-folder="{subFolder.identifier}"  data-name="{subFolder.name}">
+                                    <i class="fa fa-solid fa-folder"></i><div >{subFolder.name}</div>
+                                    <ul>
+                                        <f:for each="{subFolder.subFolders}" as="subsubFolder">
+                                            <li data-level='3' class='ted3-fp-folders-item'  data-folder="{subsubFolder.identifier}">
+                                                <i class="fa fa-solid fa-folder"></i><div >{subsubFolder.name}</div>
+                                                <ul>
+                                                    <f:for each="{subsubFolder.subFolders}" as="subsubsubFolder">
+                                                        <li data-level='4' class='ted3-fp-folders-item'  data-folder="{subsubsubFolder.identifier}">
+                                                            <i class="fa fa-solid fa-folder"></i><div >{subsubsubFolder.name}</div>
+                                                        </li>
+                                                    </f:for> 
+                                                </ul>
+                                            </li>
+                                        </f:for> 
+                                    </ul>
+                                </li>
+                            </f:for> 
+                        </ul>
+
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+
+        <div id="SortAndFilter">
+            <div class="ted3-filterbox">
+                <input type="text" placeholder="Filter" ng-model="filterText">
+            </div>
+
+            <div class="clearfix">
+                <div class="ted3-fp-ordering">
+                    <div class="ted3-fp-ordering-label">Sortieren nach <b>[[currentOrdering]]</b></div>
+                    <div class="ted3-fp-ordermenu">
+                        <div class="ted3-fp-ordermenu-item active" ng-click="orderByMe($event, '-cdate')">Neueste</div>
+                        <div class="ted3-fp-ordermenu-item" ng-click="orderByMe($event, 'cdate')">Älteste</div>
+                        <div class="ted3-fp-ordermenu-item" ng-click="orderByMe($event, 'name')">Name</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="FilesDropZone">
+        <label>Drop files here to upload.... </label>
+    </div>
+    <div class="ted3-fp-files clearfix" data-selectedfolder="/user_upload/">
+        <div class="ted3-fp-fileserror"></div>
+        <div data-uid="[[f.uid]]" data-ext="[[f.ext]]" ng-repeat="f in files| orderBy:myOrderBy | filter: filterText" class="ted3-fp-file" data-isnew="[[f.isnew]]" data-isimage="[[f.isimage]]" data-identifier="[[f.identifier]]">
+            <div class="ted3-fp-file-thumbnail-outer"> 
+                <a  class="ted3-fp-file-download" href="fileadmin/[[f.identifier]]" download="[[f.name]]" > <i class="fa fa-download"></i></a>
+                <div  class="ted3-fp-file-opendetail ted3-fp-file-opendetail-[[f.isimage]]" > <i class="fa fa-search"></i></div>
+                <img src="[[f.thumbnail]]" class="ted3-fp-file-thumbnail" /> 
+                <div class="ted3-fp-file-extname-isimage-[[f.isimage]]">[[f.ext]]</div> 
+                <div class="ted3-fp-file-dim-[[f.isimage]]">[[f.dimension]]</div> 
+            </div>
+            <div  class="ted3-fp-file-label">
+                <div  class="ted3-fp-file-filename" >[[f.name]]</div>
+                <div  class="ted3-fp-file-size" >[[f.size]] kb</div> 
+
+                <div  class="ted3-fp-file-delete" data-action="?type=4500&tx_ted3_fe[action]=deletefile&tx_ted3_fe[controller]=Filepool&tx_ted3_fe[file]=[[f.uid]]">
+                    <div class="ted3-fp-file-delete-btn"></div>
+                </div>
+            </div>
+            <div class="ted3-fp-file-detail">
+                <div class='clearfix'><div class="ted3-fp-file-detail-close">x</div></div>
+                <div class="ted3-fp-file-detail-content">
+                    <img src="fileadmin/[[f.identifier]]" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var app = angular.module('filepool', [])
+            .config(['$interpolateProvider', function ($interpolateProvider) {
+                    $interpolateProvider.startSymbol('[[');
+                    $interpolateProvider.endSymbol(']]');
+                }]);
+
+    app.controller('fileList', function ($scope, $http) {
+        var selected = false;
+
+        $scope.files = new Array();
+
+        $('.ted3-fp-files').addClass('loading');
+        $http.get("?type=4500&tx_ted3_fe[action]=list&tx_ted3_fe[controller]=Filepool").then(function (response) {
+
+            if (response.data == "umlauterror") {
+                $('.ted3-fp-fileserror').html("Fehler: Ungültiger in Dateinamen erkannt! Bitte auf Dateiebene korrigieren ...");
+                $('.ted3-fp-files').removeClass('loading');
+            } else {
+                $('.ted3-fp-fileserror').html("");
+            }
+
+            if (!selected) {
+                $scope.files = response.data;
+            }
+
+            // console.log(typeof $scope.files);
+            $('.ted3-fp-files').removeClass('loading');
+            //$scope.myData = response.data.records;
+            //  console.log($scope.files);
+        });
+
+        $scope.myOrderBy = "-cdate";
+        $scope.currentOrdering = "Neueste";
+        $scope.orderByMe = function ($event, x) {
+            $('.ted3-fp-ordermenu-item').removeClass('active');
+            $($event.currentTarget).addClass('active');
+            $scope.currentOrdering = $($event.currentTarget).text();
+            //console.log(this);
+            // $(element).addClass('active');
+            $scope.myOrderBy = x;
+
+        }
+
+        $('body').on('click', '.ted3-fp-file', function () {
+
+            window.filePoolData = {
+                uid: $(this).data('uid'),
+                ext: $(this).data('ext')
+            };
+            window.close();
+            //$('.ted3-fp-file').removeClass('active');
+            //$(this).addClass('active');
+        });
+
+
+
+        // Init  Folder
+        $('.ted3-fp-folders-item[data-name="user_upload"]').addClass('ted3-fp-folders-active');
+        Ted3.urls.upload = '?type=4500&tx_ted3_fe[action]=upload&tx_ted3_fe[controller]=Filepool&tx_ted3_fe[target]=' + $('.ted3-fp-folders-active').data('folder');
+        //alert(Ted3.urls.upload);
+        // Select Folder
+
+        $('#FolderStructure li').on('click', function (e) {
+            e.stopPropagation();
+            var folder = $(this).data("folder");
+            $('.ted3-fp-files').addClass('loading');
+            $('#FolderStructure li').removeClass('ted3-fp-folders-active');
+
+            $('.ted3-fp-files').attr("data-selectedfolder", folder);
+
+            $(this).addClass('ted3-fp-folders-active');
+            selected = true;
+            $http.get("?type=4500&tx_ted3_fe[action]=list&tx_ted3_fe[controller]=Filepool&tx_ted3_fe[folder]=" + folder).then(function (response) {
+                // console.log(response.data);
+                if (response.data == "umlauterror") {
+                    $('.ted3-fp-fileserror').html("Fehler: Ungültiger Dateinamen erkannt! Bitte auf Dateiebene korrigieren ...");
+                    $('.ted3-fp-files').removeClass('loading');
+                    // return false;
+                } else {
+                    $('.ted3-fp-fileserror').html("");
+                }
+
+                if (response.data == null) {
+                    $scope.files = new Array();
+                } else {
+                    $scope.files = response.data;
+                }
+
+
+
+                // console.log(typeof $scope.files);
+                $('.ted3-fp-files').removeClass('loading');
+                //$scope.myData = response.data.records;
+                Ted3.urls.upload = '?type=4500&tx_ted3_fe[action]=upload&tx_ted3_fe[controller]=Filepool&tx_ted3_fe[target]=' + $('.ted3-fp-folders-active').data('folder');
+                //alert(Ted3.urls.upload);
+
+                //  console.log($scope.files);
+            });
+
+        });
+
+        // Download
+        $('body').on('click', '.ted3-fp-file-download', function (e) {
+            e.stopPropagation();
+        });
+        // Open Detail
+        $('body').on('click', '.ted3-fp-file-opendetail', function (e) {
+            e.stopPropagation();
+
+            $('.ted3-fp-file').removeClass('active');
+            $(this).closest('.ted3-fp-file').addClass('active');
+
+
+            if ($(this).closest('.ted3-fp-file').data('isimage') && $(this).closest('.ted3-fp-file').data('ext') != "pdf") {
+
+            } else {
+                $(this).closest('.ted3-fp-file').find('.ted3-fp-file-detail-content').html("<iframe src='fileadmin/" + $(this).closest('.ted3-fp-file').data("identifier") + "' ></iframe>");
+                // window.open("fileadmin/" + $(this).closest('.ted3-fp-file').data("identifier"));
+            }
+
+
+        });
+        // Close Detail
+        $('body').on('click', '.ted3-fp-file-detail-close', function (e) {
+            e.stopPropagation();
+            $(this).closest('.ted3-fp-file').removeClass('active');
+        });
+
+        // Delete File
+        $('body').on('click', '.ted3-fp-file-delete', function (e) {
+            e.stopPropagation();
+            var $that = $(this);
+            if (confirm("Diese Datei wirklich löschen?")) {
+                $.get($(this).data('action'), function (response) {
+                    if (!response.deletesuccess) {
+                        alert("Datei kann nicht gelöscht werden, da sie noch " + response.references + " mal verwendet wird");
+                    } else {
+                        var uid = $that.closest('.ted3-fp-file').data('uid');
+                        //$scope.remove($that.closest('.ted3-fp-file').index());
+                        $.each($scope.files, function (index, item) {
+                            if (item.uid == uid) {
+                                $scope.files.splice(index, 1);
+                                return false;
+                            }
+                        });
+                        $that.closest('.ted3-fp-file').remove();
+                        //  .remove();
+                    }
+                });
+            }
+
+        });
+
+
+        // Upload File
+        $("html").on("dragover", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#FilesDropZone').show();
+            // alert("sdf");
+        });
+
+
+        $("html,body").on("drop", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // alert("sdf");
+        });
+
+
+
+        $('#FilesDropZone').on({// Native-dd
+            dragenter: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $(this).addClass('ted3-fp-hover');
+            },
+            drop: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                //     alert("droppp");
+                //   console.log(e.originalEvent.dataTransfer.files);
+                if (e.originalEvent.dataTransfer) {
+
+                    $.each(e.originalEvent.dataTransfer.files, function (i, uploadFile) {
+                        var that = $(this);
+                        var extension = uploadFile.name.split('.').pop();
+                        that.progressbar = $('<div />', {class: 'ted3-fp-progressbar'});
+                        that.progressbar.text(uploadFile.name);
+                        that.progressbar.css("width", 0);
+                        $('#FilesDropZone').prepend(that.progressbar);
+                        //Loader
+                        var uploadFileArray = new Array();
+                        uploadFileArray[0] = uploadFile;
+                        Ted3.file.upload(uploadFileArray, function (e, xhr) {
+                            var percent = Math.round((e.loaded / e.total * 100) * 100) / 100 + "%";
+                            console.log("prozent");
+                            console.log(percent);
+                            that.progressbar.clearQueue().animate({
+                                width: percent
+                            }, 800);
+
+                        }).done(function (data) {
+                            //  alert("done");
+                            var data = JSON.parse(data);
+
+                            if (data.success != undefined) {
+                                if (data.success == false) {
+                                    that.progressbar.remove();
+                                    return false;
+                                }
+                            }
+                            // console.log(data);
+                            $scope.files.push(data[0]);
+
+                            $scope.$apply();
+
+                            that.progressbar.fadeOut(1100, function () {
+                                that.progressbar.remove();
+                                // alert("out");
+                            });
+
+                            setTimeout(function () {
+                                $('[data-uid=' + data[0].uid + ']').addClass('ted3-fp-file-wasnew');
+                                //$('[data-isnew="1"]').addClass('.ted3-fp-file-wasnew');
+                            }, 4000);
+
+                        });
+                    });
+
+
+
+                }
+                $(this).removeClass('ted3-fp-hover');
+            },
+            dragleave: function (e) {
+
+                e.preventDefault();
+                $(this).removeClass('ted3-fp-hover');
+                //  $('#FilesDropZone').hide();
+
+            }
+        });
+
+
+
+    });
+
+
+</script>

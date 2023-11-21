@@ -1,0 +1,12 @@
+/* 
+    Created on : 13.11.2023, 15:58:54
+    Author     : dominik
+*/
+.c-image a{
+    display: block;
+}
+
+.c-image img{
+    max-width:100%;
+    height:auto;
+}

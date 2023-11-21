@@ -1,0 +1,530 @@
+@white: #fff;
+@medblack: rgba(0,0,0,0.6);
+@lightblack: rgba(0,0,0,0.3);
+@grey : #e9e9e9;
+@black: #111;
+.ted3-root{
+    .ted3-element-settingsform{
+        table{
+            width: 100%;
+            tr:first-child td{
+                border-top: 1px solid @grey; 
+            }
+            td{
+                position: relative;
+                border-bottom: 1px solid @grey;
+                padding: 10px 0;
+                input,textarea{
+                    padding: 3px;
+                    max-width: 100%;
+                    box-sizing: border-box;
+                }
+                + td{
+                    text-align: right;
+                }
+            }
+            label{
+                min-width: 100px;
+                display: inline-block;
+                margin-right: 10px;
+            }
+            input.ted3-element-setting{
+                font-size: 12px;
+            }
+        }
+
+        input.ted3-element-settingsform-sm{
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border:none;
+            width: 100px;
+            background:  @grey;
+            padding: 5px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
+
+
+
+    .ted3-btn{
+        font: normal normal normal 14px/1 FontAwesome;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        line-height: 20px;
+        height: 20px; margin: 2px 1px;
+        padding-left: 1px;
+        min-width: 22px;
+        font-size: 15px;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        color: #333;
+        box-sizing: border-box;
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor: pointer;
+        position: relative;
+        &:hover{
+            box-shadow: 1px 0px 4px @lightblack;
+            color: #000;
+            border-radius: 2px;
+        }
+
+    }
+    .ted3-element-toolbar{
+        position: absolute;
+        right: 0px; 
+        /*padding: 0 5px;*/
+        display: none;
+        z-index: 500;
+        background-color: rgba(255,255,255,1); 
+        /*background-color:rgb(217, 218, 214);*/
+        text-align: right;
+        height: 24px;
+        line-height: 0px;
+        overflow: hidden;
+        /*        outline: 2px solid @lightblack;
+                 outline-offset: -1px;*/
+        border-top: 1px solid @lightblack;
+        border-bottom: 1px solid @lightblack;
+        width: 100%;
+        min-width: 100px;
+        .ted3-toolbar-name{
+            position: absolute;
+            left:5px;
+            top:0px;
+            font-size: 12px;
+            bottom: 0px;
+            line-height: 24px;
+            color: #fff;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .ted3-element-mainbuttons,  .ted3-element-savebuttons{
+            display: inline-block;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            height: 100%;
+            .ted3-element-translatebtns{
+                display: inline-block;
+            }
+        }
+        .ted3-element-savebuttons{
+            display: none;
+        }
+        &:after{
+            content:'';
+            position: absolute;
+            left:0px;
+            height: 100%;
+            background: #79a548; opacity: 0.3;
+            z-index: 10;
+            width: 0%; overflow: hidden;
+            transition: width 1s;
+        }
+        &.ted3-element-saving{
+            &:after{
+                width: 100%;
+            }
+        }
+        &.ted3-element-toolbar-selected{
+            background: rgba(0,0,0,1);
+            background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 30%, rgba(255,255,255,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(30%, rgba(246,246,246,1)), color-stop(100%, rgba(255,255,255,1)));
+            background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 30%, rgba(255,255,255,1) 100%);
+            background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 30%, rgba(255,255,255,1) 100%);
+            background: -ms-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 30%, rgba(255,255,255,1) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 30%, rgba(255,255,255,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+        }
+        &.ted3-element-toolbar-changed{
+            background: rgba(0,0,0,1);
+            background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 59%, rgba(255,255,255,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(59%, rgba(246,246,246,1)), color-stop(100%, rgba(255,255,255,1)));
+            background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 59%, rgba(255,255,255,1) 100%);
+            background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 59%, rgba(255,255,255,1) 100%);
+            background: -ms-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 59%, rgba(255,255,255,1) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(246,246,246,1) 59%, rgba(255,255,255,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+            .ted3-element-mainbuttons{
+                display: none !important;
+            }
+            .ted3-toolbar-name{    
+                color: #fff !important;
+            }
+        }
+        &.ted3-element-toolbar-hidden{
+            background: rgba(219,83,65,1);
+            background: -moz-linear-gradient(left, rgba(219,83,65,1) 0%, rgba(219,83,65,1) 27%, rgba(242,246,248,1) 63%, rgba(242,246,248,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(219,83,65,1)), color-stop(27%, rgba(219,83,65,1)), color-stop(63%, rgba(242,246,248,1)), color-stop(100%, rgba(242,246,248,1)));
+            background: -webkit-linear-gradient(left, rgba(219,83,65,1) 0%, rgba(219,83,65,1) 27%, rgba(242,246,248,1) 63%, rgba(242,246,248,1) 100%);
+            background: -o-linear-gradient(left, rgba(219,83,65,1) 0%, rgba(219,83,65,1) 27%, rgba(242,246,248,1) 63%, rgba(242,246,248,1) 100%);
+            background: -ms-linear-gradient(left, rgba(219,83,65,1) 0%, rgba(219,83,65,1) 27%, rgba(242,246,248,1) 63%, rgba(242,246,248,1) 100%);
+            background: linear-gradient(to right, rgba(219,83,65,1) 0%, rgba(219,83,65,1) 27%, rgba(242,246,248,1) 63%, rgba(242,246,248,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db5341', endColorstr='#f2f6f8', GradientType=1 );
+            .ted3-btn-show{
+                color: red;
+            }
+        }
+
+    }
+    .ted3-progressbar{
+        position: absolute;
+        left:0px;
+        height: 40px;
+        background: #79a548; opacity: 0.8;
+        z-index: 10;
+        width: 0%; overflow: hidden;
+    }
+    .ted3-addzone{
+        vertical-align: middle;
+        width: 100%;
+        text-align: center;
+        z-index: 1000;
+        padding: 0;
+        overflow: hidden;
+        height: 24px;
+        line-height: 0px;
+        position: relative;
+        box-sizing: border-box;
+        display: block;
+        opacity: 0.5;
+        background-color: rgba(255,255,255,0.3);
+        .ted3-btn{
+            &:before{
+                font-size: 13px;
+            }
+
+        }
+        &.ted3-addzone-image{
+            position: absolute;
+            height: 20px;
+            opacity: 1;
+            display: none;
+            background-color: rgba(255,255,255,0.5);
+            .ted3-btn{
+                line-height:16px;
+                height:16px;
+                margin: 2px 0;
+                &:before{
+                    font-size: 12px;
+                }
+
+            }
+
+        }
+        &:after{
+            content:'';
+            position: absolute;
+            z-index: 100;
+            /*border: 1px dotted3 @lightblack;*/
+            border-top: 1px solid @lightblack;
+            border-bottom: 1px solid @lightblack;
+            left: 0; top: 0; bottom: 0; right: 0px;
+            pointer-events: none;
+        }
+        .ted3-addzone-progressbar{
+            height: 100%;
+            top:0px;
+        }
+
+        .ted3-btn-paste{
+            display: none;
+        }
+        &:hover{
+            opacity:1;
+        } 
+        .ted3-addzone-name{
+            position: absolute;
+            top: 0px; left: 0px;
+            line-height: 24px;
+            font-size: 12px;
+            padding-left: 5px;
+            font-family: 'Share Tech';
+            color: #000;
+        }
+    }
+    &.no-transition .ted3-addzone{
+        transition: none;
+    }
+
+    [data-container][data-parent="0"]{
+        > .ted3-addzone{
+            display: block;
+        }
+        .ted3-element-root{
+            > .ted3-addzone{
+                display: block;
+            }
+        }
+    }
+
+    [data-element]{
+        min-height: 20px;
+        > .ted3-element-selectoverlay{
+            content:' ';
+            display: block;
+            top: 0px; left: 0px; right: 0px;
+            bottom: 0px;
+            z-index: 5000;
+            position: absolute;
+        }
+
+        a{
+            cursor: default;
+        }
+        .ted3-element-settingsform{
+            display: none !important;
+        }
+        .ted3-dragger{
+            position: absolute;
+            z-index: 5000;
+            top : 0px;
+            right: 0px;
+            opacity: 0.7;
+            display: none;
+            padding: 0px;
+            background: #fff;
+            cursor:move;
+            margin:0px;
+            &:before{
+                content: '\f047';
+                font-size: 11px;
+            }
+            &:hover{
+                opacity: 1;
+            }
+        }
+        .ted3-addzone{
+            line-height: 18px !important;
+            height: 22px;
+            .ted3-btn{
+                margin: 2px 0;
+                &:before{
+                    font-size: 11px;
+                }
+                line-height: 18px !important;
+                height: 18px;
+                width: 18px;
+            }
+        }
+
+
+        &:not(.ted3-element-selected){
+            &:hover{
+                outline: 1px solid @lightblack;
+                outline-offset: -1px;
+            } 
+        }
+
+        &.ted3-element-selected{
+            z-index: 500;
+            /*box-shadow: 0px 0px 1px #000;*/
+        }
+
+
+    }
+
+    [data-container]{
+        &[data-container="content"].ted3-container-empty{
+        }
+        &.ted3-container-empty{
+            overflow: visible;
+        }
+
+        /*        &[data-parent="0"]{
+                    > .ted3-addzone{
+                        height: 20px;
+                    }
+                    .ted3-element-root{
+                        > .ted3-addzone{
+                            height: 20px;
+                        }
+                    }
+                }*/
+        &.ted3-element-slidecontainer{
+            > .ted3-addzone:first-child{
+                background: rgba(185, 255, 255, 0.6);
+                &:before{
+                    font-family: 'Share Tech';
+                    content: 'add to interr. inheritance';
+                    display: inline-block;
+                    position: absolute; right:5px; top: 0px;
+                    font-size: 10px;
+                    line-height: 24px;
+
+                }
+            }
+        }
+    }
+
+    &.ted3-mode-dragging{
+        .ted3-container{
+            box-shadow: 0px 0px 3px @lightblack;
+        }
+        /*        .ted3-addzone{
+                    height: 20px;
+                }*/
+        .ted3-drop-hover{
+            background: #79a548;
+        }
+        .ted3-element-toolbar, .ted3-element-toolbar-bottom{
+            display: none !important;
+        }
+
+
+    }
+
+
+    &.ted3-mode-clipboard{
+        .ted3-addzone{
+            .ted3-btn-paste{
+                display: inline-block;
+            }
+        }
+    }
+    &.ted3-mode-addzones{
+        [data-element].ted3-element-selected{
+            box-shadow: none;
+        }
+    }
+    &:not(.ted3-mode-addzones){
+        .ted3-addzone{
+            height: 0px !important;
+        }
+        [data-element] .ted3-dragger{
+            display: none !important;
+        }
+    }
+
+    &.ted3-mode-selected{
+        [data-element]:not(.ted3-element-selected){
+            > .ted3-element-toolbar{
+                display: none;
+            }
+            /*            &:after{
+                            display: none;
+                        }*/
+        }
+        [data-element].ted3-element-selected{
+            > .ted3-element-selectoverlay{
+                display: none;
+            }
+        }
+    }
+    [data-element][data-hidden="1"], [data-element][data-outofdate="1"]{
+        opacity: 0.5;
+        &.ted3-element-selected{
+            opacity: 1;
+        }
+    }
+    &.ted3-mode-preview{
+        .ted3-addzone, .ted3-dragger, .ted3-element-toolbar, .ted3-element-cornerbuttons{
+            display: none !important;
+        }
+        [data-element]{
+            a{
+                cursor: pointer;
+            }
+            &:hover{
+                outline: none;
+            }
+
+            > .ted3-element-selectoverlay{
+                display: none;
+            }
+
+        }
+        &.ted3-mode-showhidden{
+            [data-element][data-hidden="1"], [data-element][data-outofdate="1"]{
+                opacity: 1;
+            }
+        }
+        &:not(.ted3-mode-showhidden){
+            [data-element][data-hidden="1"]{
+                display: none;
+            }
+            [data-element][data-outofdate="1"]{
+                display: none;
+            }
+        }
+
+    }
+    &.ted3-mode-noconflict{
+        [data-element]{
+            a{
+                cursor: pointer;
+            }
+            > .ted3-element-selectoverlay{
+                display: none;
+            }
+        }
+
+    }
+    &[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit{
+        [data-element][data-translateable="1"] > *{
+            pointer-events: none !important;
+        }
+        .ted3-dragger{
+            display: none !important;
+        }
+        .ted3-element-toolbar{
+            .ted3-btn-copy, .ted3-btn-cut{
+                display: none !important;
+            }
+            .ted3-element-translatebtns{
+                display: none !important;
+            }
+            &.tb-translateable{
+                .ted3-btn-delete{
+                    display: none !important;
+                }
+                .ted3-btn-cog{
+                    display: none !important;
+                }
+                .ted3-btn-edit{
+                    display: none !important;
+                }
+                .ted3-btn-link{
+                    display: none !important;
+                }
+            }
+
+        }
+
+        .ted3-element-toolbar-bottom{
+            display: none !important;
+        }
+        .ted3-addzone:not(.ted3-addzone-image), .ted3-btn-addzones{
+            display: none !important;
+        }
+        &[data-langfallbacktype="strict"]{
+            .ted3-addzone:not(.ted3-addzone-image){
+                display: block !important;
+            }
+        }
+
+
+    }
+
+}
+#ted3-linkdialog{
+    span{
+        display: inline-block;
+        width: 80px;
+    }
+    input{
+        margin-bottom: 10px;
+        height: 25px; line-height: 25px;
+        padding-left: 5px;
+    }
+}
+
+.ted3-mode-edit:not(.ted3-mode-noconflict)  [target="lightbox"]{
+    pointer-events: none;
+    user-select: none;
+}

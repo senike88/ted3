@@ -1,0 +1,27 @@
+{namespace ted3=DS\Ted3\ViewHelpers}
+
+<ted3:element.content object="{data}" class="c-element c-image" name="TED³ Image"  >
+    <ted3:settings.form>
+        <ted3:settings.input type="text" label="Width"  name="width" size="4"  />
+        <ted3:settings.input type="text" label="Height"  name="height" size="4" />
+        <ted3:settings.input type="checkbox" label="Lightbox"  name="lightboxlink" value="1" />
+        <ted3:settings.input type="checkbox" label="Center"  name="center" value="1" />
+        <ted3:settings.input type="checkbox" label="Border"  name="border" value="1" />
+    </ted3:settings.form>
+    <div class="c-image-inner c-image-center-{ted3settings.center} c-image-border-{ted3settings.border}">
+        <f:if condition="{ted3settings.lightboxlink}">
+            <f:then>
+                <f:for each="{files}" as="file">
+                    <a href="{file.publicUrl}" target="lightbox" >
+                        <f:media  file="{file}" alt="{file.alternative}" title="{file.title}" width="{ted3settings.width}" height="{ted3settings.height}"  />
+                    </a>
+                </f:for>
+            </f:then>
+            <f:else>
+                <f:for each="{files}" as="file">
+                    <f:media  file="{file}" alt="{file.alternative}" title="{file.title}" width="{ted3settings.width}" height="{ted3settings.height}" />
+                </f:for>
+            </f:else>
+        </f:if>
+    </div>
+</ted3:element.content>

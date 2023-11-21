@@ -1,0 +1,461 @@
+.ted3-root .ted3-element-settingsform table {
+  width: 100%;
+}
+.ted3-root .ted3-element-settingsform table tr:first-child td {
+  border-top: 1px solid #e9e9e9;
+}
+.ted3-root .ted3-element-settingsform table td {
+  position: relative;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 10px 0;
+}
+.ted3-root .ted3-element-settingsform table td input,
+.ted3-root .ted3-element-settingsform table td textarea {
+  padding: 3px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.ted3-root .ted3-element-settingsform table td + td {
+  text-align: right;
+}
+.ted3-root .ted3-element-settingsform table label {
+  min-width: 100px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.ted3-root .ted3-element-settingsform table input.ted3-element-setting {
+  font-size: 12px;
+}
+.ted3-root .ted3-element-settingsform input.ted3-element-settingsform-sm {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border: none;
+  width: 100px;
+  background: #e9e9e9;
+  padding: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.ted3-root .ted3-btn {
+  font: normal normal normal 14px/1 FontAwesome;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  line-height: 20px;
+  height: 20px;
+  margin: 2px 1px;
+  padding-left: 1px;
+  min-width: 22px;
+  font-size: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  color: #333;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  position: relative;
+}
+.ted3-root .ted3-btn:hover {
+  box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.3);
+  color: #000;
+  border-radius: 2px;
+}
+.ted3-root .ted3-element-toolbar {
+  position: absolute;
+  right: 0px;
+  /*padding: 0 5px;*/
+  display: none;
+  z-index: 500;
+  background-color: #ffffff;
+  /*background-color:rgb(217, 218, 214);*/
+  text-align: right;
+  height: 24px;
+  line-height: 0px;
+  overflow: hidden;
+  /*        outline: 2px solid @lightblack;
+                 outline-offset: -1px;*/
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  min-width: 100px;
+}
+.ted3-root .ted3-element-toolbar .ted3-toolbar-name {
+  position: absolute;
+  left: 5px;
+  top: 0px;
+  font-size: 12px;
+  bottom: 0px;
+  line-height: 24px;
+  color: #fff;
+  overflow: hidden;
+  text-align: left;
+}
+.ted3-root .ted3-element-toolbar .ted3-element-mainbuttons,
+.ted3-root .ted3-element-toolbar .ted3-element-savebuttons {
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+}
+.ted3-root .ted3-element-toolbar .ted3-element-mainbuttons .ted3-element-translatebtns,
+.ted3-root .ted3-element-toolbar .ted3-element-savebuttons .ted3-element-translatebtns {
+  display: inline-block;
+}
+.ted3-root .ted3-element-toolbar .ted3-element-savebuttons {
+  display: none;
+}
+.ted3-root .ted3-element-toolbar:after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  height: 100%;
+  background: #79a548;
+  opacity: 0.3;
+  z-index: 10;
+  width: 0%;
+  overflow: hidden;
+  transition: width 1s;
+}
+.ted3-root .ted3-element-toolbar.ted3-element-saving:after {
+  width: 100%;
+}
+.ted3-root .ted3-element-toolbar.ted3-element-toolbar-selected {
+  background: #000000;
+  background: -moz-linear-gradient(left, #000000 0%, #f6f6f6 30%, #ffffff 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, #000000), color-stop(30%, #f6f6f6), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(left, #000000 0%, #f6f6f6 30%, #ffffff 100%);
+  background: -o-linear-gradient(left, #000000 0%, #f6f6f6 30%, #ffffff 100%);
+  background: -ms-linear-gradient(left, #000000 0%, #f6f6f6 30%, #ffffff 100%);
+  background: linear-gradient(to right, #000000 0%, #f6f6f6 30%, #ffffff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#ffffff', GradientType=1);
+}
+.ted3-root .ted3-element-toolbar.ted3-element-toolbar-changed {
+  background: #000000;
+  background: -moz-linear-gradient(left, #000000 0%, #f6f6f6 59%, #ffffff 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, #000000), color-stop(59%, #f6f6f6), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(left, #000000 0%, #f6f6f6 59%, #ffffff 100%);
+  background: -o-linear-gradient(left, #000000 0%, #f6f6f6 59%, #ffffff 100%);
+  background: -ms-linear-gradient(left, #000000 0%, #f6f6f6 59%, #ffffff 100%);
+  background: linear-gradient(to right, #000000 0%, #f6f6f6 59%, #ffffff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#ffffff', GradientType=1);
+}
+.ted3-root .ted3-element-toolbar.ted3-element-toolbar-changed .ted3-element-mainbuttons {
+  display: none !important;
+}
+.ted3-root .ted3-element-toolbar.ted3-element-toolbar-changed .ted3-toolbar-name {
+  color: #fff !important;
+}
+.ted3-root .ted3-element-toolbar.ted3-element-toolbar-hidden {
+  background: #db5341;
+  background: -moz-linear-gradient(left, #db5341 0%, #db5341 27%, #f2f6f8 63%, #f2f6f8 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, #db5341), color-stop(27%, #db5341), color-stop(63%, #f2f6f8), color-stop(100%, #f2f6f8));
+  background: -webkit-linear-gradient(left, #db5341 0%, #db5341 27%, #f2f6f8 63%, #f2f6f8 100%);
+  background: -o-linear-gradient(left, #db5341 0%, #db5341 27%, #f2f6f8 63%, #f2f6f8 100%);
+  background: -ms-linear-gradient(left, #db5341 0%, #db5341 27%, #f2f6f8 63%, #f2f6f8 100%);
+  background: linear-gradient(to right, #db5341 0%, #db5341 27%, #f2f6f8 63%, #f2f6f8 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#db5341', endColorstr='#f2f6f8', GradientType=1);
+}
+.ted3-root .ted3-element-toolbar.ted3-element-toolbar-hidden .ted3-btn-show {
+  color: red;
+}
+.ted3-root .ted3-progressbar {
+  position: absolute;
+  left: 0px;
+  height: 40px;
+  background: #79a548;
+  opacity: 0.8;
+  z-index: 10;
+  width: 0%;
+  overflow: hidden;
+}
+.ted3-root .ted3-addzone {
+  vertical-align: middle;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+  padding: 0;
+  overflow: hidden;
+  height: 24px;
+  line-height: 0px;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.ted3-root .ted3-addzone .ted3-btn:before {
+  font-size: 13px;
+}
+.ted3-root .ted3-addzone.ted3-addzone-image {
+  position: absolute;
+  height: 20px;
+  opacity: 1;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.ted3-root .ted3-addzone.ted3-addzone-image .ted3-btn {
+  line-height: 16px;
+  height: 16px;
+  margin: 2px 0;
+}
+.ted3-root .ted3-addzone.ted3-addzone-image .ted3-btn:before {
+  font-size: 12px;
+}
+.ted3-root .ted3-addzone:after {
+  content: '';
+  position: absolute;
+  z-index: 100;
+  /*border: 1px dotted3 @lightblack;*/
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0px;
+  pointer-events: none;
+}
+.ted3-root .ted3-addzone .ted3-addzone-progressbar {
+  height: 100%;
+  top: 0px;
+}
+.ted3-root .ted3-addzone .ted3-btn-paste {
+  display: none;
+}
+.ted3-root .ted3-addzone:hover {
+  opacity: 1;
+}
+.ted3-root .ted3-addzone .ted3-addzone-name {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  line-height: 24px;
+  font-size: 12px;
+  padding-left: 5px;
+  font-family: 'Share Tech';
+  color: #000;
+}
+.ted3-root.no-transition .ted3-addzone {
+  transition: none;
+}
+.ted3-root [data-container][data-parent="0"] > .ted3-addzone {
+  display: block;
+}
+.ted3-root [data-container][data-parent="0"] .ted3-element-root > .ted3-addzone {
+  display: block;
+}
+.ted3-root [data-element] {
+  min-height: 20px;
+}
+.ted3-root [data-element] > .ted3-element-selectoverlay {
+  content: ' ';
+  display: block;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 5000;
+  position: absolute;
+}
+.ted3-root [data-element] a {
+  cursor: default;
+}
+.ted3-root [data-element] .ted3-element-settingsform {
+  display: none !important;
+}
+.ted3-root [data-element] .ted3-dragger {
+  position: absolute;
+  z-index: 5000;
+  top: 0px;
+  right: 0px;
+  opacity: 0.7;
+  display: none;
+  padding: 0px;
+  background: #fff;
+  cursor: move;
+  margin: 0px;
+}
+.ted3-root [data-element] .ted3-dragger:before {
+  content: '\f047';
+  font-size: 11px;
+}
+.ted3-root [data-element] .ted3-dragger:hover {
+  opacity: 1;
+}
+.ted3-root [data-element] .ted3-addzone {
+  line-height: 18px !important;
+  height: 22px;
+}
+.ted3-root [data-element] .ted3-addzone .ted3-btn {
+  margin: 2px 0;
+  line-height: 18px !important;
+  height: 18px;
+  width: 18px;
+}
+.ted3-root [data-element] .ted3-addzone .ted3-btn:before {
+  font-size: 11px;
+}
+.ted3-root [data-element]:not(.ted3-element-selected):hover {
+  outline: 1px solid rgba(0, 0, 0, 0.3);
+  outline-offset: -1px;
+}
+.ted3-root [data-element].ted3-element-selected {
+  z-index: 500;
+  /*box-shadow: 0px 0px 1px #000;*/
+}
+.ted3-root [data-container] {
+  /*        &[data-parent="0"]{
+                    > .ted3-addzone{
+                        height: 20px;
+                    }
+                    .ted3-element-root{
+                        > .ted3-addzone{
+                            height: 20px;
+                        }
+                    }
+                }*/
+}
+.ted3-root [data-container].ted3-container-empty {
+  overflow: visible;
+}
+.ted3-root [data-container].ted3-element-slidecontainer > .ted3-addzone:first-child {
+  background: rgba(185, 255, 255, 0.6);
+}
+.ted3-root [data-container].ted3-element-slidecontainer > .ted3-addzone:first-child:before {
+  font-family: 'Share Tech';
+  content: 'add to interr. inheritance';
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  font-size: 10px;
+  line-height: 24px;
+}
+.ted3-root.ted3-mode-dragging {
+  /*        .ted3-addzone{
+                    height: 20px;
+                }*/
+}
+.ted3-root.ted3-mode-dragging .ted3-container {
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+.ted3-root.ted3-mode-dragging .ted3-drop-hover {
+  background: #79a548;
+}
+.ted3-root.ted3-mode-dragging .ted3-element-toolbar,
+.ted3-root.ted3-mode-dragging .ted3-element-toolbar-bottom {
+  display: none !important;
+}
+.ted3-root.ted3-mode-clipboard .ted3-addzone .ted3-btn-paste {
+  display: inline-block;
+}
+.ted3-root.ted3-mode-addzones [data-element].ted3-element-selected {
+  box-shadow: none;
+}
+.ted3-root:not(.ted3-mode-addzones) .ted3-addzone {
+  height: 0px !important;
+}
+.ted3-root:not(.ted3-mode-addzones) [data-element] .ted3-dragger {
+  display: none !important;
+}
+.ted3-root.ted3-mode-selected [data-element]:not(.ted3-element-selected) {
+  /*            &:after{
+                            display: none;
+                        }*/
+}
+.ted3-root.ted3-mode-selected [data-element]:not(.ted3-element-selected) > .ted3-element-toolbar {
+  display: none;
+}
+.ted3-root.ted3-mode-selected [data-element].ted3-element-selected > .ted3-element-selectoverlay {
+  display: none;
+}
+.ted3-root [data-element][data-hidden="1"],
+.ted3-root [data-element][data-outofdate="1"] {
+  opacity: 0.5;
+}
+.ted3-root [data-element][data-hidden="1"].ted3-element-selected,
+.ted3-root [data-element][data-outofdate="1"].ted3-element-selected {
+  opacity: 1;
+}
+.ted3-root.ted3-mode-preview .ted3-addzone,
+.ted3-root.ted3-mode-preview .ted3-dragger,
+.ted3-root.ted3-mode-preview .ted3-element-toolbar,
+.ted3-root.ted3-mode-preview .ted3-element-cornerbuttons {
+  display: none !important;
+}
+.ted3-root.ted3-mode-preview [data-element] a {
+  cursor: pointer;
+}
+.ted3-root.ted3-mode-preview [data-element]:hover {
+  outline: none;
+}
+.ted3-root.ted3-mode-preview [data-element] > .ted3-element-selectoverlay {
+  display: none;
+}
+.ted3-root.ted3-mode-preview.ted3-mode-showhidden [data-element][data-hidden="1"],
+.ted3-root.ted3-mode-preview.ted3-mode-showhidden [data-element][data-outofdate="1"] {
+  opacity: 1;
+}
+.ted3-root.ted3-mode-preview:not(.ted3-mode-showhidden) [data-element][data-hidden="1"] {
+  display: none;
+}
+.ted3-root.ted3-mode-preview:not(.ted3-mode-showhidden) [data-element][data-outofdate="1"] {
+  display: none;
+}
+.ted3-root.ted3-mode-noconflict [data-element] a {
+  cursor: pointer;
+}
+.ted3-root.ted3-mode-noconflict [data-element] > .ted3-element-selectoverlay {
+  display: none;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit [data-element][data-translateable="1"] > * {
+  pointer-events: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-dragger {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar .ted3-btn-copy,
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar .ted3-btn-cut {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar .ted3-element-translatebtns {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar.tb-translateable .ted3-btn-delete {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar.tb-translateable .ted3-btn-cog {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar.tb-translateable .ted3-btn-edit {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar.tb-translateable .ted3-btn-link {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-element-toolbar-bottom {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-addzone:not(.ted3-addzone-image),
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit .ted3-btn-addzones {
+  display: none !important;
+}
+.ted3-root[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit[data-langfallbacktype="strict"] .ted3-addzone:not(.ted3-addzone-image) {
+  display: block !important;
+}
+#ted3-linkdialog span {
+  display: inline-block;
+  width: 80px;
+}
+#ted3-linkdialog input {
+  margin-bottom: 10px;
+  height: 25px;
+  line-height: 25px;
+  padding-left: 5px;
+}
+.ted3-mode-edit:not(.ted3-mode-noconflict) [target="lightbox"] {
+  pointer-events: none;
+  user-select: none;
+}

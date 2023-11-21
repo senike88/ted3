@@ -1,0 +1,129 @@
+lib.ted3parseFunc_RTE < lib.parseFunc_RTE
+lib.ted3parseFunc_RTE.nonTypoTagStdWrap.encapsLines >
+lib.ted3parseFunc_RTE.tags.link < lib.parseFunc.tags.link
+#config.disTed3Donate = 1
+
+[backend.user.isLoggedIn] 
+
+config.contentObjectExceptionHandler = 0
+plugin.tx_ted3 {
+	features {
+            skipDefaultArguments = 1
+            requireCHashArgumentForActionArguments = 0
+	}
+        
+}
+ted3ajaxRequest = PAGE
+ted3ajaxRequest {
+    typeNum = 4455
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.additionalHeaders = Content-type:application/json
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    config.no_cache = 1
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Fe
+        extensionName = Ted3
+        controller = Crud
+        vendorName = DS
+        switchableControllerActions{
+                Crud{
+                    1 = tce
+                    2 = movecontent
+                    3 = delete
+                    4 = copy
+                    5 = createcontent
+                    6 = translate
+                    7 = hide
+                    8 = addfile
+                    9 = sort
+                    10 = addflexelement
+                    11 = copycontent
+                    12 = initdata
+                    13 = settings
+                    14 = test
+                }
+                File{
+                    1 = index
+		    2 = upload
+                }
+        }
+        #action = renderbe
+    }
+}
+
+
+ted3backend = PAGE
+ted3backend {
+    typeNum = 4456
+    config.no_cache = 1
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Fe
+        extensionName = Ted3
+        controller = Backend
+        vendorName = DS
+        switchableControllerActions{
+            Backend{
+                1 = route
+                2 = module
+                3 = link
+            }
+        }
+        #action = renderbe
+    }
+}
+
+
+
+
+
+ted3closeWindow = PAGE
+ted3closeWindow {
+    typeNum = 4457
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    config.no_cache = 1
+
+    headerData.10 = TEXT
+    headerData.10.value(
+        <script>window.close();</script>
+    )
+}
+
+
+ted3test = PAGE
+ted3test {
+    typeNum = 777
+    config.no_cache = 1
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    10 = TEXT
+    10 {
+        value = My Test ...
+    }
+}
+
+[global]
+

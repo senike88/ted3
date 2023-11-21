@@ -1,0 +1,13 @@
+{namespace ted3=DS\Ted3\ViewHelpers}
+<ted3:element.content object="{data}" class="c-gallery c-element" name="TED³ Gallery" >
+    <ted3:settings.form>
+        <ted3:settings.input type="text" label="Width"  name="width" size="4" default="100c" />
+        <ted3:settings.input type="text" label="Height"  name="height" size="4" default="100c" />
+    </ted3:settings.form>
+
+    <f:for each="{files}" as="file">
+        <a href="{file.publicUrl}" target="lightbox">
+            <f:image image="{file}" width="{ted3settings.width}" height="{ted3settings.height}"  />
+        </a>
+    </f:for>
+</ted3:element.content>

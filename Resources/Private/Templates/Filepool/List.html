@@ -1,0 +1,12 @@
+<f:for each="{files}" as="file">
+    <div class="ted3-fp-file" data-cdate="{file.properties.creation_date}">
+        <f:image src="fileadmin/{file.identifier}" width="150c" height="150c" /> 
+        <div class="ted3-fp-extension">{file.ext}</div>
+        <div class="ted3-fp-file-detail">
+            <div class='clearfix'><div class="ted3-fp-file-detail-close">x</div></div>
+            <div class="ted3-fp-file-detail-content">
+                <img src='fileadmin/{file.identifier}' />
+            </div>
+        </div>
+    </div>
+</f:for>

@@ -1,0 +1,153 @@
+/* TEXT */
+
+.ted3-element-selected [data-widget="textedit"]:empty:after{
+    content: attr(data-default);
+    color: grey;
+}
+[data-widget="textedit"][contenteditable="true"]{
+    outline: 0px solid transparent;
+    cursor: text;
+}
+[data-widget="textedit"][contenteditable="false"]{
+    -webkit-user-modify: initial;
+}
+
+[data-widget="textedit"] > *:first-child{
+    margin-top:0px;
+}
+.ted3-defaulttext{
+}
+/* Link */
+a[data-widget="link"]{
+    .ted3-link-toolbar{
+        display: none;
+        opacity: 0.1;
+        position: absolute;
+        top: 50%; right: 0px;
+        z-index: 10;
+        margin-top: -8px;
+    }
+
+}
+.ted3-element-linkbtn{
+    opacity: 0.5;
+    position: absolute;
+    bottom: 0px; left: 0px;
+    z-index: 10;
+    background: #fff;
+    display: none;
+}
+.ted3-root .ted3-image-editbutton{
+    position: absolute;
+    display: none;
+    background: rgb(255,255,255);
+    opacity:0.8;
+    margin-top:1px;
+    &:before {
+        font-size: 13px;
+    }
+    &:hover{opacity: 0.9;}
+}
+.ted3-element-selected .ted3-element-linkbtn{
+    display: block;
+}
+.ted3-element-linkbtn:hover{
+    opacity: 1;
+}
+
+.ted3-element-selected .ted3-link-toolbar{
+    display: block;
+}
+[data-widget="link"]:hover .ted3-link-toolbar{
+    opacity: 1;
+}
+
+
+
+
+/* IMAGE */
+.ted3-image-cropbox{
+    overflow: hidden;
+    position: relative;
+      background: url(/typo3conf/ext/ted3/Resources/Public/Images/emptyimg-bg.png); 
+    .ted3-image-viewsize{
+        position: absolute;
+        z-index: 50;
+        background-color:  rgba(0,0,0,0.6);
+        color: #fff;
+        padding: 2px 5px;
+        top:2%; left: 0px;
+        font-size: 11px;
+    }
+}
+
+[data-widget="image"]{
+    &.ted3-image-hide{
+        display: none;
+    }
+}
+img.ted3-image-original{
+    cursor: move;
+    height: auto !important;
+}
+.ted3-image-hide{
+    visibility: hidden;
+}
+.ted3-image-buttons{
+    .ted3-btn{
+        position: absolute;
+        z-index: 8888; top: 25px; left: 10px;
+        background: rgba(255,255,255,0.7);
+        opacity: 0.5;
+        transition: opacity 0.3s;
+        line-height: 16px;
+        min-width: 17px;
+        font-size: 12px;
+        &:hover{
+            opacity: 1;
+        }
+    }
+    .ted3-btn-reset{
+        top: 25px; left: 33px;
+    }
+}
+.ted3-jqueryui-outer .ui-icon, .ted3-jqueryui-outer .ui-widget-content .ui-icon{
+    background-color: rgba(255,255,255,0.9);
+}
+img{
+    display: block;
+}
+[data-widget="image"].ted3-image-placeholder{
+/*    background-color: #eee;
+    background-image: linear-gradient(45deg, #dedede 25%, transparent 25%, transparent 75%, #dedede 75%, #dedede), 
+        linear-gradient(45deg, #dedede 25%, transparent 25%, transparent 75%, #dedede 75%, #dedede);
+    background-size:16px 16px;
+    background-position:0 0, 8px 8px;*/
+    background: url(/typo3conf/ext/ted3/Resources/Public/Images/emptyimg-bg.png); 
+    
+    min-height: 40px;
+}
+
+.ted3-jqueryui-outer .ted3-image-slider{
+    position: absolute;
+    z-index: 50;
+    right: 10px; top: 30px; 
+    width: 120px;
+    max-width: 100%;
+    height: 7px;
+    .ui-slider-handle{
+        width: 11px; height: 13px;
+    }
+}
+
+
+[data-widget="image"] {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */      
+}
+
+.ted3-rte-unparsed{
+    display: none;
+}

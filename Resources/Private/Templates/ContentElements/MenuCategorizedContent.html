@@ -1,0 +1,14 @@
+{namespace ted3=DS\Ted3\ViewHelpers}
+<ted3:element.content object="{data}" settings="{edit:1,save:0}" class="c-element c-menu-catcontent" name="Categorized content" >
+    <f:if condition="{content}">
+        <ul>
+            <f:for each="{content}" as="element">
+                <li>
+                <f:link.page pageUid="{element.data.pid}" section="{element.data.uid}" title="{element.data.header}">
+                    <span>{element.data.header}</span>
+                </f:link.page>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>
+</ted3:element.content>
