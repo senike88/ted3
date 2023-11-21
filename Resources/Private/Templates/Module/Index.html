@@ -1,0 +1,21 @@
+
+
+
+
+
+<f:be.container pageTitle="Biblio Management" loadExtJsTheme="FALSE" loadJQuery="true">
+    <script>
+    
+    console.log(TYPO3);
+   // var extern = document.getElementsByTagName("link")[0].import;
+  //  console.log($('link[rel="import"]')[0]);
+  $(document).ready(function(){
+      $('#mypage').html($('link[rel="import"]')[0].import.getElementsByTagName("body")[0]);
+  });
+  
+</script>
+<link id="i" rel="import" href="/index.php?id={id}">
+<div id="mypage">
+    
+</div>
+</f:be.container>

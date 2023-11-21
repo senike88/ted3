@@ -25,8 +25,6 @@
                 }
             });
 
-
-
             if (this.element.css('position') == "static") {
                 this.element.css('position', 'relative');
             }
@@ -56,7 +54,28 @@
             this._createAddzone();
 
             if (this.options.move && !(this.options.buttonsort || this.getContainer().data('buttonsorting'))) {
-                //
+                this.dragger = $('<div /> ', {
+                    class: 'ted3-dragger ted3-btn'
+                }).prependTo(this.element);
+                this.element.draggable({
+                    handle: that.dragger,
+                    refreshPositions: true,
+                    cursor: "move",
+                    delay: 90,
+                    helper: 'clone',
+                    cursorAt: {top: -30},
+                    start: function (e, ui) {
+                        var that = $(this);
+                        $('body').addClass('ted3-mode-dragging');
+                        setTimeout(function () {
+                            that.draggable('option', 'refreshPositions', false);
+                        }, 1000);
+                    },
+                    stop: function (e, ui) {
+                        $('body').removeClass('ted3-mode-dragging');
+                    },
+                    revert: 'invalid'
+                });
             }
 
 
@@ -84,7 +103,11 @@
                 },
                 receiveNew: function (e, newdata) {
                     var addzone = $(this);
+                    //console.log(newdata);
+                    //alert("asdf");
+                    //console.log(newdata);
                     that.api.new(that.element, newdata).done(function (data) {
+
                         if (that.forceReload()) {
                             Ted3.root.ted3root('reload');
                             return false;
@@ -214,14 +237,16 @@
         cancel: function () {
             var that = this;
             this.element.find('[data-widget="text"]').textedit('blur');
+          
 
             this.element.find('[data-widget="textedit"]').each(function (i, item) {
 
                 if ($(this).closest('[data-element]')[0] == that.element[0]) {
                     $(this).removeClass('ted3-changed');
-                    if (!$(this).closest('[data-element]').data('translateable')) {
-                        $(this).textedit('disable');
+                    if(! $(this).closest('[data-element]').data('translateable')){
+                       $(this).textedit('disable'); 
                     }
+                    
                 }
             });
             if (this.options.save && this.savebuttons) {
@@ -501,10 +526,11 @@
         _createDirectFieldWidgetsOnce: function () {
             if (!this._fieldWidgetsCreated) {
                 var that = this;
+             
 
                 this.element.find('[data-widget="textedit"]').each(function () {
                     var $thisItem = $(this);
-                    if ($(this).closest('[data-element]')[0] == that.element[0] && !$(this).closest('[data-element]').data('translateable')) {
+                    if ($(this).closest('[data-element]')[0] == that.element[0] && ! $(this).closest('[data-element]').data('translateable')) {
                         //  console.log("text_edit");
                         setTimeout(function () {
                             $thisItem.textedit();
@@ -586,8 +612,7 @@
                     width = width - ((that.element.offset().left + that.element.outerWidth()) - $(window).width());
 
                 }
-                // alert(Ted3.root.css('marginLeft'));
-               
+
 
                 var topOffset = that.element.offset().top - 26;
                 if (topOffset < 0) {
@@ -603,7 +628,7 @@
 
                 this.toolbarbottom.css({
                     top: that.element.offset().top + that.element.outerHeight(),
-                    left: that.element.offset().left,
+                    left: that.element.offset().left ,
                     width: width
                 });
 

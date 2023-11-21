@@ -55,6 +55,7 @@ class TextViewHelper extends \DS\Ted3\ViewHelpers\AbstractTagBasedViewHelper {
 //            if($default && strlen( PropertyHelper::getProperty($record, $field)) < 1){
 //                $content = ;
 //            }
+            //$recordTable = $this->viewHelperVariableContainer->get(AbstractElementViewHelper::class,'table');
 //            
             //TODO besser in das system integrieren, zb beim speichern
             return '<div data-widget="textedit" data-default="' . $default . '" data-rte="' . $rte . '" data-field=\'' . $field . '\' contenteditable="false">'

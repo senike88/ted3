@@ -1,6 +1,5 @@
-{namespace ted=DS\Ted3\ViewHelpers}
-<ted:main>
-
+{namespace ted3=DS\Ted3\ViewHelpers}
+<ted3:main>
     <div id="ted3-bottombar-outer" data-belang='{fedata.belang}'>
         <div id="ted3-bottombar" class="clearfix" >
             <div class="ted3-logo">TED<span style="opacity:0.5">³</span></div>
@@ -70,15 +69,11 @@
                     </f:if>
 
                 </div>
-                
-                <a class="ted3-btn ted3-btn-t3" title="Backend" target="_blank" href="{ted:routeuri(route:'main')}"></a>
-                <a class="ted3-btn ted3-btn-logout" title="Logout" href="{ted:routeuri(route:'logout')}"></a>
+
+                <a class="ted3-btn ted3-btn-t3" title="Backend" target="_blank" href="{ted3:routeuri(route:'main')}"></a>
+                <a class="ted3-btn ted3-btn-logout" title="Logout" href="{ted3:routeuri(route:'logout')}"></a>
                 <a class="ted3-btn ted3-btn-empty"></a>
-                <!-- a class="ted3-btn ted3-btn-donate" title="Support TED³" target="_blank" href="#"></a -->
-                
-                <a class="ted3-btn ted3-btn-doku" title="Documentation" target="_blank" href="http://ted3.zimmermann-streiter.com/en/documentation/"></a>
-                
-                
+
 
             </div>
 
@@ -99,9 +94,9 @@
 
     </div>
 
-    <script>
+     <script>
         <![CDATA[ Ted3.fedata = {}; ]]>
         Ted3.fedata = <f:format.htmlentitiesDecode >{fedataJSON}</f:format.htmlentitiesDecode>; 
         
     </script>
-</ted:main>
+</ted3:main>

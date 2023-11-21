@@ -2,20 +2,16 @@
 
 namespace DS\Ted3\ViewHelpers\Settings;
 
-
 use DS\Ted3\ViewHelpers\Element\AbstractElementViewHelper;
 
 class InputViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
-    
-    
-    
-      /**
+
+    /**
      * As this ViewHelper renders HTML, the output must not be escaped.
      *
      * @var bool
      */
     protected $escapeOutput = false;
-    
 
     public function initializeArguments() {
 
@@ -33,10 +29,10 @@ class InputViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
     }
 
     public function render() {
-        
-        
+
+
 //        array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext
-        
+
         $name = $this->arguments['name'];
         $label = $this->arguments['label'];
         $value = $this->arguments['value'];
@@ -45,7 +41,7 @@ class InputViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
         $max = $this->arguments['max'];
         $maxlength = $this->arguments['maxlength'];
         $checked = $this->arguments['checked'];
-        $required = $this->rguments['required'];
+        $required = $this->arguments['required'];
         $size = $this->arguments['size'];
         $default = $this->arguments['default'];
 
@@ -63,7 +59,7 @@ class InputViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 //                    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($record['ted3_settings']);
                 }
 
-                if ($default && !$ted3settings[$name] && $ted3settings[$name] != $default) {
+                if ($default && !@$ted3settings[$name] && @$ted3settings[$name] != $default) {
 //                    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($record);
                     //Save Default
                     $ted3settings[$name] = $default;
@@ -82,12 +78,15 @@ class InputViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
             }
         }
         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($ted3settings);
-        if ($ted3settings[$name] == $value || $checked) {
+        if (!isset($ted3settings)) {
+            $ted3settings = array();
+        }
+        if (@$ted3settings[$name] == $value || $checked) {
             $checkedAttr = 'checked="checked"';
         }
 
         if (!$value) {
-            $value = $ted3settings[$name];
+            $value = @$ted3settings[$name];
 //            if (!$value) {
 //                $value = $default;
 //            }
@@ -97,8 +96,9 @@ class InputViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
         if ($required) {
             $requiredAttr = 'required="1"';
         }
+        //    return "<b>test</b>";
         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($vars); exit;
-        $input = '<input class="ted3-element-setting" type="' . $type . '" name="' . $name . '" ' . $checkedAttr . '" value="' . $value . '" ' . $requiredAttr . ' size="' . $size . '" />';
+        @$input = '<input class="ted3-element-setting" type="' . $type . '" name="' . $name . '" ' . $checkedAttr . '" value="' . $value . '" ' . @$requiredAttr . ' size="' . $size . '" />';
         return '<tr><td><label>' . $label . '</label></td><td>' . $input . '</td></tr>';
     }
 

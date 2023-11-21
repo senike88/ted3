@@ -29,7 +29,7 @@ class ColViewHelper extends AbstractContainerViewHelper {
         $access = $this->arguments['access'];
 
 
-        if ($this->editingAccess) {
+        if (@$this->editingAccess) {
             // Check if content-slide
 
 

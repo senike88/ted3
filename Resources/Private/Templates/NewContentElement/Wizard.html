@@ -1,28 +1,58 @@
-<script src="/typo3conf/ext/ted3/Resources/Public/js/jquery-1.11.3.min.js"></script>
-<script src="/typo3conf/ext/ted3/Resources/Public/js/newcontent.js"></script>
-<!-- link rel="stylesheet" href="/typo3conf/ext/ted3/Resources/Public/css/newcontent-backend.css" -->
-<link rel="stylesheet" href="/typo3/sysext/backend/Resources/Public/Css/backend.css">
-<link rel="stylesheet" href="/typo3conf/ext/ted3/Resources/Public/css/newcontent.css">
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+    >
 
 
-<f:if condition="{hasAccess}">
-    <f:then>
-        <div class="t3-new-content-element-wizard-inner">
-            <f:if condition="{positionSelection}">
-                <div class="t3-new-content-element-wizard-title">
-                    <h2>{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:1_selectType')}</h2>
-                </div>
-            </f:if>
-        
-            {renderedTabs -> f:format.raw()}
-            <div class="container-fluid">
-                <div class="alert alert-danger hidden t3js-filter-noresult" role="alert">
-                    <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:newContentElement.filter.noResults" />
-                </div>
-            </div>
+    <style>
+        .cew-title{
+            background: #eee;
+            padding: 10px;
+            font-family: Arial;
+        }
+        .cew-elements{
+            padding: 10px;
+            margin-bottom: 25px;
+        }
+        .cew-elements-item{
+            padding: 5px 0;
+            margin-top: -10px;
+
+        }
+        button{
+            cursor: pointer; 
+        }
+        .cew-elements-item svg{
+            width: 35px; height: 35px;
+            position: relative;
+            top: 13px;
+        }
+    </style>
+
+
+    <f:if condition="{positionSelection}">
+        <h2>{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:1_selectType')}</h2>
+    </f:if>
+
+
+    <f:for each="{catJSON}" as='cat'>
+        <div class='cew-cat'>
+            <div class='cew-title'>{cat.label}</div> 
+            <div class='cew-elements'>
+                <f:for each="{cat.items}" as='contentelement'>
+                    <div class='cew-elements-item'>
+                        <svg class="icon-color"><use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/{contentelement.iconcat}.svg#{contentelement.icon}"></use></svg>
+                       
+                        <button type="button" data-ctype="{contentelement.CType}" class="btn btn-link media p-0 text-start"
+                                data-target="{contentelement.url}" 
+                                title="{contentelement.description}"
+                                onclick="makeCElement(this);">{contentelement.label}</button>
+                    </div>
+                </f:for>
+            </div> 
         </div>
-    </f:then>
-    <f:else>
-        <h1>No access</h1>
-    </f:else>
-</f:if>
+    </f:for>
+
+
+</html>

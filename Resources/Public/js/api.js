@@ -36,6 +36,7 @@ Ted3.jQuery = jQuery.noConflict(true);
         },
         belang: 'default',
         reload: function () {
+            //schoener
             Ted3.root.ted3root('reload');
         },
         findOverflowHiddenParent: function (element, sourcelement) {
@@ -70,7 +71,9 @@ Ted3.jQuery = jQuery.noConflict(true);
             movecontent: '?type=4455&tx_ted3_fe[action]=movecontent&tx_ted3_fe[controller]=Crud',
             closewindow: '/index.php?id=1&type=4457',
             t3edit: '?type=4456&tx_ted3_fe[action]=route&tx_ted3_fe[controller]=Backend&route=record_edit&table=',
-            link: '?type=4456&tx_ted3_fe[action]=link&tx_ted3_fe[controller]=Backend'
+            upload: '?type=4455&tx_ted3_fe[action]=upload&tx_ted3_fe[controller]=File',
+            link: '?type=4456&tx_ted3_fe[action]=link&tx_ted3_fe[controller]=Backend',
+            filepool: '?type=4500'
         },
         newWindow: {
             open: function (link, afterClose) {
@@ -106,19 +109,11 @@ Ted3.jQuery = jQuery.noConflict(true);
         ajax: function (params) {
             params.data = Ted3.paramsToData(params.data);
 
-//            var currentPageId = $('[data-cpid]').eq(0).data('cpid') || 0;
-//            if (currentPageId) {
-//                params.data = $.extend(params.data, Ted3.paramsToData({pid: currentPageId}));
-//            }
-//
-//             alert(currentPageId);
-
             var ajaxparams = $.extend({
                 method: 'POST',
                 success: function (data) {
                     if (data.success == false) {
                         $('<div class="ted3-dialog-content" />').dialog({
-                            appendTo: "#ted3-jqueryui",
                             title: "Action failed",
                             dialogClass: "ted3-dialog  ted3-dialog-error",
                             position: {my: "center center", at: "center center"},
@@ -136,7 +131,6 @@ Ted3.jQuery = jQuery.noConflict(true);
                 error: function (data) {
                     $('<div class="ted3-dialog-content" />').dialog({
                         title: data.statusText,
-                        appendTo: "#ted3-jqueryui",
                         dialogClass: "ted3-dialog  ted3-dialog-error",
                         position: {my: "center center", at: "center center"},
                         buttons: [
@@ -160,7 +154,6 @@ Ted3.jQuery = jQuery.noConflict(true);
                     if (status == "error") {
                         $('<div calss="ted3-dialog-content" />').dialog({
                             title: xhr.statusText,
-                            appendTo: "#ted3-jqueryui",
                             dialogClass: "ted3-dialog  ted3-dialog-error",
                             position: {my: "center center", at: "center center"},
                             buttons: [
@@ -204,7 +197,7 @@ Ted3.jQuery = jQuery.noConflict(true);
                 var that = this;
                 //   alert( encodeURI(Ted3.urls.closewindow) );
                 var link = {
-                    url: Ted3.urls.contentelements + "&uid="+Ted3.fedata.pid+"&returnUrl=" + encodeURIComponent(Ted3.urls.closewindow),
+                    url: Ted3.urls.contentelements + "&uid=" + Ted3.fedata.pid + "&returnUrl=" + encodeURIComponent(Ted3.urls.closewindow),
                     title: 'Content wählen',
                     options: "width=900,height=650,left=50,top=100"
                 };
@@ -212,28 +205,18 @@ Ted3.jQuery = jQuery.noConflict(true);
                 var cWindow = Ted3.newWindow.open(link, function () {
                 });
                 cWindow.makeCElement = function (element) {
-                    // alert("makeCElement");
+                     //alert("makeCElement");
                 };
                 //  newWindow.opener = $(this);
                 $(cWindow).on('load', function () {
                     //  var responseText = .innerText || newWindow.document.documentElement.textContent;
                     cWindow.makeCElement = function (element) {
-
-                        //  console.log(element);
-                        var nStr = element.dataset.params.replace("defVals", "tx_ted3_fe");
-                        //   alert(nStr);
-
-//                        var nStr = cWindow.document.editForm.defValues.value.replace("defVals", "tx_ted3_fe");
-
-                        nStr = nStr.replace("defVals", "tx_ted3_fe");
-                        //console.log(nStr);
-
-                        //   alert(nStr);
-
+                        ctype = element.dataset.ctype;
+                        // alert(ctype);
                         window.focus();
                         cWindow.close();
 
-                        done(nStr);
+                        done(ctype);
                     }
                 });
             },
@@ -253,7 +236,7 @@ Ted3.jQuery = jQuery.noConflict(true);
                     title: 'Link test',
                     options: "width=1150,height=750,top=100,left=50"
                 };
-//                alert("linktest api 346");
+                alert("Ted3.browser.files ");
                 var newWindow = Ted3.newWindow.open(link, function () {
                     //   alert("test");
                     console.log(window.fileBrowserData, 3);
@@ -343,7 +326,6 @@ Ted3.jQuery = jQuery.noConflict(true);
     Ted3.api = {};
     Ted3.api.record = {
         new : function (container, target) {
-        
             var params = {data: {}, cmd: {}};
             var table = container.data('table');
             params.data[table] = {};
@@ -477,14 +459,12 @@ Ted3.jQuery = jQuery.noConflict(true);
 //            alert(Ted3.urls.t3edit + element.data('table') + '&uid=' + element.data('uid') + '&returnUrl=' + encodeURIComponent(Ted3.urls.closewindow));
             // console.log(Ted3.urls.t3edit + element.data('table') + '&uid=' + element.data('uid') + '&returnUrl=' + encodeURIComponent(Ted3.urls.closewindow));
             //  alert(location.href);
-     
             var link = {
                 url: Ted3.urls.t3edit + element.data('table') + '&uid=' + element.data('uid') + '&returnUrl=' + encodeURIComponent(location.href),
-                title: 'Edit record',
+                title: "Edit record",
                 options: "width=810,height=600,top=50,left=100"
             };
             location.href = link.url;
-            // window.open()
 
         },
 
@@ -505,7 +485,7 @@ Ted3.jQuery = jQuery.noConflict(true);
             params.data[table] = {};
             params.data[table][element.data('uid')] = {};
             //alert("do save direct proerties and no inline records")
-                
+
 
 
             element.find('[data-widget="textedit"].ted3-changed').each(function (i, item) {
@@ -525,9 +505,9 @@ Ted3.jQuery = jQuery.noConflict(true);
                     $(this).textedit('clearmemory');
                 }
             });
-            
+            //  console.log(params);
             params.pid = Ted3.fedata.pid;
-              //console.log(params);
+
             return Ted3.ajax({
                 url: Ted3.urls.tce,
                 data: params
@@ -604,29 +584,27 @@ Ted3.jQuery = jQuery.noConflict(true);
             var fields = {};
             var url = Ted3.urls.createcontent;
             var identifier = "";
-
+            // alert(data.extension);
             if (data.type == "fileref") {
+
                 data.extension = data.extension.toLowerCase();
                 if (Ted3.fileToContentMap[data.extension] == undefined) {
-                    
-                     $('<div class="ted3-dialog-content" />').dialog({
-                            title: "Info",
-                            dialogClass: "ted3-dialog",
-                               appendTo: "#ted3-jqueryui",
-                            position: {my: "center center", at: "center center"},
-                            buttons: [
-                                {
-                                    text: "Ok",
-                                    click: function () {
-                                        $(this).dialog('close');
-                                    }
+
+                    $('<div class="ted3-dialog-content" />').dialog({
+                        title: "Info",
+                        dialogClass: "ted3-dialog",
+                        appendTo: "#ted3-jqueryui",
+                        position: {my: "center center", at: "center center"},
+                        buttons: [
+                            {
+                                text: "Ok",
+                                click: function () {
+                                    $(this).dialog('close');
                                 }
-                            ]
-                        }).html("No content defined for file '" + data.extension+"'");
-                    
-                    
-                    
-                    // var donothing = function(){return false};
+                            }
+                        ]
+                    }).html("No content defined for file '" + data.extension + "'");
+
                     return Ted3.ajax({
                         url: url,
                         data: {
@@ -635,17 +613,19 @@ Ted3.jQuery = jQuery.noConflict(true);
                     });
 
                 }
-
                 var fileToContent = Ted3.fileToContentMap[data.extension];
                 identifier = fileToContent.identifier;
+                // alert(identifier);
                 fields[fileToContent.field] = {
                     type: 'file',
                     data: data.value,
                     ted3_renderwidth: parseInt(target.width())
                 };
             } else {
-                url = url + data.value;
+                identifier = data.value;
+
             }
+//            alert(url);
             //Ted3.log("Content Create " + data.value);
             var container = target.closest('[data-container="content"]');
 

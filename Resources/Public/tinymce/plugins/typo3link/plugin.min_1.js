@@ -5,68 +5,69 @@ var plugin = tinymce.PluginManager.add('typo3link', function (editor, url) {
         var selectedElement = editor.selection.getNode();
         var element = editor.dom.getParent(selectedElement, 'a[href]');
 
-        var currentLink = {
-            url: "",
-            target: "",
-            title: ""
-        }
-
+        var additionalParameter = '';
         if (element) {
-            currentLink.url = element.getAttribute('href');
-            currentLink.target = element.target;
-            currentLink.title = element.title;
-        }
-
-
-        var link = {};
-
-        Ted3.jQuery("<div id='ted3-linkdialog'><span>Link:</span><input style='width:300px'  name='linkinput'  placeholder='Link/T3-Pid'  type='text' value='" + currentLink.url + "'/><br><span>Target:</span><input name='targetinput' placeholder='zB.: _blank' type='text' value='" + currentLink.target + "'/><br><span>Title:</span><input name='titleinput' type='text' value='" + currentLink.title + "'/></div>").dialog({
-            appendTo: "#ted3-jqueryui",
-            title: "Set Link",
-            minWidth: 450,
-            close: function () {
-                Ted3.jQuery('#ted3-linkdialog').remove();
-            },
-            dialogClass: "ted3-dialog ted3-dialog-delete",
-            position: {my: "center center", at: "center center"},
-            buttons: {
-                "Set Link": function () {
-
-                    var that = Ted3.jQuery(this);
-//                            alert();
-                    link.url = Ted3.jQuery('#ted3-linkdialog').find('input[name="linkinput"]').val();
-
-                    if (isNaN(link.url)) {
-                        var splittedLink = link.url.split("#");
-                        if (splittedLink.length > 1 && !isNaN(splittedLink[0])) { // Fix Anchors
-                            link.url = "t3://page?uid=" + splittedLink[0] + "#" + splittedLink[1];
-                        }
-                    } else {
-                        link.url = "t3://page?uid=" + link.url;
-                    }
-
-                    plugin.createLink(
-                            link.url,
-                            Ted3.jQuery('#ted3-linkdialog').find('input[name="targetinput"]').val(),
-                            "",
-                            Ted3.jQuery('#ted3-linkdialog').find('input[name="titleinput"]').val()
-                            );
-
-
-                    that.dialog("close");
-
-
-
-
-                },
-                Cancel: function () {
-                    Ted3.jQuery(this).dialog("close");
-
-                }
-
+            additionalParameter = '&curUrl[url]=' + encodeURIComponent(element.getAttribute('href'));
+            if (element.target) {
+                additionalParameter += '&curUrl[target]=' + encodeURIComponent(element.target);
             }
-        });
+            if (element.className) {
+                additionalParameter += '&curUrl[class]=' + encodeURIComponent(element.className);
+            }
+            if (element.title) {
+                additionalParameter += '&curUrl[title]=' + encodeURIComponent(element.title);
+            }
+        }
+     
+        Ted3.browser.link("",function (link) {
+            var attributes = link.attributeValues;
+            var curTitle = attributes.title ? attributes.title : '';
+            var curClass = attributes.class ? attributes.class : '';
+            var curTarget = attributes.target ? attributes.target : '';
+            var curParams = attributes.params ? attributes.params : '';
+            delete attributes;
 
+           // console.log(link);
+            // replace page: prefix
+//            if (link.url.indexOf('page:') === 0) {
+//                link.url = link.url.substr(5);
+//            }
+            //@todo > bereits in Linkbrowser
+//            plugin.createLink(
+//                    link.url + curParams,
+//                    curTarget,
+//                    curClass,
+//                    curTitle,
+//                    attributes
+//                    );
+
+
+            //
+           // alert( link.url);
+            Ted3.ajax({
+                 url: Ted3.urls.link,
+                 data : {
+                     'typolink' : link.url
+                 }
+            }).done(function(data){
+               console.log(data);
+                if(data){
+                        plugin.createLink(
+                    data + curParams,
+                    curTarget,
+                    curClass,
+                    curTitle,
+                    attributes
+                    ); 
+                }else{
+                    alert("Link konnte nicht gesetzt werden");
+                   // alert("fd");
+                      // plugin.createLink("","","","","");
+                }
+            
+            })
+
+        });
     };
 
     // add the buttons
@@ -134,28 +135,21 @@ plugin.createLink = function (href, target, cssClass, title, additionalValues) {
         'data-htmlarea-external': null
     };
 
-//    for (var index in additionalValues) {
-//        if (additionalValues.hasOwnProperty(index)) {
-//            linkAttrs[index] = additionalValues[index];
-//        }
-//    }
-    //linkAttrs.href = "/karr/test/";
-    //alert(linkAttrs.href);
+    for (var index in additionalValues) {
+        if (additionalValues.hasOwnProperty(index)) {
+            linkAttrs[index] = additionalValues[index];
+        }
+    }
+
     var selectedElement = tinymce.activeEditor.selection.getNode();
     var element = tinymce.activeEditor.dom.getParent(selectedElement, 'a[href]');
-    // alert(element);
     tinymce.activeEditor.focus();
     if (element) {
-        //  alert("update");
-        //  alert(linkAttrs.href);
         tinymce.activeEditor.dom.setAttribs(element, linkAttrs);
     } else {
-//        alert("insert");
-//        alert(element);
-//        alert(linkAttrs.href);
         tinymce.activeEditor.execCommand('mceInsertLink', false, linkAttrs);
     }
-    //tinymce.activeEditor.selection.collapse();
+    tinymce.activeEditor.selection.collapse();
     tinymce.activeEditor.undoManager.add();
 
     //   tinymce.activeEditor.windowManager.getWindows()[0].close();

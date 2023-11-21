@@ -2,11 +2,13 @@
 
 namespace DS\Ted3\Controller;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use Psr\Http\Message\ResponseInterface;
+
+//use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 
 /**
- * 
+ * Extended controller for link browser
+ * @internal This is a specific Backend Controller implementation and is not considered part of the Public TYPO3 API.
  */
 class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
@@ -17,6 +19,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
             echo "Ted3Controller: Access denied.";
             exit;
         }
+
         if (!isset($GLOBALS['LANG'])) {
             $GLOBALS['LANG'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Lang\LanguageService');
             $GLOBALS['LANG']->init("de");
@@ -29,6 +32,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
     }
 
     public function sendAjaxResponse($data) {
+
         echo json_encode($data);
         exit;
     }
@@ -85,9 +89,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
     public function testAction() {
 //        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['BE_USER']->userTS['options.']['ted3.']['dontHideAtNewContent']);
-        echo "testaction";
         exit;
-        
     }
 
     /**
@@ -102,6 +104,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         $table = 'tt_content';
         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(array($uid,$table,$pid,$colpos,$container,$beforeUid));
         //exit;
+
         $cmd = array();
         $data = array();
         //$data[$table][$uid][''] = $pid;
@@ -163,6 +166,8 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
      * @param array $tt_content
      */
     public function createcontentAction($identifier = "", $pid = 0, $colpos = -2, $container = 0, $beforeUid = 0,$currentLangId=0, $fields = array(), $tt_content = array()) {
+        //  echo "createcontent".$identifier; exit;
+
         if($identifier == "notDefined"){
             $this->sendAjaxResponse(array('success' => false, 'newuid' => null));
         }
@@ -179,7 +184,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
         //    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['BE_USER']); exit;
 
-        if ($GLOBALS['BE_USER']->getTSConfig()['options.']['ted3.']['dontHideAtNewContent']) {
+        if (@$GLOBALS['BE_USER']->getTSConfig()['options.']['ted3.']['dontHideAtNewContent']) {
             $data[$table]['NEW9823be8']['hidden'] = 0;
         }
         //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($data); exit;
@@ -239,26 +244,27 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
      * @param integer $pid
      */
     public function tceAction($data = array(), $cmd = array(), $pid = 0) {
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['LANG']); exit;
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($data); exit;
         //$content = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*', $table, 'uid=' . $uid);
+        //echo "mc"; exit;
 
         $this->tce->start($data, $cmd);
         $this->tce->process_cmdmap();
         $this->tce->process_datamap();
 
-        $newuid = $this->tce->substNEWwithIDs['NEWRECORD'];
-        if ($cmd) {
+        $newuid = @$this->tce->substNEWwithIDs['NEWRECORD'];
+        if (@$cmd) {
             $table = key($cmd);
             $uid = key($cmd[$table]);
-            $copyuid = $this->tce->copyMappingArray_merged[$table][$uid];
-        }
-       // echo $pid; exit;
-        if ($pid > 0) {
-             $CacheService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\CacheService');
-             $CacheService->clearPageCache(array($pid));
+            $copyuid = @$this->tce->copyMappingArray_merged[$table][$uid];
         }
 
-        $this->sendAjaxResponse(array('success' => true, 'newuid' => $newuid, 'copyuid' => $copyuid));
+        if ($pid > 0) {
+            $CacheService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\CacheService');
+            $CacheService->clearPageCache(array($pid));
+        }
+
+        $this->sendAjaxResponse(array('success' => true, 'newuid' => $newuid, 'copyuid' => @$copyuid));
     }
 
     /**
@@ -321,9 +327,11 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
      * @param string $table
      */
     public function translateAction($uid, $lang, $table = "tt_content") {
-        //  echo "asdf"; exit;
-        // $this->uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        //  $url = $this->uriBuilder->reset()->setTargetPageUid(1);
+
+     //   $uriBuilder = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder');
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->uriBuilder->reset()->setTargetPageUid(1)->build());
+    //  $translatedPageUrl = $this->uriBuilder->reset()->setTargetPageUid(1)->setLanguage($lang)->build();
+   //   \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->uriBuilder->setTargetPageUid(1)->uriFor('')->build()); exit;
         $translatedPageUrl = "";
 
         $data = array();
@@ -346,18 +354,15 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         } else {
             $data[$table][$transuid]['hidden'] = 0;
         }
-
-
-
         $this->tce->start($data, array());
         $this->tce->process_datamap();
 
         if ($table == "pages") {
-            $translatedPageUrl = $this->getControllerContext()->getUriBuilder()->reset()->setTargetPageUid($uid)->setLanguage($lang)->build();
-           
+           // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($uid); exit;
+            $translatedPageUrl = $this->uriBuilder->reset()->setTargetPageUid($transuid)->build();
         }
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->tce); exit;
-        $this->sendAjaxResponse(array('success' => true, 'transuid' => $transuid,'translatedPageUrl'=>$translatedPageUrl));
+        $this->sendAjaxResponse(array('success' => true, 'transuid' => $transuid, 'translatedPageUrl' => $translatedPageUrl));
     }
 
 }

@@ -18,8 +18,35 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->redirectToUri("typo3/" . $url, 0, 301);
     }
 
+    /**
+     * @param string $typolink
+     * @param int $lang
+     */
+    public function linkAction($typolink, $lang = 0) {
+
+
+        if (count(explode("#", $typolink)) == 2) {
+            $ankArray = explode("#", $typolink);
+            $typolink = $ankArray[0];
+            $ankArray[1] = str_replace("/", "", $ankArray[1]);
+        }
+
+        $uri = $this->configurationManager->getContentObject()->typoLink_URL(array('parameter' => $typolink, 'language' => $lang));
+
+        //Anker
+        if (@$ankArray[1]) {
+            $uri = $uri . "#" . $ankArray[1];
+            $uri = str_replace("//", "/", $uri);
+        }
+
+        echo $uri;
+        exit;
+    }
 
     public function routeAction() {
+        // $GLOBALS['LANG'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Lang\LanguageService');
+        // $GLOBALS['LANG'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Localization\LanguageService');
+        //echo $mode." tets"; exit;
 
         $route = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP("route");
         $mode = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP("mode");
@@ -44,10 +71,11 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 ),
                 'returnUrl' => $returnUrl
             ));
+            // echo $uri; exit;
             //  echo $uri; exit;
         } else if ("ted3_new_content_element_wizard" == $route) {
-            // echo $uid; exit;
-            // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump("sdf".$GLOBALS['TSFE']->id); exit;   
+
+            //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this,5,5); exit;   
             $uri = $uB->buildUriFromRoute("ted3_new_content_element_wizard", array(
                 'id' => $uid,
                 'uid_pid' => 1,
@@ -56,9 +84,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 'returnUrl' => $returnUrl
             ));
             //    echo $uri; exit;
-        }
+        } else {
 
-        else {
 
             $urlParameters = [
                 'P' => [
@@ -77,41 +104,22 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             exit;
         }
         //     echo $uri; exit;
-        $this->redirectToUri($uri, 0, 301);
+        //  $this->redirectToUri($uri, 0, 301);
+        //echo $uri; exit;
+        return $this->responseFactory->createResponse(301)
+                        ->withHeader('Location', (string) $uri);
+        // echo "sxdf"; exit;
+        return $this->htmlResponse();
     }
 
-    public function contentelementAction() {
-
-    }
-    
-    
-
-
-    /**
-     * @param string $typolink
-     * @param int $lang
-     */
-    public function linkAction($typolink,$lang=0) {
-
-
-        if (count(explode("#", $typolink)) == 2) {
-            $ankArray = explode("#", $typolink);
-            $typolink = $ankArray[0];
-            $ankArray[1] = str_replace("/", "", $ankArray[1]);
-        }
-        
-        $uri = $this->configurationManager->getContentObject()->typoLink_URL(array('parameter' => $typolink,'language'=>$lang));
-
-        //Anker
-        if ($ankArray[1]) {
-            $uri = $uri . "#" . $ankArray[1];
-            $uri = str_replace("//", "/", $uri);
-        }
-
-        echo $uri;
+    public function newcontentAction() {
+        echo "newcontentAction";
         exit;
     }
 
+    public function contentelementAction() {
+        
+    }
 
 }
 

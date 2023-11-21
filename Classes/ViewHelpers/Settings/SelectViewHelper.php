@@ -43,8 +43,9 @@ class SelectViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 	    }
 	}
 	$valArray = array();
-	if (!$value) {
-	    $value = $ted3settings[$name];
+        //$value = 0;
+	if (! @$value) {
+	    $value = @$ted3settings[$name];
 	    if (count(explode(",", $value)) > 1) {
 		$valArray = explode(",", $value);
 	    } 
@@ -60,7 +61,7 @@ class SelectViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 	if($multiple){
 	    $multipleAttr = 'multiple="1"';
 	}
-
+        $ophtml = "";
 	foreach ($options as $key => $lab) {
 	    if ($value !== null && ($key == $value || in_array($key, $valArray))) {
 		$ophtml .= '<option selected="selected" value="' . $key . '" >' . $lab . '</option>';
@@ -68,7 +69,7 @@ class SelectViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 		$ophtml .= '<option  value="' . $key . '" >' . $lab . '</option>';
 	    }
 	}
-	$input = '<select class="ted3-element-setting" '.$multipleAttr.'  name="' . $name . '"  ' . $requiredAttr . ' size="' . $size . '" >'.$ophtml.'</select>';
+	$input = '<select class="ted3-element-setting" '.@$multipleAttr.'  name="' . $name . '"  ' . @$requiredAttr . ' size="' . $size . '" >'.$ophtml.'</select>';
 	return '<tr><td><label>' . $label . '</label></td><td>' . $input . '</td></tr>';
     }
 

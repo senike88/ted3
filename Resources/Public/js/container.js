@@ -73,6 +73,7 @@
                 },
                 receiveNew: function (e, newdata) {
                     var addzone = $(this);
+//                    alert("container");
                     that.api.new(that.element, newdata).done(function (data) {
                         if (that.element.closest('[data-forcereload="1"]').length > 0 || that.element.hasClass('ted3-element-slidecontainer')) {
                             Ted3.reload();

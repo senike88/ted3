@@ -17,8 +17,7 @@
             this.identifier = this.parentElement.data('uid') + this.element.data('field');
             this.originalContent = this.element.html();
 
-//            console.log(this.originalContent);
-//            alert("sdf");
+        
             if (this.element.data('rte') == 1) {
                 //  console.log("before tinymce");
                 // setTimeout(function () {
@@ -29,7 +28,6 @@
                     entity_encoding: "raw",
                     setup: function (editor) {
                         editor.on('init', function () {
-                            //alert("sdf");
                             editor.hide();
 
                         });
@@ -76,6 +74,7 @@
                         Ted3.root.addClass('ted3-tinymcebar-forceTopPadding');
                     }
 
+
                 } else {
                     that.element.attr('contenteditable', true);
                     that.element.on('paste', function (e) {
@@ -108,7 +107,6 @@
                     if (!Ted3.root.ted3root('hasMode', 'preview') && !Ted3.root.hasClass('ted3-mode-noconflict')) {
 
                         //Fix for links
-//                        if(that.element.data('clicktrough') == 0){
 
                         e.preventDefault();
 //                        }
@@ -128,6 +126,8 @@
             var that = this;
             if (!Ted3.root.ted3root('hasMode', 'preview')) {
 
+//                 this.element.attr('contenteditable', true);
+//                 this.element.focus();
                 if (this.element.data('rte') == 1) {
 
                 } else {

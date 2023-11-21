@@ -23,6 +23,20 @@ class UcViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
         return strtoupper($str);
     }
 
+//      /**
+//     *
+//     * @param array $arguments
+//     * @param \Closure $renderChildrenClosure
+//     * @param RenderingContextInterface $renderingContext
+//     * @return string
+//     */
+//    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+//    {
+//        
+//      //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($renderingContext); exit;
+//        $str = $arguments['str'];
+//         return strtoupper($str);
+//    }
 }
 
 ?>

@@ -19,6 +19,9 @@
             if (this.options.settings.elements != false) {
                 this._initElementBehavior();
             }
+            if (this.options.settings.files != false) {
+                this._initFileBehavior();
+            }
 
             if (this.options.settings.cleanrecords != false) {
                 this._initRecordsBehavior();
@@ -26,7 +29,7 @@
         },
         _initRecordsBehavior: function () {
             var that = this;
-            this.buttons.records = $('<div class="ted3-btn ted3-btn-elementwizard" title="New element"  />')
+            this.buttons.records = $('<div class="ted3-btn ted3-btn-elementwizard" title="New Element"  />')
                     .appendTo(that.element).on('click', function (e) {
                 e.stopPropagation();
                 that._trigger('createRecord', e);
@@ -45,14 +48,17 @@
             this.buttons.elements = $('<div class="ted3-btn ted3-btn-elementwizard" title="New Content-Element"  />')
                     .appendTo(that.element).on('click', function (e) {
                 e.stopPropagation();
+
                 if (!that.options.settings.directelement) {
                     Ted3.browser.content(function (data) {
+
                         that.startLoading();
                         that._trigger('receiveNew', e, {type: 'content', value: data});
                     });
                 } else {
+                    //alert("direct"); 
                     that.startLoading();
-                    that._trigger('receiveNew', e, {type: 'content', value: "&tx_ted3_fe[tt_content][CType]=" + that.options.settings.directelement});
+                    that._trigger('receiveNew', e, {type: 'content', value: that.options.settings.directelement});
                 }
 
             });
@@ -73,7 +79,131 @@
                 }
             });
         },
-  
+        _initFileBehavior: function () {
+            var that = this;
+            if (this.options.settings.fromfiles == 1) {
+                this.buttons.falwizard = $('<div class="ted3-btn ted3-btn-file" title="New Content-Element from file"  />')
+                        .appendTo(that.element).on('click', function (e) {
+                    e.stopPropagation();
+
+
+                    Ted3.filepool(function (filedata) {
+                        console.log(filedata);
+                        that.startLoading();
+                        that._trigger('receiveNew', e, {type: 'fileref', value: filedata.uid, extension: filedata.ext});
+                    });
+
+
+                });
+            } else {
+                this.buttons.falwizard = $('<div class="ted3-btn ted3-btn-falwizard" title="Select file"  />')
+                        .appendTo(that.element).on('click', function (e) {
+                    e.stopPropagation();
+                    Ted3.filepool(function (filedata) {
+                        //    console.log(filedata);
+                        that.startLoading();
+                        that._trigger('receiveNew', e, {type: 'fileref', value: filedata.uid, extension: filedata.ext});
+                    });
+
+                });
+            }
+            this.buttons.fileupload = $('<div class="ted3-btn ted3-btn-upload" title="Select file"  />')
+                    .appendTo(that.element).on('click', function (e) {
+                e.stopPropagation();
+                $('#ted3-fileselector-input').one('change', function (e) {
+                    if (e.target.files.length > 0) {
+//                            console.log(e.originalEvent.dataTransfer);
+                        var extension = e.target.files[0].name.split('.').pop();
+                        that.startLoading(true);
+                        Ted3.file.upload(e.target.files, function (e, xhr) {
+                            var percent = Math.round((e.loaded / e.total * 100) * 100) / 100 + "%";
+                            that.progressbar.clearQueue().animate({
+                                width: percent
+                            }, 800);
+                        }).done(function (data) {
+                            var data = JSON.parse(data);
+                            if (data.success == true) {
+                                that._trigger('receiveNew', e, {type: 'fileref', value: data.files[0], extension: extension});
+                            } else {
+                                that.endLoading();
+                            }
+                        });
+                    }
+                });
+                $('#ted3-fileselector-input').trigger('click');
+
+            });
+
+            if (this.options.settings.remove == 1) {
+                that.buttons.removeFile = $('<div class="ted3-btn ted3-btn-delete" title="Remove file"  />')
+                        .appendTo(that.element).on('click', function (e) {
+                    e.stopPropagation();
+                    that._trigger('remove');
+                });
+            }
+            this.element.on({// Native-dd
+                dragenter: function (e) {
+                    e.preventDefault();
+                    $(this).addClass('ted3-drop-hover');
+                },
+                drop: function (e) {
+                    e.preventDefault();
+                    if (e.originalEvent.dataTransfer) {
+                        if (e.originalEvent.dataTransfer.files.length > 0) {
+                            var extension = e.originalEvent.dataTransfer.files[0].name.split('.').pop();
+                            var lowerExt = extension.toLowerCase();
+                            // console.log(that.element);
+                            if (that.element.hasClass('ted3-addzone-image')) {
+
+                                // console.log( Object.values(Ted3.fedata.imageFileExtensions));
+                                if (!Object.values(Ted3.fedata.imageFileExtensions).includes(lowerExt)) {
+
+
+                                    $('<div class="ted3-dialog-content" />').dialog({
+                                        title: "Info",
+                                        appendTo: "#ted3-jqueryui",
+                                        dialogClass: "ted3-dialog  ted3-dialog-error",
+                                        position: {my: "center center", at: "center center"},
+                                        buttons: [
+                                            {
+                                                text: "Ok",
+                                                click: function () {
+                                                    $(this).dialog('close');
+                                                }
+                                            }
+                                        ]
+                                    }).html("Only images allowed");
+
+
+                                    return false;
+                                }
+                            }
+                            that.startLoading(true);
+                            Ted3.file.upload(e.originalEvent.dataTransfer.files, function (e, xhr) {
+                                var percent = Math.round((e.loaded / e.total * 100) * 100) / 100 + "%";
+                                that.progressbar.clearQueue().animate({
+                                    width: percent
+                                }, 800);
+                            }).done(function (data) {
+                                var data = JSON.parse(data);
+                                if (data.success == true) {
+                                    that._trigger('receiveNew', e, {type: 'fileref', value: data.files[0], extension: extension});
+                                } else {
+                                    that.endLoading();
+                                }
+
+
+                            });
+                        }
+                    }
+                    $(this).removeClass('ted3-drop-hover');
+                },
+                dragleave: function (e) {
+                    e.preventDefault();
+                    $(this).removeClass('ted3-drop-hover');
+                }
+            });
+        },
         _setOption: function (key, value) {
             this.options[key] = value;
             if (key == "settings") {
@@ -85,7 +215,7 @@
                 }
 
                 if (value.files && this.buttons.falwizard == undefined) {
-                    
+                    this._initFileBehavior();
                 } else if (value.files == 0 && this.buttons.falwizard) {
                     this.buttons.falwizard.remove();
                     this.element.off('dragenter').off('drop').off('dragleave');

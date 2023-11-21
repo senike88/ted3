@@ -16,9 +16,13 @@ $newTtContentColumns = array(
             'type' => 'passthrough',
         ),
     )
+
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_file_reference', $newTtContentColumns);
+
+
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', array(
     'ted3_settings' => array(
         'config' => array(
@@ -90,11 +94,13 @@ $newTtContentColumns = array(
         )
 );
 
+
+
 // Add the CType "image"
 $languageFilePrefix = 'LLL:EXT:fluid_styled_content/Resources/Private/Language/Database.xlf:';
 $frontendLanguageFilePrefix = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:';
 
-
+   
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'tt_content', 'CType', [
     'Gallery',
@@ -135,7 +141,6 @@ $GLOBALS['TCA']['tt_content']['types']['fadegallery'] = [
 		'
 ];
 
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'tt_content', 'CType', [
     'Video',
@@ -155,3 +160,5 @@ $GLOBALS['TCA']['tt_content']['types']['video'] = [
 			--div--;' . $frontendLanguageFilePrefix . 'tabs.extended
 		'
 ];
+
+

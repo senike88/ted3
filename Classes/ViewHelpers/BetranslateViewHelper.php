@@ -17,14 +17,13 @@ class BetranslateViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
         // $default = $this->arguments['default'];
         // $de = $this->arguments['de'];
         $currentBeLanguage = strtolower($GLOBALS['LANG']->lang);
-
-        if ($currentBeLanguage != "de" && $currentBeLanguage != "en") {
+        
+        if($currentBeLanguage != "de" && $currentBeLanguage != "en"){
             $currentBeLanguage = "default";
         }
 
         return $this->arguments[$currentBeLanguage];
     }
-
 }
 
 ?>

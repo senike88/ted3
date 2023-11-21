@@ -18,6 +18,7 @@ class RouteuriViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 
     public function render() {
 
+   // echo "test"; exit;
 //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($renderingContext); exit;
         $route = $this->arguments['route'];
         $options = $this->arguments['options'];
@@ -40,6 +41,15 @@ class RouteuriViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
     }
 
 
+
+//    public function render($route, $options = array(), $mode = "") {
+//        $uriB = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Backend\Routing\UriBuilder');
+//        if ($mode == "ajaxid") {
+//            return $uriB->buildUriFromAjaxId($route, $options);
+//        } else {
+//            return $uriB->buildUriFromRoute($route, $options);
+//        }
+//    }
 }
 
 ?>

@@ -16,7 +16,12 @@ class FormViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
      */
     public function render() {
         if(($GLOBALS['TSFE']->beUserLogin === 1 || $GLOBALS['TSFE']->beUserLogin == true ) ? TRUE : FALSE){
-             return '<form method="post" style="display:none;" action="" class="ted3-element-settingsform"><table>'.$this->renderChildren().'</table><input type="submit" class="ted3-element-settingsform-sm" value="Save" /></form>';
+            
+           
+            $saveLabel = "Save";
+            
+            
+             return '<form method="post" style="display:none;" action="" class="ted3-element-settingsform"><table>'.$this->renderChildren().'</table><input type="submit" class="ted3-element-settingsform-sm" value="'.$saveLabel.'" /></form>';
         }else{
             return null;
         }

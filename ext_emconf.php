@@ -4,7 +4,7 @@ $EM_CONF[$_EXTKEY] = array(
     'title' => 'TED³',
     'description' => 'Frontendediting for TYPO3 (Basic version)',
     'category' => 'Frontend',
-    'version' => '11.2.4',
+    'version' => '12.0.1',
     'state' => 'beta',
     'uploadfolder' => true,
     'createDirs' => '',
@@ -16,9 +16,9 @@ $EM_CONF[$_EXTKEY] = array(
     array(
         'depends' =>
         array(
-            'typo3' => '11.0.0-11.9.99',
-            'fluid_styled_content' => '11.0.0-11.9.99',
-            'typo3db_legacy' => '1.1.5-1.2.0',
+            'typo3' => '12.0.0-12.9.99',
+            'fluid_styled_content' => '12.0.0-12.9.99',
+            'typo3db_legacy' => '1.2.0',
         ),
         'conflicts' =>
         array(

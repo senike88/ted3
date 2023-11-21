@@ -69,11 +69,10 @@ class RecordViewHelper extends AbstractElementViewHelper {
 
             $this->tag->addAttribute("data-uid", PropertyHelper::getProperty($object, 'uid'));
 
-            if ($this->table == "pages") {
+            if ($this->table == "pages") { // pagerecords
 
                 if (isset($object['_PAGES_OVERLAY_UID']) && $object['sys_language_uid'] == $currentlangId) {
-                    //get translated record
-                    //   \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($object); exit;
+
                     $this->tag->addAttribute("data-origuid", $object['uid']);
                     $this->tag->addAttribute("data-uid", $object['_PAGES_OVERLAY_UID']);
                 } else {
@@ -100,13 +99,13 @@ class RecordViewHelper extends AbstractElementViewHelper {
                     }
                 }
             }
+
             $this->tag->addAttribute("data-hidden", PropertyHelper::getProperty($object, $disablefield));
             $this->tag->addAttribute("data-disablefield", $disablefield);
             $this->tag->addAttribute("data-element", "record");
             $this->tag->addAttribute("data-table", $this->table);
             $this->tag->addAttribute("data-forcereload", $forceReload);
             $this->tag->addAttribute("data-editingaccess", $this->editingAccess);
-      
 
             if ($linkfield) {
                 $this->tag->addAttribute("data-linkfield", $linkfield);

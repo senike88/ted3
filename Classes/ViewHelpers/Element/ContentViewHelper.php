@@ -29,6 +29,7 @@ class ContentViewHelper extends AbstractElementViewHelper {
 
     public function render() {
 
+
         $object = $this->arguments['object'];
         $settings = $this->arguments['settings'];
         $linkfield = $this->arguments['linkfield'];
@@ -38,27 +39,29 @@ class ContentViewHelper extends AbstractElementViewHelper {
 
         $this->viewHelperVariableContainer->add(AbstractElementViewHelper::class, 'record', $object);
         $this->viewHelperVariableContainer->add(AbstractElementViewHelper::class, 'table', $this->table);
-        if ($this->ted3settings) {
+        if (@$this->ted3settings) {
             $this->templateVariableContainer->add("ted3settings", $this->ted3settings);
         }
 
 
 
         if ($this->beLogin) {
-
             $context = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
             $currentlangId = $context->getPropertyFromAspect('language', 'id');
 
             $this->viewHelperVariableContainer->add(AbstractElementViewHelper::class, 'uid', $object['uid']);
-
-            if (isset($object['_LOCALIZED_UID']) && $object['sys_language_uid'] == $currentlangId) {
-                //get translated record
+            // echo $object['_LOCALIZED_UID']; exit;
+            //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($object); exit;
+            if (isset($object['_LOCALIZED_UID']) && @$object['sys_language_uid'] == $currentlangId) {
+                //translated element
                 $this->tag->addAttribute("data-origuid", $object['uid']);
                 $this->tag->addAttribute("data-uid", $object['_LOCALIZED_UID']);
-            } else if (@$object['sys_language_uid'] == $currentlangId && $currentlangId > 0) {
+            } else if(@$object['sys_language_uid'] == $currentlangId && $currentlangId > 0){
                 // untranslated Element from a diffrent language (added in backend)
                 $this->tag->addAttribute("data-uid", $object['uid']);
+                
             } else {
+                //untranslated element from default language
                 $this->tag->addAttribute("data-uid", $object['uid']);
 
                 if ($currentlangId > 0) {
@@ -79,7 +82,7 @@ class ContentViewHelper extends AbstractElementViewHelper {
                 $this->tag->addAttribute("data-outofdate", 1);
                 $addname .= "bis " . date("d.m.o, H:i", $object['endtime']);
             }
-            if ($addname) {
+            if (@$addname) {
                 $addname = " (" . $addname . ")";
             }
             $this->tag->addAttribute("data-element", "content");
@@ -103,7 +106,7 @@ class ContentViewHelper extends AbstractElementViewHelper {
             } else {
                 $this->elementSettings['name'] = ucfirst($object['CType']);
             }
-            $this->elementSettings['name'] .= $addname;
+            $this->elementSettings['name'] .= @$addname;
             $this->elementSettings = array_merge($this->elementSettings, $settings);
 
 
@@ -116,7 +119,7 @@ class ContentViewHelper extends AbstractElementViewHelper {
         }
         $this->viewHelperVariableContainer->remove(AbstractElementViewHelper::class, 'table');
         $this->viewHelperVariableContainer->remove(AbstractElementViewHelper::class, 'record');
-        if ($this->ted3settings) {
+        if (@$this->ted3settings) {
             $this->templateVariableContainer->remove("ted3settings");
         }
         return $this->tag->render();

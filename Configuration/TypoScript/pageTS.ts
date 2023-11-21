@@ -7,9 +7,10 @@ mod.wizards.newContentElement.wizardItems.common.elements {
                 bullets > #Reorder to bottom
                 table > #Reorder to bottom
                 uploads > #Reorder to bottom
+                text >
                 text {
 			iconIdentifier = content-text
-			title = LLL:EXT:backend/Resources/Private/Language/locallang_db_new_content_el.xlf:common_regularText_title
+			title = Text
 			description = LLL:EXT:backend/Resources/Private/Language/locallang_db_new_content_el.xlf:common_regularText_description
 			tt_content_defValues {
 				CType = text
@@ -18,13 +19,13 @@ mod.wizards.newContentElement.wizardItems.common.elements {
                 image{
 			iconIdentifier = content-image
 			title = Image
-			description = Simple Image
+			description = A cropable image
 			tt_content_defValues {
 				CType = image
 			}
 		}
                 gallery{
-			iconIdentifier = content-image
+			iconIdentifier = install-test-image
 			title = Gallery
 			description = Simple Thumbnailgallery
 			tt_content_defValues {
@@ -32,11 +33,19 @@ mod.wizards.newContentElement.wizardItems.common.elements {
 			}
 		}
                fadegallery{
-			iconIdentifier = content-image
+			iconIdentifier = content-carousel-image
 			title = Fadegallery
-			description = Simple Fadegallery
+			description = Simple Imagefader
 			tt_content_defValues {
 				CType = fadegallery
+			}
+		}
+                video{
+			iconIdentifier = mimetypes-x-content-multimedia
+			title = Video
+			description = Video with optional fallback-files
+			tt_content_defValues {
+				CType = video
 			}
 		}
                 textmedia {
@@ -72,8 +81,8 @@ mod.wizards.newContentElement.wizardItems.common.elements {
 				CType = uploads
 			}
 		}
+            
 
 }
 mod.wizards.newContentElement.wizardItems.common.show >
-mod.wizards.newContentElement.wizardItems.common.show := addToList(header,text,image,textmedia,bullets,gallery,fadegallery,table,uploads)
-
+mod.wizards.newContentElement.wizardItems.common.show := addToList(header,text,image,textmedia,bullets,gallery,fadegallery,video,table,uploads)

@@ -3,11 +3,16 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+
+  DS\Ted3\Controller\CrudController:
+    shared: false
+    public: true
+   
     
-  DS\Ted3\Controller\NewContentElementController:
+  DS\Ted3\Controller\BackendController:
     shared: false
     public: true 
     
-  DS\Ted3\Hooks\PageRepositoryGetPageOverlay:
+  DS\Ted3\Controller\NewContentElementController:
     shared: false
     public: true 

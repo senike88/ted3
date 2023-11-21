@@ -3,6 +3,8 @@
 namespace DS\Ted3\ViewHelpers;
 
 use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Extbase\Service\ImageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ImageuriViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 
@@ -17,11 +19,11 @@ class ImageuriViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
      */
     protected $imageService;
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Service\ImageService $imageService
-     */
-    public function injectImageService(\TYPO3\CMS\Extbase\Service\ImageService $imageService) {
-        $this->imageService = $imageService;
+    public function __construct() {
+        parent::__construct();
+        $this->imageService = GeneralUtility::makeInstance(ImageService::class);
+         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->imageService );
+        //exit;
     }
 
     public function render() {
@@ -37,6 +39,7 @@ class ImageuriViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
                 'width' => $mobileWidth
             ];
 
+           // $processedImage = $this->imageService->applyProcessingInstructions($image, $processingInstructions);
             $processedImage = $this->imageService->applyProcessingInstructions($image, $processingInstructions);
             $imgUrl = $this->imageService->getImageUri($processedImage, false);
         }

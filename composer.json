@@ -1,8 +1,8 @@
 {
     "name": "ted3team/ted3",
     "type": "typo3-cms-extension",
-    "description": "Frontend editing for TYPO3",
-    "version": "11.2.4",
+    "description": "Frontend editing",
+    "version": "12.0.1",
     "homepage": "http://ted3.zimmermann-streiter.com/",
     "support": {
         "source": "https://github.com/senike88/ted3",
@@ -10,7 +10,7 @@
     },
     "license": "GPL-2.0-or-later",
     "require": {
-        "typo3/cms-core": "^11.0",
+        "typo3/cms-core": "^12.0",
         "friendsoftypo3/typo3db-legacy": "^1.2.0"
     },
     "autoload": {

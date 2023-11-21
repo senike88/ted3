@@ -7,8 +7,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class FrontendRenderer {
 
     public function tsfe($params, $adsf) {
+        
 
-
+        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']); exit;
         if ($GLOBALS['TSFE']->beUserLogin) {
             //...
         } else { // FIX ab T3 10
@@ -18,47 +19,46 @@ class FrontendRenderer {
         }
 
 
-        if ($GLOBALS['TSFE']->beUserLogin && $GLOBALS['BE_USER']->doesUserHaveAccess($GLOBALS['TSFE']->page, 2)) {
-
-
-
-            if (!$GLOBALS['TSFE']->pSetup) {
+        if ($GLOBALS['TSFE']->beUserLogin && $GLOBALS['BE_USER']->doesUserHaveAccess($GLOBALS['TSFE']->page ,2) ) {
+            
+            if(!$GLOBALS['TSFE']->pSetup){
                 //$GLOBALS['TSFE']->pageCache->flush();
                 $CacheService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\CacheService');
                 $CacheService->clearPageCache(array($GLOBALS['TSFE']->id));
-
+                
                 $this->refreshOnce();
-
             }
+           // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->pSetup['ted3']); exit;
+            if (@$GLOBALS['TSFE']->pSetup['ted3'] == "1") {
 
-            if ($GLOBALS['TSFE']->pSetup['ted3'] == 1) {
-         
-
+//                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($sites['mysite']->getConfiguration()['test']);
+//                exit;
                 //   if ($GLOBALS['TSFE']->pSetup['typeNum'] != '4500' && $GLOBALS['TSFE']->pSetup['typeNum'] != '1533906435' &&  != 'preventTed3') {
                 $GLOBALS['TSFE']->pSetup['1'] = "FLUIDTEMPLATE";
                 $GLOBALS['TSFE']->pSetup['1.']['file'] = 'EXT:ted3/Resources/Private/Main.html';
                 // }
-                
-                      // echo "asdf"; exit;
-      
+                // echo "test"; exit;
                 // SHOW-HIDDEN TILL TYPO3-9
                 $GLOBALS['TSFE']->showHiddenRecords = true;
-      
-                
+                //$GLOBALS['TSFE']->fe_user->showHiddenRecords  = true;
+                //$GLOBALS['BE_USER']->showHiddenRecords = true;
+                // SHOW-HIDDEN FROM TYPO3-10
                 $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
                 $aspect = $context->getAspect('visibility');
                 $newAspect = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\VisibilityAspect::class, $aspect->includeHiddenPages(), true, $aspect->includeDeletedRecords());
                 $context->setAspect('visibility', $newAspect);
 
-          
-
+                // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newAspect);
+                // exit;
+                
+                // Show elements out of publish-range
                 unset($GLOBALS['TCA']['tt_content']['ctrl']['enablecolumns']['starttime']);
                 unset($GLOBALS['TCA']['tt_content']['ctrl']['enablecolumns']['endtime']);
 //             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( $GLOBALS['TSFE']); exit;  
 
 
                 $GLOBALS['TSFE']->no_cache = TRUE;
-            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( get_class_methods(  ); exit;  
+//            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( $GLOBALS['TSFE']); exit;  
                 $tmpJS = $GLOBALS['TSFE']->pSetup['includeJS.'];
                 if (!is_array($tmpJS)) {
                     $tmpJS = array();
@@ -85,7 +85,7 @@ class FrontendRenderer {
                 }
                 $GLOBALS['TSFE']->pSetup['includeCSS.'] = array_merge(array(
                     'tedFontAwesome' => ' EXT:ted3/Resources/Public/fonticons/css/font-awesome.min.css',
-                    'tedJqueryUi' => ' EXT:ted3/Resources/Public/css/jquery-ui.css',
+                    'tedJqueryUi' => 'EXT:ted3/Resources/Public/css/jquery-ui.css',
                     'tedGeneral' => 'EXT:ted3/Resources/Public/css/general.css',
                     'tedContent' => ' EXT:ted3/Resources/Public/css/content.css',
                     'tedProps' => 'EXT:ted3/Resources/Public/css/properties.css'
@@ -98,9 +98,8 @@ class FrontendRenderer {
         if ($GLOBALS['TSFE']->pSetup['ted3'] == 1) {
              $GLOBALS['TSFE']->pageRenderer->addCssFile("EXT:ted3/Resources/Public/css/ted3-frontend.css");
         }
-       
     }
-
+    
     private function refreshOnce() {
         //echo "asdf"; exit;
         if (!isset($_COOKIE['rcounter'])) {

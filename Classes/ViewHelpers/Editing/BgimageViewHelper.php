@@ -77,13 +77,13 @@ class BgimageViewHelper extends \DS\Ted3\ViewHelpers\AbstractTagBasedViewHelper 
 
             $parentTable = $this->viewHelperVariableContainer->get(AbstractElementViewHelper::class, "table");
 
-            if ($parentRecord['_LOCALIZED_UID']) {
+            if (@$parentRecord['_LOCALIZED_UID']) {
                 $files = $fileRepository->findByRelation($parentTable, $field, $parentRecord['_LOCALIZED_UID']);
             } else {
                 $files = $fileRepository->findByRelation($parentTable, $field, PropertyHelper::getProperty($parentRecord, "uid"));
             }
 
-            $image = $files[0];
+            $image = @$files[0];
         }
         if (!$image instanceof FileReference) {
             if ($beLogin) {

@@ -468,6 +468,7 @@
     &[data-isdefaultlang="0"][data-langfallbacktype="fallback"].ted3-mode-edit{
         [data-element][data-translateable="1"] > *{
             pointer-events: none !important;
+
         }
         .ted3-dragger{
             display: none !important;
@@ -489,7 +490,7 @@
                 .ted3-btn-edit{
                     display: none !important;
                 }
-                .ted3-btn-link{
+                 .ted3-btn-link{
                     display: none !important;
                 }
             }
@@ -502,13 +503,14 @@
         .ted3-addzone:not(.ted3-addzone-image), .ted3-btn-addzones{
             display: none !important;
         }
+/*        .ted3-addzone-image.ted3-addzone-image-translateable{
+            display: none !important;
+        }*/
         &[data-langfallbacktype="strict"]{
             .ted3-addzone:not(.ted3-addzone-image){
-                display: block !important;
+                 display: block !important;
             }
         }
-
-
     }
 
 }
@@ -522,9 +524,4 @@
         height: 25px; line-height: 25px;
         padding-left: 5px;
     }
-}
-
-.ted3-mode-edit:not(.ted3-mode-noconflict)  [target="lightbox"]{
-    pointer-events: none;
-    user-select: none;
 }

@@ -52,7 +52,7 @@ class RecordViewHelper extends AbstractContainerViewHelper {
 
 
         $this->tag->setContent($this->renderChildren());
-        if ($this->parentContainerTable) {
+        if (@$this->parentContainerTable) {
             $this->viewHelperVariableContainer->addOrUpdate(AbstractContainerViewHelper::class, "table", $this->parentContainerTable);
         } else {
             $this->viewHelperVariableContainer->remove(AbstractContainerViewHelper::class, "table");

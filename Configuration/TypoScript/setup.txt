@@ -1,9 +1,10 @@
 lib.ted3parseFunc_RTE < lib.parseFunc_RTE
 lib.ted3parseFunc_RTE.nonTypoTagStdWrap.encapsLines >
 lib.ted3parseFunc_RTE.tags.link < lib.parseFunc.tags.link
-#config.disTed3Donate = 1
+config.disTed3Donate = 1
 
 [backend.user.isLoggedIn] 
+
 
 config.contentObjectExceptionHandler = 0
 plugin.tx_ted3 {
@@ -25,7 +26,7 @@ ted3ajaxRequest {
     config.debug = 0
     config.no_cache = 1
 
-    10 = USER
+    10 = EXTBASEPLUGIN
     10 {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
         pluginName = Fe
@@ -47,7 +48,6 @@ ted3ajaxRequest {
                     11 = copycontent
                     12 = initdata
                     13 = settings
-                    14 = test
                 }
                 File{
                     1 = index
@@ -91,7 +91,22 @@ ted3backend {
 
 
 
-
+ted3test = PAGE
+ted3test {
+    typeNum = 777
+    config.no_cache = 1
+    config.disableAllHeaderCode = 1
+    config.disableCharsetHeader = 1
+    config.disablePrefixComment = 1
+    config.admPanel = 0
+    config.xhtml_cleaning = 0
+    config.debug = 0
+    config.disTed3Donate = 1
+    10 = TEXT
+    10 {
+        value = Mein Test ...
+    }
+}
 ted3closeWindow = PAGE
 ted3closeWindow {
     typeNum = 4457
@@ -108,22 +123,4 @@ ted3closeWindow {
     )
 }
 
-
-ted3test = PAGE
-ted3test {
-    typeNum = 777
-    config.no_cache = 1
-    config.disableAllHeaderCode = 1
-    config.disableCharsetHeader = 1
-    config.disablePrefixComment = 1
-    config.admPanel = 0
-    config.xhtml_cleaning = 0
-    config.debug = 0
-    10 = TEXT
-    10 {
-        value = My Test ...
-    }
-}
-
 [global]
-

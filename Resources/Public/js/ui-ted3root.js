@@ -2,6 +2,7 @@
     $.widget("ted3.ted3root", {
         _create: function () {
             var that = this;
+
             // Initialize Containers
             Ted3.root = this.element;
             this.element.addClass('ted3-root');
@@ -23,8 +24,7 @@
                     Ted3.memory.set('ted3-mainbarpos', ui.position);
                 }
             });
-            //     alert(Ted3.fedata.currentlangId);
-
+            //alert(Ted3.fedata.currentlangId);
             Ted3.root.attr('data-currentLangId', Ted3.fedata.currentlangId);
             if (Ted3.fedata.deflang.uid == Ted3.fedata.currentlangId) {
                 Ted3.root.attr('data-isDefaultLang', 1);
@@ -45,16 +45,15 @@
                     $(this).container();
                 }
             });
-            
-            // If no conatiners in use
-            $('[data-element]').each(function(){
-               var element = $(this); 
-               if(element.closest('[data-container]').length < 1){
-                   console.log("no container");
-                   element.element();
-               }
-            });
 
+            // If no conatiners in use
+            $('[data-element]').each(function () {
+                var element = $(this);
+                if (element.closest('[data-container]').length < 1) {
+                    console.log("no container");
+                    element.element();
+                }
+            });
 
 
             $('.ted3-btn-preview-toggle').on('click', function () {
@@ -94,6 +93,13 @@
             });
 
 
+            //Donate
+            /*
+             if(Ted3.memory.get('ted3-donate-banner-hidex')){
+             $('#ted3-donate #ted3-donate-inner').hide();
+             $('#ted3-donate #ted3-donate-close').hide();
+             }
+             */
             $('#ted3-donate').on('click', function () {
                 $('#ted3-donate-window').show();
             });
@@ -109,7 +115,15 @@
             });
 
 
-
+            /*
+             // Tool-Donate-Button
+             $('.ted3-btn-donate').on('click', function (e) {
+             e.preventDefault();
+             
+             $('#ted3-donate-window').show();
+             });
+             
+             */
 
             $('.ted3-btn-page').on('click', function () {
 
@@ -126,12 +140,15 @@
 
 
                 }
+                //link.url = "http://t3install10.zimmermann2019.web-crossing.com/typo3/index.php?route=%2Frecord%2Fedit&token=63652dc6facbd84723043b1f849102a717a32544&edit%5Bpages%5D%5B27%5D=edit&returnUrl=%2Findex.php%3Fid%3D1%26type%3D4457";
+                //alert(link.url);
+//                    Ted3.newWindow.open(link, function () {
+//                        Ted3.reload();
+//                    });
 
                 location.href = link.url;
 
             });
-
-
 
             $('body > *').on("click", "a[href*='t3:']", function (e) {
 
@@ -152,8 +169,6 @@
                 });
             });
 
-
-
             $('#ted3-quickinfo-close').on('click', function () {
                 $('#ted3-quickinfo').removeClass('ted3-quickinfo-visble');
             });
@@ -170,6 +185,7 @@
                 }
 
             });
+
 
 
             $('.syslang.notTranslatedPage').on('click', function (e) {
@@ -206,9 +222,7 @@
                         that.getVisibleElement();
                     }, 100);
                 }
-            });
-
-
+            })
 
         },
         _init: function () {
@@ -298,7 +312,6 @@
             var that = this;
             var elementGot = false;
 //            console.log("getVisibleElement");
-
             $('[data-element]').each(function () {
                 //check if visible
                 var topOffset = $(this).offset().top;

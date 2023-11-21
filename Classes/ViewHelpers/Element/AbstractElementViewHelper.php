@@ -34,6 +34,10 @@ class AbstractElementViewHelper extends \DS\Ted3\ViewHelpers\AbstractTagBasedVie
             if (!is_numeric($uid) || !$uid) {
                 throw new \Exception("No valid object or array given for " . get_class($this));
             }
+            
+            if(!isset($this->arguments['elementaccess'])){
+                $this->arguments['elementaccess'] = "";
+            }
 
             $this->editingAccess = 1;
             if ($this->arguments['elementaccess'] == "admins" && $GLOBALS['BE_USER']->user['admin'] != true) {

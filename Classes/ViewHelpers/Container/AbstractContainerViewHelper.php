@@ -10,7 +10,7 @@ class AbstractContainerViewHelper extends \DS\Ted3\ViewHelpers\AbstractTagBasedV
         'elements' => 1
     );
 
-   public function initialize() {
+    public function initialize() {
         parent::initialize();
         $this->tag->forceClosingTag(true);
 
