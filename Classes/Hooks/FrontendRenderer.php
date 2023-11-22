@@ -28,29 +28,23 @@ class FrontendRenderer {
                 $CacheService->clearPageCache(array($GLOBALS['TSFE']->id));
 
                 $this->refreshOnce();
-
             }
 
             if ($GLOBALS['TSFE']->pSetup['ted3'] == 1) {
-         
+
 
                 //   if ($GLOBALS['TSFE']->pSetup['typeNum'] != '4500' && $GLOBALS['TSFE']->pSetup['typeNum'] != '1533906435' &&  != 'preventTed3') {
                 $GLOBALS['TSFE']->pSetup['1'] = "FLUIDTEMPLATE";
                 $GLOBALS['TSFE']->pSetup['1.']['file'] = 'EXT:ted3/Resources/Private/Main.html';
                 // }
-                
-                      // echo "asdf"; exit;
-      
+                // echo "asdf"; exit;
                 // SHOW-HIDDEN TILL TYPO3-9
                 $GLOBALS['TSFE']->showHiddenRecords = true;
-      
-                
+
                 $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
                 $aspect = $context->getAspect('visibility');
                 $newAspect = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\VisibilityAspect::class, $aspect->includeHiddenPages(), true, $aspect->includeDeletedRecords());
                 $context->setAspect('visibility', $newAspect);
-
-          
 
                 unset($GLOBALS['TCA']['tt_content']['ctrl']['enablecolumns']['starttime']);
                 unset($GLOBALS['TCA']['tt_content']['ctrl']['enablecolumns']['endtime']);
@@ -58,7 +52,7 @@ class FrontendRenderer {
 
 
                 $GLOBALS['TSFE']->no_cache = TRUE;
-            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( get_class_methods(  ); exit;  
+                //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( get_class_methods(  ); exit;  
                 $tmpJS = $GLOBALS['TSFE']->pSetup['includeJS.'];
                 if (!is_array($tmpJS)) {
                     $tmpJS = array();
@@ -95,10 +89,9 @@ class FrontendRenderer {
                 // BAR
             }
         }
-        if ($GLOBALS['TSFE']->pSetup['ted3'] == 1) {
-             $GLOBALS['TSFE']->pageRenderer->addCssFile("EXT:ted3/Resources/Public/css/ted3-frontend.css");
+        if ($GLOBALS['TSFE']->pSetup && @$GLOBALS['TSFE']->pSetup['ted3'] == 1) {
+            $GLOBALS['TSFE']->pageRenderer->addCssFile("EXT:ted3/Resources/Public/css/ted3-frontend.css");
         }
-       
     }
 
     private function refreshOnce() {
@@ -112,12 +105,11 @@ class FrontendRenderer {
             $current_val++;
             setcookie('rcounter', $current_val);
             header('refresh: 0');
-            echo "Force refresh ... ".$_COOKIE['rcounter'];
+            echo "Force refresh ... " . $_COOKIE['rcounter'];
             exit;
         } else {
             //echo 'no more reloads';
             setcookie('rcounter', 0);
         }
     }
-
 }
