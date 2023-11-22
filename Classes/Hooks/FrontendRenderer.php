@@ -95,7 +95,9 @@ class FrontendRenderer {
                 // BAR
             }
         }
-        if (@$GLOBALS['TSFE']->pSetup['ted3'] == 1) {
+        
+       
+        if ($GLOBALS['TSFE']->pSetup && @$GLOBALS['TSFE']->pSetup['ted3'] == 1) {
              $GLOBALS['TSFE']->pageRenderer->addCssFile("EXT:ted3/Resources/Public/css/ted3-frontend.css");
         }
     }
