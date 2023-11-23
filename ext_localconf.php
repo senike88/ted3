@@ -1,9 +1,5 @@
 <?php
 
-if (!$_EXTKEY) {
-    $_EXTKEY = 'Ted3';
-}
-//echo $_EXTKEY; exit;
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -30,7 +26,7 @@ if (TYPO3_MODE === 'BE') {
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'DS.' . $_EXTKEY, 'Fe', array(
+        'DS.Ted3', 'Fe', array(
     \DS\Ted3\Controller\CrudController::class => 'tce,movecontent,delete,copy,createcontent,hide,translate,sort,addflexelement,copycontent,settings,test',
     \DS\Ted3\Controller\BackendController::class => 'module,route,link',
 //    \DS\Ted3\Controller\NewContentElementController::class => 'wizard'
@@ -70,7 +66,7 @@ if (TYPO3_MODE === 'BE') {
                 $dispatcher->connect(
                         \TYPO3\CMS\Extensionmanager\Controller\ConfigurationController::class, 'afterExtensionConfigurationWrite', \TYPO3\CMS\FluidStyledContent\Hooks\TcaCacheClearing::class, 'clearTcaCache'
                 );
-            }, $_EXTKEY
+            }, "Ted3"
     );
 }
 
