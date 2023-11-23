@@ -1,8 +1,4 @@
 <?php
-
-if (!@$_EXTKEY) {
-    $_EXTKEY = 'Ted3';
-}
 //namespace {
 if (!defined('TYPO3')) {
     die('Access denied.');
@@ -69,7 +65,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['configArr
 
 
 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'] =  $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'].",webp";
-// echo $_EXTKEY."adf"; exit;
 call_user_func(
         function ($extKey) {
     // Get the extension configuration
@@ -79,7 +74,7 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ted3/Configuration/TypoScript/pageTS.ts">');
     }
 
-}, $_EXTKEY
+}, "Ted3"
 );
 //}
 

@@ -7,7 +7,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class FrontendRenderer {
 
     public function tsfe($params, $adsf) {
-        
 
         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']); exit;
         if ($GLOBALS['TSFE']->beUserLogin) {
@@ -96,7 +95,7 @@ class FrontendRenderer {
             }
         }
         
-       
+     
         if ($GLOBALS['TSFE']->pSetup && @$GLOBALS['TSFE']->pSetup['ted3'] == 1) {
              $GLOBALS['TSFE']->pageRenderer->addCssFile("EXT:ted3/Resources/Public/css/ted3-frontend.css");
         }
