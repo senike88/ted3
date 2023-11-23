@@ -205,19 +205,22 @@ Ted3.jQuery = jQuery.noConflict(true);
                 var cWindow = Ted3.newWindow.open(link, function () {
                 });
                 cWindow.makeCElement = function (element) {
-                     //alert("makeCElement");
+                    //alert("makeCElement");
                 };
                 //  newWindow.opener = $(this);
                 $(cWindow).on('load', function () {
                     //  var responseText = .innerText || newWindow.document.documentElement.textContent;
-                    cWindow.makeCElement = function (element) {
-                        ctype = element.dataset.ctype;
-                        // alert(ctype);
-                        window.focus();
-                        cWindow.close();
+                    $(cWindow.document).ready(function () {
+                        $(cWindow.document.body).find('button.btn-link').on('click', function () {
+                            ctype = $(this).data('ctype');
+                            // alert(ctype);
+                            window.focus();
+                            cWindow.close();
 
-                        done(ctype);
-                    }
+                            done(ctype);
+                        });
+                    });
+
                 });
             },
             selectDesktopFile: function () {
