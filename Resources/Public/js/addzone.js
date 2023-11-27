@@ -71,6 +71,7 @@
                 accept: '.ted3-element',
                 drop: function (e, ui) {
                     that.startLoading();
+                    ui.draggable.css({left: 0, top: 0});
                     that._trigger('receiveElement', e, ui.draggable);
 
                 }

@@ -61,7 +61,7 @@
                     refreshPositions: true,
                     cursor: "move",
                     delay: 90,
-                    helper: 'clone',
+//                    helper: 'clone',
                     cursorAt: {top: -30},
                     start: function (e, ui) {
                         var that = $(this);
@@ -73,7 +73,7 @@
                     stop: function (e, ui) {
                         $('body').removeClass('ted3-mode-dragging');
                     },
-                    revert: 'invalid'
+                    revert: 'invalid' 
                 });
             }
 
@@ -125,7 +125,7 @@
                     var addzone = $(this);
                     that.addzone.after(element);
                     element.element(); //reinit
-                    //element.css({left: 0, top: 0});
+                  //  element.css({left: 0, top: 0});
                     that.api.move(that.element, element).done(function (data) {
                         //    Ted3.log("Element moved to dropzone");
                         //that.reload();
