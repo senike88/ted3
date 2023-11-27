@@ -73,7 +73,7 @@
                     stop: function (e, ui) {
                         $('body').removeClass('ted3-mode-dragging');
                     },
-                    revert: 'invalid' 
+                    revert: 'invalid'
                 });
             }
 
@@ -125,7 +125,7 @@
                     var addzone = $(this);
                     that.addzone.after(element);
                     element.element(); //reinit
-                  //  element.css({left: 0, top: 0});
+                    //  element.css({left: 0, top: 0});
                     that.api.move(that.element, element).done(function (data) {
                         //    Ted3.log("Element moved to dropzone");
                         //that.reload();
@@ -498,6 +498,7 @@
                         if (that.forceReload()) {
                             Ted3.reload();
                         }
+                        that._trigger("resort");
                     });
                 } else {
                     console.log("no Prev");
@@ -515,6 +516,7 @@
                         if (that.forceReload()) {
                             Ted3.reload();
                         }
+                        that._trigger("resort");
                     });
                 }
 
@@ -696,6 +698,7 @@
                         text: "Yes",
                         click: function () {
                             that.api.delete(that.element).done(function () {
+                                that._trigger("delete");
                                 if (elementReload) { // translated elements
                                     Ted3.reload();
                                 } else {
@@ -863,6 +866,7 @@
                         newelement = $(newelement[0]);
                         console.log("2 new elements");
                     }
+                    that._trigger('reload');
 //                    console.log(newelement[0]);
 //                    alert(newelement.length);
                     that.element.before(newelement);
