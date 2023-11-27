@@ -64,7 +64,7 @@
                     refreshPositions: true,
                     cursor: "move",
                     delay: 90,
-                    helper: 'clone',
+//                    helper: 'clone',
                     cursorAt: {top: -30},
                     start: function (e, ui) {
                         var that = $(this);
