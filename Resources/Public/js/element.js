@@ -56,13 +56,6 @@
             this._createAddzone();
 
             if (this.options.move && !(this.options.buttonsort || this.getContainer().data('buttonsorting'))) {
-
-                var dragHelper = "";
-                if (Ted3.findOverflowHiddenParent(this.element)) {
-                    //console.log("overflowhidden!");
-                    dragHelper = "clone";
-                }
-
                 this.dragger = $('<div /> ', {
                     class: 'ted3-dragger ted3-btn'
                 }).prependTo(this.element);
@@ -71,15 +64,15 @@
                     refreshPositions: true,
                     cursor: "move",
                     delay: 90,
-                    helper: dragHelper,
+                    helper: 'clone',
                     cursorAt: {top: -30},
                     start: function (e, ui) {
                         var that = $(this);
                         $('body').addClass('ted3-mode-dragging');
+                        ui.helper.css("width",that.width());
                         setTimeout(function () {
                             that.draggable('option', 'refreshPositions', false);
                         }, 1000);
-
                     },
                     stop: function (e, ui) {
                         $('body').removeClass('ted3-mode-dragging');
