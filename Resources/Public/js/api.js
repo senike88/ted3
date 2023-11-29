@@ -39,15 +39,13 @@ Ted3.jQuery = jQuery.noConflict(true);
             //schoener
             Ted3.root.ted3root('reload');
         },
-         findOverflowHiddenParent: function (element, sourcelement) {
+        findOverflowHiddenParent: function (element, sourcelement) {
             var sourcelement = sourcelement || element;
             if (element.length > 0) {
-
-//                if (element.offset().top <= sourcelement.offset().top - 25) {
-//                    return false;
-//                }
-                //console.log(element.css('overflow'));
-                if ((element.css('overflow') == "hidden" || element.css('overflow') == "auto") && (element.css('height') || element.css('max-height'))) {
+                if (element.offset().top <= sourcelement.offset().top - 25) {
+                    return false;
+                }
+                if (element.css('overflow') == "hidden" && (element.css('height') || element.css('max-height'))) {
 
                     return element;
                 } else {
@@ -56,7 +54,6 @@ Ted3.jQuery = jQuery.noConflict(true);
                     }
                     return this.findOverflowHiddenParent(element.parent(), sourcelement);
                 }
-
             } else {
                 return false;
             }
