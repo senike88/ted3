@@ -41,10 +41,12 @@ Ted3.jQuery = jQuery.noConflict(true);
         findOverflowHiddenParent: function (element, sourcelement) {
             var sourcelement = sourcelement || element;
             if (element.length > 0) {
-                if (element.offset().top <= sourcelement.offset().top - 25) {
-                    return false;
-                }
-                if (element.css('overflow') == "hidden" && (element.css('height') || element.css('max-height'))) {
+
+//                if (element.offset().top <= sourcelement.offset().top - 25) {
+//                    return false;
+//                }
+                //console.log(element.css('overflow'));
+                if ((element.css('overflow') == "hidden" || element.css('overflow') == "auto") && (element.css('height') || element.css('max-height'))) {
 
                     return element;
                 } else {
@@ -53,6 +55,7 @@ Ted3.jQuery = jQuery.noConflict(true);
                     }
                     return this.findOverflowHiddenParent(element.parent(), sourcelement);
                 }
+
             } else {
                 return false;
             }
@@ -204,7 +207,7 @@ Ted3.jQuery = jQuery.noConflict(true);
                 var that = this;
                 //   alert( encodeURI(Ted3.urls.closewindow) );
                 var link = {
-                    url: Ted3.urls.contentelements + "&uid="+Ted3.fedata.pid+"&returnUrl=" + encodeURIComponent(Ted3.urls.closewindow),
+                    url: Ted3.urls.contentelements + "&uid=" + Ted3.fedata.pid + "&returnUrl=" + encodeURIComponent(Ted3.urls.closewindow),
                     title: 'Content wählen',
                     options: "width=900,height=650,left=50,top=100"
                 };
@@ -343,7 +346,7 @@ Ted3.jQuery = jQuery.noConflict(true);
     Ted3.api = {};
     Ted3.api.record = {
         new : function (container, target) {
-        
+
             var params = {data: {}, cmd: {}};
             var table = container.data('table');
             params.data[table] = {};
@@ -477,7 +480,7 @@ Ted3.jQuery = jQuery.noConflict(true);
 //            alert(Ted3.urls.t3edit + element.data('table') + '&uid=' + element.data('uid') + '&returnUrl=' + encodeURIComponent(Ted3.urls.closewindow));
             // console.log(Ted3.urls.t3edit + element.data('table') + '&uid=' + element.data('uid') + '&returnUrl=' + encodeURIComponent(Ted3.urls.closewindow));
             //  alert(location.href);
-     
+
             var link = {
                 url: Ted3.urls.t3edit + element.data('table') + '&uid=' + element.data('uid') + '&returnUrl=' + encodeURIComponent(location.href),
                 title: 'Edit record',
@@ -505,7 +508,7 @@ Ted3.jQuery = jQuery.noConflict(true);
             params.data[table] = {};
             params.data[table][element.data('uid')] = {};
             //alert("do save direct proerties and no inline records")
-                
+
 
 
             element.find('[data-widget="textedit"].ted3-changed').each(function (i, item) {
@@ -525,9 +528,9 @@ Ted3.jQuery = jQuery.noConflict(true);
                     $(this).textedit('clearmemory');
                 }
             });
-            
+
             params.pid = Ted3.fedata.pid;
-              //console.log(params);
+            //console.log(params);
             return Ted3.ajax({
                 url: Ted3.urls.tce,
                 data: params
@@ -608,24 +611,24 @@ Ted3.jQuery = jQuery.noConflict(true);
             if (data.type == "fileref") {
                 data.extension = data.extension.toLowerCase();
                 if (Ted3.fileToContentMap[data.extension] == undefined) {
-                    
-                     $('<div class="ted3-dialog-content" />').dialog({
-                            title: "Info",
-                            dialogClass: "ted3-dialog",
-                               appendTo: "#ted3-jqueryui",
-                            position: {my: "center center", at: "center center"},
-                            buttons: [
-                                {
-                                    text: "Ok",
-                                    click: function () {
-                                        $(this).dialog('close');
-                                    }
+
+                    $('<div class="ted3-dialog-content" />').dialog({
+                        title: "Info",
+                        dialogClass: "ted3-dialog",
+                        appendTo: "#ted3-jqueryui",
+                        position: {my: "center center", at: "center center"},
+                        buttons: [
+                            {
+                                text: "Ok",
+                                click: function () {
+                                    $(this).dialog('close');
                                 }
-                            ]
-                        }).html("No content defined for file '" + data.extension+"'");
-                    
-                    
-                    
+                            }
+                        ]
+                    }).html("No content defined for file '" + data.extension + "'");
+
+
+
                     // var donothing = function(){return false};
                     return Ted3.ajax({
                         url: url,
