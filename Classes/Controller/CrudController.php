@@ -245,7 +245,6 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
      */
     public function tceAction($data = array(), $cmd = array(), $pid = 0) {
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($data); exit;
-        //$content = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*', $table, 'uid=' . $uid);
         //echo "mc"; exit;
 
         $this->tce->start($data, $cmd);
@@ -274,7 +273,6 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
      */
     public function sortfalrefAction($uid, $direction) {
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['LANG']); exit;
-        //$content = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*', $table, 'uid=' . $uid);
 
         $this->tce->start($data, $cmd);
         $this->tce->process_cmdmap();
@@ -344,7 +342,12 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         if ($table == "pages" && !$transuid) {
 
             // check if translated and hidden
-            $translation = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'pages_language_overlay', 'pid = ' . $uid . ' and hidden=1 and deleted=0 and sys_language_uid=' . $lang);
+            
+            $connectionPool = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class);
+            $connectionP = $connectionPool->getConnectionForTable("pages");
+            $hiddentrans = $connectionP->query("select * from pages where l10n_source=" . $uid . " and sys_language_uid=" . $lang . " and hidden=1 and deleted=0");
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(get_class_methods($translation));
+            $translation = $hiddentrans->fetchAll();
 
             if (isset($translation[0])) {
                 $id = $translation[0]['uid'];

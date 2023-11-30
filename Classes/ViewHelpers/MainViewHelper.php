@@ -16,28 +16,30 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
     public function render() {
 
 
-        //echo TYPO3_version; exit;
-        //if(TYPO3_version > 8.9 ){
-        $typo3db_legacyIsLoadet = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('typo3db_legacy');
-        if (!$typo3db_legacyIsLoadet) {
-            throw new \Exception("TED³: The Extension typo3db_legacy is required.");
-        }
 
         //Shortcut-Button
         if ($GLOBALS['TSFE']->page['shortcut_mode'] || $GLOBALS['TSFE']->page['shortcut']) {
             //   \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump("test"); exit;
             if (@$GLOBALS['TSFE']->page['_originalDoktype'] == 4) {
-              //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->page); exit;
+                //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->page); exit;
                 $shortcutPage = $GLOBALS['TSFE']->sys_page->getPageShortcut(
                         (string) $GLOBALS['TSFE']->page['shortcut'], (string) $GLOBALS['TSFE']->page['shortcut_mode'], $GLOBALS['TSFE']->page['uid']
                 );
-              //  echo "test"; exit;
+                //  echo "test"; exit;
             }
         }
-        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->id ); exit;
-        $pagetranslations = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('*', 'pages', 'l10n_parent = ' . $GLOBALS['TSFE']->id . " and hidden=0 and deleted=0", "", "", "", "sys_language_uid");
-        //      \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($pagetranslations); exit;
-        //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( $GLOBALS['LANG']); exit;
+
+        $connectionPool = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class);
+        $connectionPages = $connectionPool->getConnectionForTable("pages");
+        $mySelectResult = $connectionPages->select(array('*'), 'pages', array('l10n_parent' => $GLOBALS['TSFE']->id, 'hidden' => 0, 'deleted' => 0));
+
+        $newpagetranslations = $mySelectResult->fetchAll();
+
+        foreach ($newpagetranslations as $pt) {
+            $key = $pt['sys_language_uid'];
+            $pagetranslations[$key] = $pt;
+        }
+
         if (!isset($GLOBALS['LANG'])) {
             $GLOBALS['LANG'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Lang\LanguageService');
         }
@@ -45,12 +47,12 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 
         $siteConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Configuration\SiteConfiguration');
         $iconFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Imaging\IconFactory');
-        
+
         $currentSite = $GLOBALS['TYPO3_REQUEST']->getAttribute('site');
         $siteLangs = $currentSite->getAllLanguages();
-        
+
         $syslangs = array();
-         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($siteLangs[0]->getFallbackType() ); exit;
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($siteLangs[0]->getFallbackType() ); exit;
         foreach ($siteLangs as $i => $siteLang) {
 
             $syslangs[$i] = array(
@@ -82,9 +84,8 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
         $context = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
         $currentlangId = $context->getPropertyFromAspect('language', 'id');
 
-
         // echo "sadf";
-       // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($currentlangId); exit;
+        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($currentlangId); exit;
         $data = array(
             "pid" => $GLOBALS['TSFE']->id,
             "deflang" => array('uid' => 0, 'flag' => 'deflang.svg'),
@@ -96,13 +97,13 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
             "origDoktype" => @$GLOBALS['TSFE']->page['_originalDoktype'],
             "imageFileExtensions" => explode(",", $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])
         );
-        
+
         $data['syslangs'] = array_reverse($syslangs);
-        
-        if(count( @$data['syslangs']) < 2){
+
+        if (count(@$data['syslangs']) < 2) {
             $data['onlyOneSyslang'] = 1;
         }
-     
+
 
         if (isset($pagetranslations[$data['currentlangId']])) {
             $data['currentHasPageTranslation'] = 1;
@@ -129,7 +130,6 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
 
         return $content;
     }
-
 }
 
 ?>
