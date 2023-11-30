@@ -349,9 +349,11 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
             //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(get_class_methods($translation));
             $translation = $hiddentrans->fetchAll();
 
+           // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($translation); exit;
+            
             if (isset($translation[0])) {
                 $id = $translation[0]['uid'];
-                $data['pages_language_overlay'][$id]['hidden'] = 0;
+                $data['pages'][$id]['hidden'] = 0;
                 $transuid = $id;
             }
         } else {
