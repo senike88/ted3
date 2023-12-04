@@ -19,7 +19,8 @@
     position: relative;
     display: inline-block;
     text-align: center !important;
-    font-size: 18px; line-height: 200%;
+    font-size: 18px;
+    line-height: 200%;
     color: #000;
     font-family: 'Share Tech' !important;
     background: #fff;
@@ -63,7 +64,7 @@
         position: fixed;
         bottom: 50px;
         z-index: 8888;
-        animation: fadein 2s;  
+        animation: fadein 2s;
         right:0px;
         box-shadow:0px 0px 4px grey;
         background: #fff;
@@ -80,17 +81,22 @@
         }
         #ted3-donate-close{
             position: absolute;
-            z-index: 20; right: 10px; top: 0px;
+            z-index: 20;
+            right: 10px;
+            top: 0px;
             padding: 0 10px;
             cursor: pointer;
         }
-        .ted3-paypalimg{}
+        .ted3-paypalimg{
+        }
         #ted3-donate-window{
             display: none;
             background: #fff;
             box-shadow:0px 0px 40px #000;
-            position: fixed; top: 50px;
-            left: 50%; margin-left: -300px;
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            margin-left: -300px;
             width: 600px;
             box-sizing: border-box;
             padding: 60px;
@@ -103,7 +109,9 @@
             }
             #ted3-donate-windowclose{
                 position: absolute;
-                z-index: 20; right: 10px; top: 0px;
+                z-index: 20;
+                right: 10px;
+                top: 0px;
                 padding: 0 5px;
                 cursor: pointer;
             }
@@ -138,7 +146,7 @@
         right: 20px;
         background: #fff;
         max-height: 80%;
-        box-shadow: 0px 0px 4px grey; 
+        box-shadow: 0px 0px 4px grey;
         padding: 7px;
         box-sizing: border-box;
         transition: 0.4s opacity;
@@ -153,7 +161,8 @@
             border-bottom: 1px solid #aaa;
             margin-bottom: 0px;
             display: block;
-            width: 36px; line-height: 40px;
+            width: 36px;
+            line-height: 40px;
             height: 40px;
             margin-bottom: 0px;
         }
@@ -197,15 +206,18 @@
                 img{
                     text-align: center;
                     margin: 0 auto;
-                    width: 18px; height: 16px;
+                    width: 18px;
+                    height: 16px;
                     padding: 10px 0;
+                    box-sizing:  unset;
                 }
             }
             .ted3-btn-popout{
                 display: none;
                 z-index: -1;
                 position: absolute;
-                right: 35px; top: 0px;
+                right: 35px;
+                top: 0px;
                 padding-right: 7px;
 
                 .ted3-btn-popout-inner{
@@ -232,7 +244,11 @@
             position: absolute;
             width: 13px;
             z-index: 20;
-            top:7px; right:4px;
+            top:7px;
+            right:4px;
+            img{
+                height: auto;
+            }
         }
     }
     #ted3-tmpbar{
@@ -242,21 +258,24 @@
     }
 
     #ted3-editbar{
-        background: #555; 
+        background: #555;
         background: linear-gradient(to right, #000000 0%, #f6f6f6 90%, #ffffff 100%);
-        position: fixed;  top: 0; left: 0px; right: 0px;
+        position: fixed;
+        top: 0;
+        left: 0px;
+        right: 0px;
         z-index: 9998;
         text-align: center;
         .mce-menubar , .mce-container, .mce-btn{
 
-            background-color: #fff !important;   
+            background-color: #fff !important;
         }
         .mce-tinymce{
             border: none !important;
             background: transparent !important;
-            padding-top: 10px !important; 
-            padding-bottom: 10px !important; 
-            margin: 0 auto;                
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+            margin: 0 auto;
         }
         .mce-toolbar{
 
@@ -282,7 +301,7 @@
         left: 20px;
         /*border-radius: 5px 0 0 5px;*/
         font-size: 13px;
-        box-shadow: 0px 0px 4px grey; 
+        box-shadow: 0px 0px 4px grey;
         font-family: 'Share Tech';
         #ted3-quickinfo-close{
             text-align: right;
@@ -290,7 +309,9 @@
             font-size: 12px;
             cursor: pointer;
             line-height: 13px;
-            position: absolute; top: 0px; left: -16px;
+            position: absolute;
+            top: 0px;
+            left: -16px;
             background: rgba(255,255,255,0.6);
             padding: 2px 5px;
         }
@@ -303,7 +324,7 @@
             background: rgba(255,255,255,1);
             padding: 7px;
             padding-right: 17px;
-            display: block; 
+            display: block;
         }
         .ted3-btn{
             font-size: 13px;
@@ -325,12 +346,12 @@
             #ted3-mainbarouter{
                 .ted3-btn-preview-toggle:before{
                     content: '\f204';
-                } 
+                }
                 opacity: 0.5;
                 &:hover{
-                    opacity: 1; 
+                    opacity: 1;
                 }
-            } 
+            }
         }
     }
     &.ted3-mode-showhidden{
@@ -351,9 +372,11 @@
 /* MESSAGES */
 .ted3-message{
     position: fixed;
-    top: 10px; right: 10px;
+    top: 10px;
+    right: 10px;
     padding: 7px;
-    background: #000; color: #fff;
+    background: #000;
+    color: #fff;
     z-index: 99999;
 
     .ted3-message-success{
@@ -362,7 +385,7 @@
 }
 .ted3-jqueryui-outer .ted3-dialog{
     z-index: 99998 !important;
-    font-family: 'Share Tech';  
+    font-family: 'Share Tech';
     .ui-dialog-titlebar{
 
     }
