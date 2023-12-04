@@ -42,7 +42,7 @@
             <div class='cew-elements'>
                 <f:for each="{cat.items}" as='contentelement'>
                     <div class='cew-elements-item'>
-                        <svg class="icon-color"><use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/{contentelement.iconcat}.svg#{contentelement.icon}"></use></svg>
+                        <svg class="icon-color"><use xlink:href="{contentelement.publicpath}typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/{contentelement.iconcat}.svg#{contentelement.icon}"></use></svg>
                        
                         <button type="button" data-ctype="{contentelement.CType}" class="btn btn-link media p-0 text-start"
                                 data-target="{contentelement.url}" 

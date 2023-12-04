@@ -191,6 +191,7 @@
   width: 18px;
   height: 16px;
   padding: 10px 0;
+  box-sizing: unset;
 }
 #ted3-panel #ted3-mainbar .ted3-btn-popoutset .ted3-btn-popout {
   display: none;
@@ -220,6 +221,9 @@
   z-index: 20;
   top: 7px;
   right: 4px;
+}
+#ted3-panel #ted3-mainbar .currentlang img {
+  height: auto;
 }
 #ted3-panel #ted3-tmpbar {
   text-align: left;

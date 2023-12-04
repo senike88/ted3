@@ -205,12 +205,14 @@ class NewContentElementController
                 }
                 $item['CType'] = $defVals['CType'] ;
                 $item['iconcat'] = explode("-",$item['icon'])[0];
+                $item['publicpath'] = $request->getAttributes()['site']->getBase()->getPath();
+                
                 $categories[$key]['items'][] = $item;
             }
         }
 
         
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($request);   exit;
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categories);   exit;
         $view = $this->backendViewFactory->create($request);
         $view->assignMultiple([
             'positionSelection' => $positionSelection,
