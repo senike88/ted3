@@ -1,4 +1,0 @@
-#styles.content.loginform.pid = 0
-#styles.content.textmedia.linkWrap.width = 800
-#styles.content.textmedia.linkWrap.height = 600
-#styles.templates.templateRootPath = EXT:ted3/Resources/Private/Templates/ContentElements/
