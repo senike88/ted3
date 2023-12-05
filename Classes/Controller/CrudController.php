@@ -56,7 +56,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         $data[$table][$uid][''] = $pid;
         if ($beforeUid) {
 
-            $cmd[$table][$uid]['move'] = '-' . $beforeUid;
+            $cmd[$table][$uid]['move'] = $beforeUid*(-1);
         } else {
             $cmd[$table][$uid]['move'] = $pid;
         }
@@ -110,7 +110,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         //$data[$table][$uid][''] = $pid;
         if ($beforeUid) {
 
-            $cmd[$table][$uid]['copy'] = '-' . $beforeUid;
+            $cmd[$table][$uid]['copy'] = $beforeUid*(-1);
         } else {
             $cmd[$table][$uid]['copy'] = $pid;
         }
@@ -212,7 +212,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
         $uid = $this->tce->substNEWwithIDs['NEW9823be8'];
         if ($beforeUid) {
-            $cmd[$table][$uid]['move'] = '-' . $beforeUid;
+            $cmd[$table][$uid]['move'] = $beforeUid*(-1);
         } else {
             $cmd[$table][$uid]['move'] = $pid;
         }
