@@ -211,6 +211,8 @@ Ted3.jQuery = jQuery.noConflict(true);
                 $(cWindow).on('load', function () {
                     //  var responseText = .innerText || newWindow.document.documentElement.textContent;
                     $(cWindow.document).ready(function () {
+                        $(cWindow.document.body).find('#ContentWizard').css('opacity',1);
+                        
                         $(cWindow.document.body).find('button.btn-link').on('click', function () {
                             ctype = $(this).data('ctype');
                             // alert(ctype);

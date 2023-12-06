@@ -21,38 +21,42 @@
 
         }
         button{
-            cursor: pointer; 
+            cursor: pointer;
         }
         .cew-elements-item svg{
-            width: 35px; height: 35px;
+            width: 35px;
+            height: 35px;
             position: relative;
             top: 13px;
         }
+        #ContentWizard{
+            opacity: 0.4;
+        }
     </style>
 
+    <div id="ContentWizard">
+        <f:if condition="{positionSelection}">
+            <h2>{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:1_selectType')}</h2>
+        </f:if>
 
-    <f:if condition="{positionSelection}">
-        <h2>{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:1_selectType')}</h2>
-    </f:if>
 
+        <f:for each="{catJSON}" as='cat'>
+            <div class='cew-cat'>
+                <div class='cew-title'>{cat.label}</div> 
+                <div class='cew-elements'>
+                    <f:for each="{cat.items}" as='contentelement'>
+                        <div class='cew-elements-item'>
+                            <svg class="icon-color"><use xlink:href="{contentelement.publicpath}typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/{contentelement.iconcat}.svg#{contentelement.icon}"></use></svg>
 
-    <f:for each="{catJSON}" as='cat'>
-        <div class='cew-cat'>
-            <div class='cew-title'>{cat.label}</div> 
-            <div class='cew-elements'>
-                <f:for each="{cat.items}" as='contentelement'>
-                    <div class='cew-elements-item'>
-                        <svg class="icon-color"><use xlink:href="{contentelement.publicpath}typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/{contentelement.iconcat}.svg#{contentelement.icon}"></use></svg>
-                       
-                        <button type="button" data-ctype="{contentelement.CType}" class="btn btn-link media p-0 text-start"
-                                data-target="{contentelement.url}" 
-                                title="{contentelement.description}"
-                                >{contentelement.label}</button>
-                    </div>
-                </f:for>
-            </div> 
-        </div>
-    </f:for>
-
+                            <button type="button" data-ctype="{contentelement.CType}" class="btn btn-link media p-0 text-start"
+                                    data-target="{contentelement.url}" 
+                                    title="{contentelement.description}"
+                                    >{contentelement.label}</button>
+                        </div>
+                    </f:for>
+                </div> 
+            </div>
+        </f:for>
+    </div>
 
 </html>
