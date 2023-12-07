@@ -94,16 +94,16 @@ $newTtContentColumns = array(
 $languageFilePrefix = 'LLL:EXT:fluid_styled_content/Resources/Private/Language/Database.xlf:';
 $frontendLanguageFilePrefix = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:';
 
-
+   
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'tt_content', 'CType', [
-    'Gallery',
-    'gallery',
+    'TED³ Gallery',
+    'ted3gallery',
     'content-image'
         ], 'header', 'after'
 );
-$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = 'gallery';
-$GLOBALS['TCA']['tt_content']['types']['gallery'] = [
+$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = 'ted3gallery';
+$GLOBALS['TCA']['tt_content']['types']['ted3gallery'] = [
     'showitem' => '
         --palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,
 				assets,header,sectionIndex,
@@ -117,13 +117,13 @@ $GLOBALS['TCA']['tt_content']['types']['gallery'] = [
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'tt_content', 'CType', [
-    'Fadegallery',
-    'fadegallery',
+    'TED³ Fadegallery',
+    'ted3fadegallery',
     'content-image'
         ], 'header', 'after'
 );
-$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = 'fadegallery';
-$GLOBALS['TCA']['tt_content']['types']['fadegallery'] = [
+$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = 'ted3fadegallery';
+$GLOBALS['TCA']['tt_content']['types']['ted3fadegallery'] = [
     'showitem' => '
         --palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,
 				assets,header,sectionIndex,
@@ -136,22 +136,3 @@ $GLOBALS['TCA']['tt_content']['types']['fadegallery'] = [
 ];
 
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-        'tt_content', 'CType', [
-    'Video',
-    'video',
-    'content-image'
-        ], 'fadegallery', 'after'
-);
-$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = 'video';
-$GLOBALS['TCA']['tt_content']['types']['video'] = [
-    'showitem' => '
-        --palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,
-				assets,header,sectionIndex,
-				layout;' . $frontendLanguageFilePrefix . 'layout_formlabel,
-			--div--;' . $frontendLanguageFilePrefix . 'tabs.access,
-				hidden;' . $frontendLanguageFilePrefix . 'field.default.hidden,
-				--palette--;' . $frontendLanguageFilePrefix . 'palette.access;access,
-			--div--;' . $frontendLanguageFilePrefix . 'tabs.extended
-		'
-];
