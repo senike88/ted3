@@ -1,16 +1,16 @@
 #tt_content.image =< lib.contentElement
 #tt_content.image.templateName = Image
-tt_content.gallery =< lib.contentElement
-tt_content.gallery.templateName = Gallery
-tt_content.fadegallery =< lib.contentElement
-tt_content.fadegallery.templateName = Fadegallery
-tt_content.video =< lib.contentElement
-tt_content.video.templateName = Video
+tt_content.ted3gallery =< lib.contentElement
+tt_content.ted3gallery.templateName = Ted3Gallery
+tt_content.ted3fadegallery =< lib.contentElement
+tt_content.ted3fadegallery.templateName = Ted3Fadegallery
 tt_content.text =< lib.contentElement
 tt_content.text.templateName = Text
 
 
-
+# OLD Gallery -> Deprecated
+tt_content.gallery =< lib.contentElement
+tt_content.gallery.templateName = Gallery
 tt_content.gallery.dataProcessing{
     10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
     10 {
@@ -19,14 +19,28 @@ tt_content.gallery.dataProcessing{
     }
 }
 
+# OLD Fadegallery -> Deprecated
+tt_content.fadegallery =< lib.contentElement
+tt_content.fadegallery.templateName = Fadegallery
 tt_content.fadegallery.dataProcessing{
     10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
     10 {
             references.fieldName = assets
+
     }
 }
 
-tt_content.video.dataProcessing{
+######### NEW GALLERY ELEMENTS without conflicts ###############
+
+tt_content.ted3gallery.dataProcessing{
+    10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    10 {
+            references.fieldName = assets
+
+    }
+}
+
+tt_content.ted3fadegallery.dataProcessing{
     10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
     10 {
             references.fieldName = assets

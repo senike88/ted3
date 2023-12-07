@@ -18,26 +18,26 @@ mod.wizards.newContentElement.wizardItems.common.elements {
 		}
                 image{
 			iconIdentifier = content-image
-			title = Image
-			description = Simple Image
+			title = Images
+			description = Simple Images (ted3)
 			tt_content_defValues {
 				CType = image
 			}
 		}
-                gallery{
+                ted3gallery{
 			iconIdentifier = install-test-image
-			title = Gallery
-			description = Simple Thumbnailgallery
+			title =  Gallery
+			description = Simple Thumbnailgallery (ted3)
 			tt_content_defValues {
-				CType = gallery
+				CType = ted3gallery
 			}
 		}
-               fadegallery{
+               ted3fadegallery{
 			iconIdentifier = content-carousel-image
 			title = Fadegallery
-			description = Simple Imagefader
+			description = Simple Imagefader (ted3)
 			tt_content_defValues {
-				CType = fadegallery
+				CType = ted3fadegallery
 			}
 		}
                 textmedia {
@@ -77,4 +77,4 @@ mod.wizards.newContentElement.wizardItems.common.elements {
 
 }
 mod.wizards.newContentElement.wizardItems.common.show >
-mod.wizards.newContentElement.wizardItems.common.show := addToList(header,text,image,textmedia,bullets,gallery,fadegallery,table,uploads)
+mod.wizards.newContentElement.wizardItems.common.show := addToList(header,text,image,textmedia,bullets,ted3gallery,ted3fadegallery,table,uploads)
