@@ -430,6 +430,8 @@ Ted3.jQuery = jQuery.noConflict(true);
             params.data[table] = {};
             params.data[table][element.data('uid')] = {};
             params.data[table][element.data('uid')][disablefield] = 1;
+            
+            params.pid = Ted3.fedata.pid;
             return Ted3.ajax({
                 url: Ted3.urls.tce,
                 data: params
@@ -456,6 +458,8 @@ Ted3.jQuery = jQuery.noConflict(true);
             params.data[table] = {};
             params.data[table][element.data('uid')] = {};
             params.data[table][element.data('uid')][disablefield] = 0;
+            
+            params.pid = Ted3.fedata.pid;
             return Ted3.ajax({
                 url: Ted3.urls.tce,
                 data: params
