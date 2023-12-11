@@ -55,7 +55,7 @@ if (TYPO3) {
 
 @$GLOBALS['TYPO3_CONF_VARS']['FE']['pageOverlayFields'] .= ',ted3text1,ted3text2,ted3text3';
 
-if (in_array($_GET['type'], array(4455, 4456, 4457, 4500, 777, 4457))) {
+if (isset($_GET['type']) && in_array($_GET['type'], array(4455, 4456, 4457, 4500, 777, 4457))) {
     $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFoundOnCHashError'] = 0;
 }
 
