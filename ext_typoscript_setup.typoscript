@@ -1,0 +1,3 @@
+lib.ted3parseFunc_RTE < lib.parseFunc_RTE
+lib.ted3parseFunc_RTE.nonTypoTagStdWrap.encapsLines >
+lib.ted3parseFunc_RTE.tags.link < lib.parseFunc.tags.link
