@@ -558,6 +558,8 @@ Ted3.jQuery = jQuery.noConflict(true);
                     }
                 }
             }
+            
+            params.pid = Ted3.fedata.pid;
             return Ted3.ajax({
                 url: Ted3.urls.tce + addUri,
                 data: params
