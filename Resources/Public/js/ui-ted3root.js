@@ -113,9 +113,20 @@
                 e.stopPropagation();
                 $('#ted3-donate-window').hide();
             });
+            
+
+            $('#ted3-attention-close').on('click', function (e) {
+                e.stopPropagation();
+                $('#ted3-attention').hide();
+                sessionStorage.setItem("ted3-attention-hide", true);
+            });
+
+            if (sessionStorage.getItem("ted3-attention-hide")) {
+                $('#ted3-attention').hide();
+            }
 
 
-     
+
 
             $('.ted3-btn-page').on('click', function () {
 

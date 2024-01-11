@@ -116,6 +116,12 @@ class MainViewHelper extends \DS\Ted3\ViewHelpers\AbstractViewHelper {
         if ($data['belang'] != "de" && $data['belang'] != "en") {
             $data['belang'] = "default";
         }
+        
+        $gridelementsIsLoadet = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('gridelements');
+        $containerIsLoadet = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('container');
+        if ($gridelementsIsLoadet && $containerIsLoadet) {
+            $data['bothgridextloadet'] = true;
+        }
 //        if($_GET['ted3_showhidden'] == 1){
 //            $data['showhidden'] = 1;
 //        }
