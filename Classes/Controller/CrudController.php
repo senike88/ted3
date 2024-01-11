@@ -61,10 +61,16 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         }
 
         if ($container) {
-            $data[$table][$uid]['colPos'] = -1;
+             if ($this->isGridelement($container)) {
+                 $data[$table][$uid]['colPos'] = -1;
+             }
         }
+        // for gridelements
         $data[$table][$uid]['tx_gridelements_container'] = $container;
         $data[$table][$uid]['tx_gridelements_columns'] = $colpos;
+        
+        // for container
+        $data[$table][$uid]['tx_container_parent'] = $container;
 
         //newWidthReplace for images
         foreach ($fields as $field => $pictures) {
@@ -127,10 +133,16 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         }
 
         if ($container) {
-            $data[$table][$newId]['colPos'] = -1;
+            if ($this->isGridelement($container)) {
+                $data[$table][$newId]['colPos'] = -1;
+            }
         }
+        //gridelements
         $data[$table][$newId]['tx_gridelements_container'] = $container;
         $data[$table][$newId]['tx_gridelements_columns'] = $colpos;
+        
+        //container
+        $data[$table][$newId]['tx_container_parent'] = $container;
 
         //newWidthReplace for images
         foreach ($fields as $field => $pictures) {
@@ -216,9 +228,16 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         }
 
         if ($container) {
-            $data[$table][$uid]['colPos'] = -1;
+            //gridelements
             $data[$table][$uid]['tx_gridelements_container'] = $container;
             $data[$table][$uid]['tx_gridelements_columns'] = $colpos;
+            
+            //container
+            $data[$table][$uid]['tx_container_parent'] = $container;
+
+            if ($this->isGridelement($container)) {
+                $data[$table][$uid]['colPos'] = -1;
+            }
         }
 
         $this->tce->start($data, $cmd);
@@ -358,6 +377,18 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         }
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->tce); exit;
         $this->sendAjaxResponse(array('success' => true, 'transuid' => $transuid,'translatedPageUrl'=>$translatedPageUrl));
+    }
+    
+    protected function isGridelement($contentUid) {
+        $connectionPool = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class);
+        $connectionFileReference = $connectionPool->getConnectionForTable("tt_content");
+        $mySelectResult = $connectionFileReference->select(array('*'), 'tt_content', array('uid' => $contentUid, 'deleted' => 0));
+        $tt_content_record = $mySelectResult->fetchAll();
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($tt_content_record); exit;
+        if (is_array($tt_content_record) && $tt_content_record[0]['CType'] == "gridelements_pi1") {
+            return true;
+        }
+        return false;
     }
 
 }

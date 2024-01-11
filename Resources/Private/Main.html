@@ -1,6 +1,11 @@
 {namespace ted=DS\Ted3\ViewHelpers}
 <ted:main>
-
+    <f:if condition="{fedata.bothgridextloadet}">
+        <div id="ted3-attention" >
+            <b>TED³-Warning:</b><br>Extension "container" currently not working correctly <br>in frontend-editing as long "gridelements" is installed
+            <div id='ted3-attention-close' title="Close">X</div>
+        </div>
+    </f:if>
     <div id="ted3-bottombar-outer" data-belang='{fedata.belang}'>
         <div id="ted3-bottombar" class="clearfix" >
             <div class="ted3-logo">TED<span style="opacity:0.5">³</span></div>
