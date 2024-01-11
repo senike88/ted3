@@ -32,6 +32,10 @@
         #ContentWizard{
             opacity: 0.4;
         }
+         .icon-markup img{
+            position: relative;
+            top: 10px;
+        }
     </style>
 
     <div id="ContentWizard">
@@ -39,15 +43,14 @@
             <h2>{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:1_selectType')}</h2>
         </f:if>
 
-
         <f:for each="{catJSON}" as='cat'>
             <div class='cew-cat'>
                 <div class='cew-title'>{cat.label}</div> 
                 <div class='cew-elements'>
                     <f:for each="{cat.items}" as='contentelement'>
                         <div class='cew-elements-item'>
-                            <svg class="icon-color"><use xlink:href="{contentelement.publicpath}typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/{contentelement.iconcat}.svg#{contentelement.icon}"></use></svg>
-
+                            <f:format.raw>{contentelement.renderedIcon}</f:format.raw>
+                            
                             <button type="button" data-ctype="{contentelement.CType}" class="btn btn-link media p-0 text-start"
                                     data-target="{contentelement.url}" 
                                     title="{contentelement.description}"

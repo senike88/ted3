@@ -132,9 +132,10 @@ class NewContentElementController
 
         $key = 'common';
         $categories = [];
+        $iconFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Imaging\IconFactory');
         
         
-
+       // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($wizardItems);  
         
         foreach ($wizardItems as $wizardKey => $wizardItem) {
             // An item is either a header or an item rendered with title/description and icon:
@@ -205,6 +206,8 @@ class NewContentElementController
                 }
                 $item['CType'] = $defVals['CType'] ;
                 $item['iconcat'] = explode("-",$item['icon'])[0];
+                $item['renderedIcon'] = $iconFactory->getIcon($item['icon'])->render();
+                
                 $item['publicpath'] = $request->getAttributes()['site']->getBase()->getPath();
                 
                 $categories[$key]['items'][] = $item;
