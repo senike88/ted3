@@ -217,24 +217,22 @@ Ted3.jQuery = jQuery.noConflict(true);
                 //  newWindow.opener = $(this);
                 $(cWindow).on('load', function () {
                     //  var responseText = .innerText || newWindow.document.documentElement.textContent;
-                    cWindow.makeCElement = function (element) {
+                    $(cWindow.document).ready(function () {
+                        $(cWindow.document.body).find('button.btn-link').on('click', function () {
+                            element = this;
+                            //  console.log(element);
+                            var nStr = element.dataset.params.replace("defVals", "tx_ted3_fe");
+                            //   alert(nStr);
 
-                        //  console.log(element);
-                        var nStr = element.dataset.params.replace("defVals", "tx_ted3_fe");
-                        //   alert(nStr);
+                            nStr = nStr.replace("defVals", "tx_ted3_fe");
+                            //console.log(nStr);
 
-//                        var nStr = cWindow.document.editForm.defValues.value.replace("defVals", "tx_ted3_fe");
+                            window.focus();
+                            cWindow.close();
 
-                        nStr = nStr.replace("defVals", "tx_ted3_fe");
-                        //console.log(nStr);
-
-                        //   alert(nStr);
-
-                        window.focus();
-                        cWindow.close();
-
-                        done(nStr);
-                    }
+                            done(nStr);
+                        });
+                    });
                 });
             },
             selectDesktopFile: function () {
@@ -430,7 +428,7 @@ Ted3.jQuery = jQuery.noConflict(true);
             params.data[table] = {};
             params.data[table][element.data('uid')] = {};
             params.data[table][element.data('uid')][disablefield] = 1;
-            
+
             params.pid = Ted3.fedata.pid;
             return Ted3.ajax({
                 url: Ted3.urls.tce,
@@ -458,7 +456,7 @@ Ted3.jQuery = jQuery.noConflict(true);
             params.data[table] = {};
             params.data[table][element.data('uid')] = {};
             params.data[table][element.data('uid')][disablefield] = 0;
-            
+
             params.pid = Ted3.fedata.pid;
             return Ted3.ajax({
                 url: Ted3.urls.tce,
@@ -573,7 +571,7 @@ Ted3.jQuery = jQuery.noConflict(true);
                     }
                 }
             }
-            
+
             params.pid = Ted3.fedata.pid;
             return Ted3.ajax({
                 url: Ted3.urls.tce + addUri,
