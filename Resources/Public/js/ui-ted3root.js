@@ -113,7 +113,7 @@
                 e.stopPropagation();
                 $('#ted3-donate-window').hide();
             });
-            
+
 
             $('#ted3-attention-close').on('click', function (e) {
                 e.stopPropagation();
@@ -125,6 +125,15 @@
                 $('#ted3-attention').hide();
             }
 
+//            //prevent imagelinks in editingmode
+//            $('a img').on('click', function (e) {
+//                if (that.hasMode('edit') && ! Ted3.root.hasClass('ted3-mode-noconflict')) {
+//                    
+//                    e.preventDefault();
+//                    e.stopPropagation();
+//                }
+//
+//            });
 
 
 
