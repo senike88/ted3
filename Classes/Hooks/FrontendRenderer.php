@@ -22,12 +22,13 @@ class FrontendRenderer {
 
 
 
-            if (!$GLOBALS['TSFE']->pSetup) {
-                //$GLOBALS['TSFE']->pageCache->flush();
-                $CacheService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\CacheService');
-                $CacheService->clearPageCache(array($GLOBALS['TSFE']->id));
+            if ($GLOBALS['TSFE']->pSetup === "" || $GLOBALS['TSFE']->pSetup === " ") {
+                
+                //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump( $GLOBALS['TSFE']->pSetup['ted3'] ); exit;  
+                 echo "TED3: typoscript-setup empty - please clear TYPO3-pagecache and refresh ..."; exit;
+              //  $CacheService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\CacheService');
+              //  $CacheService->clearPageCache(array($GLOBALS['TSFE']->id));
 
-                $this->refreshOnce();
             }
 
             if ($GLOBALS['TSFE']->pSetup['ted3'] == 1) {
@@ -94,22 +95,4 @@ class FrontendRenderer {
         }
     }
 
-    private function refreshOnce() {
-        //echo "asdf"; exit;
-        if (!isset($_COOKIE['rcounter'])) {
-            setcookie('rcounter', 0);
-        }
-
-        if (isset($_COOKIE['rcounter']) && $_COOKIE['rcounter'] < 2) {
-            $current_val = $_COOKIE['rcounter'];
-            $current_val++;
-            setcookie('rcounter', $current_val);
-            header('refresh: 0');
-            echo "Force refresh ... " . $_COOKIE['rcounter'];
-            exit;
-        } else {
-            //echo 'no more reloads';
-            setcookie('rcounter', 0);
-        }
-    }
 }
