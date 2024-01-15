@@ -126,7 +126,7 @@
             }
 
             //prevent imagelinks in editingmode
-            $('a img').on('click', function (e) {
+            $('[data-element] a img').on('click', function (e) {
                 if (that.hasMode('edit') && ! Ted3.root.hasClass('ted3-mode-noconflict')) {
                     e.preventDefault();
                     e.stopPropagation();
