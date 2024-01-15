@@ -118,6 +118,14 @@
             if ( sessionStorage.getItem("ted3-attention-hide") ) {
                 $('#ted3-attention').hide();
             }
+            
+            //prevent imagelinks in editingmode
+            $('[data-element] a img').on('click', function (e) {
+                if (that.hasMode('edit') && ! Ted3.root.hasClass('ted3-mode-noconflict')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
 
 
             $('.ted3-btn-page').on('click', function () {
