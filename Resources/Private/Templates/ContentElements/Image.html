@@ -13,13 +13,13 @@
             <f:then>
                 <f:for each="{files}" as="file">
                     <a href="{file.publicUrl}" target="lightbox" >
-                        <f:media  file="{file}" alt="{file.alternative}" title="{file.title}" width="{ted3settings.width}" height="{ted3settings.height}"  />
+                        <f:media  file="{file}" alt="{file.alternative}" title="{file.title}" width="{ted3settings.width}" height="{ted3settings.height}" loading="lazy"  />
                     </a>
                 </f:for>
             </f:then>
             <f:else>
                 <f:for each="{files}" as="file">
-                    <f:media  file="{file}" alt="{file.alternative}" title="{file.title}" width="{ted3settings.width}" height="{ted3settings.height}" />
+                    <f:media  file="{file}" alt="{file.alternative}" title="{file.title}" width="{ted3settings.width}" height="{ted3settings.height}"  loading="lazy"  />
                 </f:for>
             </f:else>
         </f:if>
