@@ -7,7 +7,7 @@
 
     <f:for each="{files}" as="file">
         <a href="{file.publicUrl}" target="lightbox">
-            <f:image image="{file}" width="{ted3settings.width}" height="{ted3settings.height}"  />
+            <f:image image="{file}" width="{ted3settings.width}" height="{ted3settings.height}" loading="lazy"   />
         </a>
     </f:for>
 </ted3:element.content>
