@@ -876,6 +876,7 @@
                     that.element.remove();
                     $('body').removeClass('ted3-mode-change');
                     //done(newelement);
+                    Ted3.root.ted3root('getVisibleElement');
                 });
             }
 
