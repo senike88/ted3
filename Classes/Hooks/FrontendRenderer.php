@@ -20,13 +20,8 @@ class FrontendRenderer {
 
         if ($GLOBALS['TSFE']->beUserLogin && $GLOBALS['BE_USER']->doesUserHaveAccess($GLOBALS['TSFE']->page ,2) ) {
             
-            if ($GLOBALS['TSFE']->pSetup === "" || $GLOBALS['TSFE']->pSetup === " ") {
-                
-                        echo "TED3: typoscript-setup empty - please make sure page.ted3=1 is set, clear TYPO3-pagecache and refresh ..."; exit;
-
-            }
            // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->pSetup['ted3']); exit;
-            if (@$GLOBALS['TSFE']->pSetup['ted3'] == "1") {
+            if ($GLOBALS['TSFE']->pSetup && @$GLOBALS['TSFE']->pSetup['ted3'] == 1) {
 
 //                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($sites['mysite']->getConfiguration()['test']);
 //                exit;
