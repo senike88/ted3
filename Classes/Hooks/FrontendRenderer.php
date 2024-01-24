@@ -22,7 +22,7 @@ class FrontendRenderer {
             
             if ($GLOBALS['TSFE']->pSetup === "" || $GLOBALS['TSFE']->pSetup === " ") {
                 
-                 echo "TED3: typoscript-setup empty - please clear TYPO3-pagecache and refresh ..."; exit;
+                        echo "TED3: typoscript-setup empty - please make sure page.ted3=1 is set, clear TYPO3-pagecache and refresh ..."; exit;
 
             }
            // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->pSetup['ted3']); exit;
