@@ -75,7 +75,7 @@ class CrudController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
         
         // for container
         $data[$table][$uid]['tx_container_parent'] = $container;
-
+        
         //newWidthReplace for images
         foreach ($fields as $field => $pictures) {
             foreach ($pictures as $uid => $newWidth) {

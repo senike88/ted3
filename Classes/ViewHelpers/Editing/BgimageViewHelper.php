@@ -5,20 +5,29 @@ namespace DS\Ted3\ViewHelpers\Editing;
 use TYPO3\CMS\Core\Resource\FileReference;
 use DS\Ted3\ViewHelpers\Element\AbstractElementViewHelper;
 use DS\Ted3\Helper\PropertyHelper;
+use TYPO3\CMS\Extbase\Service\ImageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BgimageViewHelper extends \DS\Ted3\ViewHelpers\AbstractTagBasedViewHelper {
 
+    
+     /**
+     * @var \TYPO3\CMS\Extbase\Service\ImageService
+     */
+    protected $imageService;
+
+    public function __construct() {
+        parent::__construct();
+        $this->imageService = GeneralUtility::makeInstance(ImageService::class);
+         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->imageService );
+        //exit;
+    }
+    
     public function initialize() {
         parent::initialize();
         $this->tag->forceClosingTag(true);
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Service\ImageService $imageService
-     */
-    public function injectImageService(\TYPO3\CMS\Extbase\Service\ImageService $imageService) {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Initialize arguments.
