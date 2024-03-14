@@ -12,7 +12,7 @@ class FrontendRenderer {
         if ($GLOBALS['TSFE']->beUserLogin) {
             //...
         } else { // FIX ab T3 10
-            if (is_object($GLOBALS['BE_USER'])) {
+            if (is_object($GLOBALS['BE_USER']) && isset($GLOBALS['TSFE'])) {
                 $GLOBALS['TSFE']->beUserLogin = $GLOBALS['BE_USER']->backendCheckLogin();
             }
         }
