@@ -244,6 +244,7 @@
   right: 4px;
 }
 #ted3-panel #ted3-mainbar .currentlang img {
+  max-width: 100%;
   height: auto;
 }
 #ted3-panel #ted3-tmpbar {
