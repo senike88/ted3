@@ -51,9 +51,12 @@ $newTtContentColumns = array(
     'ted3_settings' => array(
         'config' => array(
             'type' => 'passthrough',
+            'behaviour' => [
+                'allowLanguageSynchronization' => true,
+            ],
         ),
     ),
-   'ted3text1' => array(
+    'ted3text1' => array(
         'config' => array(
             'type' => 'passthrough',
         ),
@@ -94,7 +97,6 @@ $newTtContentColumns = array(
 $languageFilePrefix = 'LLL:EXT:fluid_styled_content/Resources/Private/Language/Database.xlf:';
 $frontendLanguageFilePrefix = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:';
 
-   
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'tt_content', 'CType', [
     'TED³ Gallery',
@@ -134,5 +136,4 @@ $GLOBALS['TCA']['tt_content']['types']['ted3fadegallery'] = [
 			--div--;' . $frontendLanguageFilePrefix . 'tabs.extended
 		'
 ];
-
 
