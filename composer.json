@@ -2,7 +2,7 @@
     "name": "ted3team/ted3",
     "type": "typo3-cms-extension",
     "description": "Frontend editing for TYPO3",
-    "version": "12.2.12",
+    "version": "12.2.13",
     "homepage": "http://ted3.zimmermann-streiter.com/",
     "support": {
         "source": "https://github.com/senike88/ted3",
